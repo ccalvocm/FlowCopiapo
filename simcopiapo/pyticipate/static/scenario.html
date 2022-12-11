@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simulacion</title>
+        <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+        <script src="static/vendors/babel-polyfill/polyfill.min.js" type="text/javascript"></script>
+        <script src="static/vendors/jquery-3.2.1/jquery.min.js" type="text/javascript"></script>
+        <script src="static/vendors/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="static/vendors/jquery-ui-1.12.1/jquery-ui.min.css" type="text/css" />
+        <script src="static/vendors/jquery-scrolltabs/jquery.scrolltabs.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="static/vendors/jquery-scrolltabs/jquery.scrolltabs.min.css" type="text/css" />
+        <script src="static/vendors/jspanel-4.1.1/jspanel.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="static/vendors/jspanel-4.1.1/jspanel.min.css" type="text/css" />
+        <script src="static/vendors/popper/popper.min.js" type="text/javascript"></script>
+        <script src="static/vendors/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="static/vendors/bootstrap/bootstrap.min.css" type="text/css" />
+        <script src="static/vendors/bootstrap-multiselect/bootstrap-multiselect.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="static/vendors/bootstrap-multiselect/bootstrap-multiselect.min.css" type="text/css" />
+        <link rel="stylesheet" href="static/vendors/bootstrap-switch/bootstrap-switch.min.css" type="text/css" />
+        <script src="static/vendors/bootstrap-switch/bootstrap-switch.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="static/vendors/bootstrap-slider/bootstrap-slider.min.css" type="text/css" />
+        <script src="static/vendors/bootstrap-slider/bootstrap-slider.min.js" type="text/javascript"></script>
+        <script src="static/vendors/handlebars/handlebars.min-latest.js" type="text/javascript"></script>
+        <script src="static/vendors/leaflet/leaflet.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="static/vendors/leaflet/leaflet.css" type="text/css" />
+        <script src="static/vendors/moment/moment.min.js" type="text/javascript"></script>
+        <script src="static/vendors/palette/palette.min.js" type="text/javascript"></script>
+        <script src="static/vendors/chart/chart.min.js" type="text/javascript"></script>
+        <script src="static/vendors/chart-box/chart.boxplot.min.js" type="text/javascript"></script>
+        <script src="static/vendors/chart-zoom/chartjs-plugin-zoom.min.js" type="text/javascript"></script>
+        <script src="static/vendors/chart-gauge/gauge.min.js" type="text/javascript"></script>
+        <script src="static/vendors/plotty/plotty.min.js" type="text/javascript"></script>
+        <script src="static/vendors/geotiff/geotiff.browserify.min.js" type="text/javascript"></script>
+        <script src="static/vendors/leaflet-geotiff/leaflet-geotiff.js" type="text/javascript"></script>
+        <script src="static/vendors/leaflet-geotiff/leaflet-geotiff-plotty.js" type="text/javascript"></script>
+        <script src="static/vendors/leaflet-rotated-marker/leaflet.rotatedmarker.min.js" type="text/javascript"></script>
+        <script src="static/vendors/base64/base64-binary.js" type="text/javascript"></script>
+        <script src="static/resources/js/scenario.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="static/resources/css/scenario.css" type="text/css" />
+        <script>if (window.module) module = window.module;</script>
+        <script id="simulation-date-template" type="text/x-handlebars-template">
+            <div id="simulation-date-top-div">
+                <div id="simulation-start-div">
+                    <input type="date" max="{{start_date}}" min="{{start_date}}" value="{{start_date}}" id="simulation-start" disabled="true" title="Comienzo simulacion" />
+                </div>
+                <div id="simulation-current-div">
+                    <input type="date" max="{{end_date}}" min="{{start_date}}" value="{{start_date}}" id="simulation-current" disabled="true" title="Actual simulacion" />
+                </div>
+                <div id="simulation-end-div">
+                    <input type="date" max="{{end_date}}" min="{{end_date}}" value="{{end_date}}" id="simulation-end" disabled="true" title="Final simulacion" />
+                </div>
+            </div>
+            <div id="simulation-date-bottom-div">
+                <div id="simulation-current-range-slider" class="slider slider-horizontal">
+                    <input id="simulation-current-range" data-slider-id='simulation-current-range-slider' type="text" data-slider-min="{{start_date_num}}" data-slider-max="{{end_date_num}}" data-slider-step="86400000" data-slider-value="{{start_date_num}}" data-value="{{start_date_num}}" data-slider-enabled="false" />
+                </div>
+            </div>
+        </script>
+        <script id="group-template" type="text/x-handlebars-template">
+            <div class="io-{{type}}-div">
+                <label class="group-template-label">{{name}}</label>
+                <div id="{{id}}" class="{{type}}-info-{{direction}}-div">
+                    {{#if hasinfo}}
+                    <img id="{{id}}-img" class="{{type}}-info-img" src="/static/resources/img/info-icon.png"></img>
+                    {{/if}}
+                </div>
+            </div>
+        </script>
+        <script id="feature-finder-template" type="text/x-handlebars-template">
+            <div class="container feature-finder">
+                <div class="feature-finder-search-div">
+                    <input id="feature-finder-search" type="text">
+                    <button id="feature-finder-clear" title="Limpiar busqueda "><img class="feature-finder-search-icon" src="static/resources/img/clear-icon.png" /></button>
+                    <button id="feature-finder-expand" title="Expandir todo"><img class="feature-finder-search-icon" src="static/resources/img/expand-icon.png" /></button>
+                    <button id="feature-finder-collapse" title="Colapsar todo"><img class="feature-finder-search-icon" src="static/resources/img/collapse-icon.png" /></button>
+                </div>
+                <div class="feature-finder-groups-div">
+                    {{#if exists}}
+                    {{#each groups}}
+                    <div class="panel panel-default feature-finder-group">
+                        <div class="panel-heading">
+                            <h5 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse-{{id}}">{{name}}</a>
+                            </h5>
+                        </div>
+                        <div id="collapse-{{id}}" class="panel-collapse collapse">
+                            <ul class="list-group">
+                                {{#each features}}
+                                <li class="list-group-item">
+                                    <div class="feature-div">
+                                        <span>{{name}}</span>
+                                        <img class="pin-icon" src="/static/resources/img/pin-icon.png" onclick="scenario.pan_map_to_feature('{{layer_id}}',{{index}})">
+                                    </div>
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{else}}
+                    <span><h5>Sin propiedades</h5></span>
+                    {{/if}}
+                </div>
+            </div>
+        </script>
+        <script id="layer-tooltip" type="text/x-handlebars-template">
+            <h5>{{name}}</h5>
+            <dl>
+                {{#each items}}
+                <dt>{{name}}</dt><dd>{{value}}</dd>
+                {{/each}}
+            </dl>
+        </script>
+        <script id="layer-dropdown-template-description" type="text/x-handlebars-template">
+            <div class="layer-dropdown-template-description-div">
+                <textarea class="layer-dropdown-template-description-text" readonly>{{text}}</textarea>
+            </div>
+        </script>
+        <script id="layer-dropdown-template-geotiff" type="text/x-handlebars-template">
+            <div class="layer-dropdown-template-geotiff-div">
+                <div>
+                    <label class="layer-dropdown-template-geotiff-min">{{min}}</label>
+                    <canvas class="layer-dropdown-template-geotiff-colorband"></canvas>
+                    <label class="layer-dropdown-template-geotiff-max">{{max}}</label>
+                </div>
+                <div>
+                    <textarea class="layer-dropdown-template-geotiff-text" readonly>{{text}}</textarea>
+                </div>
+            </div>
+        </script>
+        <script id="layer-data-dialog-template-default" type="text/x-handlebars-template">
+            <img id="layer-data-dialog-template-{{type}}-export-img-{{id}}" class="layer-data-dialog-template-export" src="/static/resources/img/copy-icon.png"></img>
+            <div class="layer-data-dialog-template-graph-div">
+                <canvas id="layer-data-dialog-template-{{type}}-graph-{{id}}" class="layer-data-dialog-template-{{type}}-graph"></canvas>
+            </div>
+        </script>
+        <script id="layer-data-dialog-template-image" type="text/x-handlebars-template">
+            <img id="layer-data-dialog-template-{{type}}-export-img-{{id}}" class="layer-data-dialog-template-export" src="/static/resources/img/export-icon.png"></img>
+            <div class="layer-data-dialog-template-image-div">
+                <div class="layer-data-template-image-image-div">
+                    <div class="chartjs-size-monitor layer-data-template-image-size-monitor">
+                        <img id="layer-data-template-image-image-{{id}}" class="chartjs-render-monitor layer-data-template-image-img" alt="N/A"></img>
+                    </div>
+                </div>
+            </div>
+        </script>
+        <script id="input-template-tabs" type="text/x-handlebars-template">
+            <div id="input-tabs-div" class="scroll_tabs_theme_light">
+                {{#each groups}}
+                <span id="input-tab-span-{{id}}" ident="{{id}}">{{group}}</span>
+                {{/each}}
+            </div>
+            {{#each groups}}
+            <div id="input-tab-{{id}}" class="input-tab-div"></div>
+            {{/each}}
+        </script>
+        <script id="input-template-numeric" type="text/x-handlebars-template">
+            <div class="input">
+                <label class="input-template-numeric-label">{{name}}</label>
+                <input id="input-template-numeric-{{id}}" class="input-template-numeric" type="number" {{#if set_min}}min="{{min}}"{{/if}} {{#if set_max}}max="{{max}}"{{/if}} step="{{step}}" title="{{title}}" onchange="validity.valid||(value='');" />
+            </div>
+        </script>
+        <script id="input-template-bound-numeric" type="text/x-handlebars-template">
+            <div class="input">
+                <div>
+                    <label class="input-template-bound-numeric-label">{{name}}</label>
+                </div>
+                <div>
+                    <div id="input-template-bound-numeric-slider-div-{{id}}" class="input-template-bound-numeric-slider-div">
+                        <input id="input-template-bound-numeric-slider-{{id}}" data-slider-id='input-template-bound-numeric-slider-div-{{id}}' type="text" data-slider-min="{{min}}" data-slider-max="{{max}}" data-slider-step="{{step}}" data-slider-value="{{def}}" data-value="{{def}}" />
+                    </div>
+                    <input type="text" value="{{def}}" class="input-template-bound-numeric-preview" id="input-template-bound-numeric-preview-{{id}}" readonly />
+                </div>
+            </div>
+        </script>
+        <script id="input-template-boolean" type="text/x-handlebars-template">
+            <div class="input">
+                <label class="input-template-boolean-label">{{name}}</label>
+                <div class="input-template-boolean-div">
+                    <input type="checkbox" class="input-template-boolean-checkbox" id="input-template-boolean-checkbox-{{id}}" {{#if def}}checked="checked"{{/if}} />
+                </div>
+            </div>
+        </script>
+        <script id="input-template-single-selection" type="text/x-handlebars-template">
+            <div class="input">
+                <label class="input-template-single-selection-label">{{name}}</label>
+                <select id="input-template-single-selection-select-{{id}}" class="input-template-single-selection-select">
+                    {{#each options}}
+                    <option value="{{name}}" {{#if ticked}}selected="true"{{/if}}>{{name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </script>
+        <script id="input-template-multi-selection" type="text/x-handlebars-template">
+            <div class="input">
+                <label class="input-template-multi-selection-label">{{name}}</label>
+                <div class="input-template-multi-selection-div">
+                    <select id="input-template-multi-selection-dropdown-{{id}}" multiple="multiple">
+                        {{#each options}}
+                        <option value="{{name}}" {{#if ticked}}selected="true"{{/if}}>{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+        </script>
+        <script id="output-template-tabs" type="text/x-handlebars-template">
+            <div id="output-tabs-div" class="scroll_tabs_theme_light">
+                {{#each groups}}
+                <span id="output-tab-span-{{id}}" ident="{{id}}">{{group}}</span>
+                {{/each}}
+            </div>
+            {{#each groups}}
+            <div id="output-tab-{{id}}" class="output-tab-div"></div>
+            {{/each}}
+        </script>
+        <script id="output-template-default" type="text/x-handlebars-template">
+            <div class="output output-template-{{type}}">
+                <div class="output-template-{{type}}-label-div">
+                    <label class="output-template-{{type}}-label">{{name}}</label>
+                    <img id="output-template-{{type}}-export-img-{{id}}" class="output-template-export" src="/static/resources/img/copy-icon.png"></img>
+                </div>
+                <div class="output-template-{{type}}-graph-div">
+                    <canvas id="output-template-{{type}}-graph-{{id}}"></canvas>
+                </div>
+            </div>
+        </script>
+        <script id="output-template-value" type="text/x-handlebars-template">
+            <div class="output output-template-value">
+                <label class="output-template-value-label">{{name}}</label>
+                <input type="text" value="" class="output-template-value-value" id="output-template-value-value-{{id}}" readonly />
+                <img id="output-template-value-export-img-{{id}}" class="output-template-export" src="/static/resources/img/copy-icon.png"></img>
+            </div>
+        </script>
+        <script id="output-template-radar" type="text/x-handlebars-template">
+            <div class="output output-template-radar">
+                <div class="output-template-radar-label-div">
+                    <select id="output-template-radar-dropdown-{{id}}" class="output-template-radar-dropdown" multiple="multiple">
+                    {{#each options}}
+                        <option value="{{name}}" {{#if ticked}}selected="true"{{/if}}>{{name}}</option>
+                    {{/each}}
+                    </select>
+                    <label class="output-template-radar-label">{{name}}</label>
+                    <img id="output-template-radar-export-img-{{id}}" class="output-template-export" src="/static/resources/img/copy-icon.png"></img>
+                </div>
+                <div class="output-template-radar-graph-div">
+                    <canvas id="output-template-radar-graph-{{id}}"></canvas>
+                </div>
+            </div>
+        </script>
+        <script id="output-template-gauge" type="text/x-handlebars-template">
+            <div class="output output-template-gauge">
+                <div class="output-template-gauge-label-div">
+                    <label class="output-template-gauge-label">{{name}}</label>
+                    <img id="output-template-gauge-export-img-{{id}}" class="output-template-export" src="/static/resources/img/copy-icon.png"></img>
+                </div>
+                <div class="output-template-gauge-graph-div">
+                    <canvas id="output-template-gauge-graph-{{id}}" class="output-template-gauge-canvas" data-toggle="tooltip"></canvas>
+                </div>
+            </div>
+        </script>
+        <script id="output-template-image" type="text/x-handlebars-template">
+            <div class="output output-template-image">
+                <div class="output-template-image-label-div">
+                    <label class="output-template-image-label">{{name}}</label>
+                    <img id="output-template-image-export-img-{{id}}" class="output-template-export" src="/static/resources/img/export-icon.png"></img>
+                </div>
+                <div class="output-template-image-image-div">
+                    <div class="chartjs-size-monitor output-template-image-size-monitor">
+                        <img id="output-template-image-image-{{id}}" class="chartjs-render-monitor output-template-image-img" alt="N/A"></img>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </head>
+    <body onload="scenario.initialise_main()">
+        <div class="modal fade" id="scenario-metadata-modal" tabindex="-1" role="dialog" aria-labelledby="scenario-metadata-modal-name" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="scenario-metadata-modal-name"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="scenario-metadata-modal-description"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="scenario-exception-modal" tabindex="-1" role="dialog" aria-labelledby="scenario-exception-modal-type" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="scenario-exception-modal-type"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="scenario-exception-modal-details"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="scenario-title-div">
+            <h3 id="scenario-title"></h3>
+        </div>
+        <div id="map-div">
+            <div id="map-leaflet-div"></div>
+        </div>
+        <div id="spinner-div">
+            <span class="spinner spinner-large spinner-blue spinner-slow"></span>
+        </div>
+        <div id="progress-bar-div">
+            <h5 id="progress-bar-description"></h5>
+            <div class="progress">
+                <div id="progress-bar-inner" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+        <div id="map-tile-button-div">
+            <select id="map-tile-selector"></select>
+        </div>
+        <div id="left-ctrl-bank-div">
+            <div id="run-scenario-btn-div">
+                <button id="run-scenario-btn" class="btn btn-primary" type="button" onclick="scenario.run_scenario()" title="Correr escenario">Correr/Ejecutar</button>
+            </div>
+            <div id="run-timestep-selector-div">
+                <select id="run-timestep-selector" title="El numero de pasos de tiempo a correr per click"></select>
+            </div>
+            <div id="reset-scenario-div">
+                <button id="reset-scenario-btn" class="btn btn-primary" type="button" onclick="scenario.reset_scenario()" title="Reiniciar escenario">Reiniciar</button>
+            </div>
+        </div>
+        <div id="layer-div">
+            <select id="layer-selector" multiple="multiple"></select>
+        </div>
+        <div id="compass-div">
+            <img id="compass-img" src="/static/resources/img/north-icon.png">
+        </div>
+        <div id="right-ctrl-bank-div">
+            <div id="description-div">
+                <button id="description-btn" class="btn btn-secondary" type="button" data-toggle="modal" data-target="#scenario-metadata-modal">Acerca del modelo</button>
+            </div>
+            <div id="export-results-div">
+                <button id="export-results-btn" class="btn btn-secondary" type="button" title="" onclick="scenario.export_results()"><img id="export-results-icon" src="/static/resources/img/export-icon.png"></button>
+            </div>
+            <div id="feature-finder-all-div">
+                <div id="feature-finder-btn-div">
+                    <button id="feature-finder-btn" class="btn btn-secondary" type="button" title="Buscador de funciones" onclick="scenario.toggle_feature_finder()"><img id="feature-finder-icon" src="/static/resources/img/search-icon.png"></button>
+                </div>
+                <div id="feature-finder-container" class="collapse">
+                    <div id="feature-finder-outer-div">
+                        <div id="feature-finder-div"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="scenario-div">
+            <div id="status-div"></div>
+        </div>
+        <div id="dialogs-div"></div>
+    </body>
+</html>

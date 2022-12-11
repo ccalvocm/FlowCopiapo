@@ -1,0 +1,11 @@
+Changes to leaflet-geotiff:
+
+1) Added support for setting data directly (not just url)
+2) Added support for layer click and mouse mouse (cursor change over valid cells)
+3) Added support for Leaflet custom panes
+4) Added error checks for value access from raster array
+
+Changes to leaflet-geotiff-plotty:
+
+1) Added support for user defining of noData value
+2) Added support for opacity setting

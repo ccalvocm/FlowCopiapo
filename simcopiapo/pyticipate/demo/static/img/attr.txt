@@ -1,0 +1,19 @@
+Tractor:
+	Author: Dmitry Zelinsky
+	License: http://creativecommons.org/licenses/by/3.0/
+	Site: https://www.iconfinder.com/icons/331652/machinery_rural_tractor_transport_transportation_icon
+
+Tap:
+	Author: Marc Paget
+	License: Free for commercial use (Include link to authors website)
+	Site: https://www.iconfinder.com/icons/2807501/diy_faucet_leaky_faucet_nozzle_plumbing_tap_valve_icon
+
+Pickaxe:
+	Author: Last Call Media Inc
+	License: Free for commercial use
+	Site: https://www.iconfinder.com/icons/296208/axe_configuration_gear_mining_pick_pickaxe_tool_tools_work_icon
+
+Fish:
+	Author: Those Icons
+	License: Flaticon Basic License
+	Site: https://www.flaticon.com/authors/those-icons

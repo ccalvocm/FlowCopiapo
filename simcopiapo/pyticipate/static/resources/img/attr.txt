@@ -1,0 +1,49 @@
+Drop:
+	Author: tomas_arad
+	License: Free for commercial use
+	Site: https://www.iconspng.com/image/102903/water-drop
+
+Info:
+	Author: http://www.webdesignerdepot.com/
+	License: Free for commercial use
+	Site: https://www.iconfinder.com/icons/40801/blue_info_icon
+
+North:
+	Author: Ahkâm
+	License: Free for commercial use
+	Site: https://www.freeiconspng.com/img/4701
+
+Pin:
+	Author: roundicons.com
+	License: http://creativecommons.org/licenses/by/3.0/
+	Site: https://www.iconfinder.com/icons/227040/google_google_map_map_pin_pointer_icon
+
+Chart:
+	Author: IconsMind
+	License: Linkware
+	Site: http://www.iconarchive.com/show/outline-icons-by-iconsmind/Line-Chart-icon.html
+
+Search:
+	Author: Andrian Valeanu
+	License: https://creativecommons.org/licenses/by/3.0/
+	Site: https://www.iconfinder.com/icons/115695/find_magnifying_glass_search_zoom_icon
+
+Clear:
+	Author: Google
+	License: http://opensource.org/licenses/MIT
+	Site: https://www.iconfinder.com/icons/3669378/clear_ic_icon
+
+Expand:
+	Author: Ivan Boyko
+	License: https://creativecommons.org/licenses/by/3.0/
+	Site: https://www.iconfinder.com/icons/308964/arrow_down_expand_icon
+
+Collapse:
+	Author: Ivan Boyko
+	License: https://creativecommons.org/licenses/by/3.0/
+	Site: https://www.iconfinder.com/icons/308964/arrow_down_expand_icon
+
+Export:
+	Author: Lyolya
+	License: https://creativecommons.org/licenses/by/3.0/
+	Site: https://www.flaticon.com/free-icon/download-arrow_109612

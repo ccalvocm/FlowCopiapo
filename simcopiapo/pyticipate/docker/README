@@ -1,0 +1,4 @@
+To use:
+1) Build the Docker container
+2) Run the container forwarding port 5051 (eg docker run -p 5051:5051 <imagename>)
+3) Navigate your browser to http://localhost/5051

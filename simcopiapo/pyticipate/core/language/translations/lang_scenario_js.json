@@ -1,0 +1,157 @@
+[
+    {
+        "TAG": "LAYER_INFO_HEADER_LAYER_LABEL",
+        "en-au": "Layer",
+        "es-cl" : "Capa"
+    },
+    {
+        "TAG": "LAYER_INFO_HEADER_CELL_LABEL",
+        "en-au": "Cell",
+        "es-cl" : "Celda"
+    },
+    {
+        "TAG": "LAYER_INFO_HEADER_VALUE_LABEL",
+        "en-au": "Value",
+        "es-cl" : "Valor"
+    },
+    {
+        "TAG": "LAYER_INFO_HEADER_DATA_LABEL",
+        "en-au": "Data",
+        "es-cl" : "Dato"
+    },
+    {
+        "TAG": "LAYER_INFO_HEADER_LAT_LABEL",
+        "en-au": "LAT",
+        "es-cl" : "Latitud"
+    },
+    {
+        "TAG": "LAYER_INFO_HEADER_LNG_LABEL",
+        "en-au": "LNG",
+        "es-cl" : "Longitud"
+    },
+    {
+        "TAG": "LAYER_INFO_DIALOG_TITLE",
+        "en-au": "Layer Info",
+        "es-cl" : "Informacion Capa"
+    },
+    {
+        "TAG": "LAYER_SELECTOR_TITLE",
+        "en-au": "Map Layers",
+        "es-cl" : "Capas de mapa"
+    },
+    {
+        "TAG": "BOOLEAN_INPUT_TRUE_TEXT",
+        "en-au": "YES",
+        "es-cl": "Sí"
+    },
+    {
+        "TAG": "BOOLEAN_INPUT_FALSE_TEXT",
+        "en-au": "NO",
+        "es-cl": "No"
+    },
+    {
+        "TAG": "INPUT_NUMERIC_INVALID_MSG_TITLE",
+        "en-au": "Value must be",
+        "es-cl" : "Valor debe ser"
+    },
+    {
+        "TAG": "INPUT_NUMERIC_INVALID_MSG_POSITIVE",
+        "en-au": "positive",
+        "es-cl" : "positivo"
+    },
+    {
+        "TAG": "INPUT_NUMERIC_INVALID_MSG_NEGATIVE",
+        "en-au": "negative",
+        "es-cl" : "negativo"
+    },
+    {
+        "TAG": "INPUT_NUMERIC_INVALID_MSG_BUT_NOT",
+        "en-au": "but not",
+        "es-cl" : "pero no"
+    },
+    {
+        "TAG": "INPUT_NUMERIC_INVALID_MSG_OR",
+        "en-au": "or",
+        "es-cl" : "o"
+    },
+    {
+        "TAG": "INPUT_NUMERIC_INVALID_MSG_ZERO_OR_MULTIPLE",
+        "en-au": "zero and a multiple of",
+        "es-cl" : "cero y un multiplo de"
+    },
+    {
+        "TAG": "INPUTS_DIALOG_TITLE",
+        "en-au": "Inputs",
+        "es-cl" : "Entradas"
+    },
+    {
+        "TAG": "OUTPUTS_DIALOG_TITLE",
+        "en-au": "Outputs",
+        "es-cl" : "Salidas"
+    },
+    {
+        "TAG": "FEATURE_FINDER_POINTS_OF_INTEREST_LAYER_NAME",
+        "en-au": "Points Of Interest",
+        "es-cl" : "Puntos de interes"
+    },
+    {
+        "TAG": "BOX_PLOT_TOOLTIP_MIN",
+        "en-au": "min",
+        "es-cl" : "minimo"
+    },
+    {
+        "TAG": "BOX_PLOT_TOOLTIP_MEDIAN",
+        "en-au": "median",
+        "es-cl" : "mediana"
+    },
+    {
+        "TAG": "BOX_PLOT_TOOLTIP_MAX",
+        "en-au": "max",
+        "es-cl" : "maximo"
+    },
+    {
+        "TAG": "EXPORT_STRING_DATE",
+        "en-au": "Date",
+        "es-cl": "Fecha"
+    },
+    {
+        "TAG": "EXPORT_STRING_VARIABLES",
+        "en-au": "Variables",
+        "es-cl": "Variables"
+    },
+    {
+        "TAG": "EXPORT_STRING_INTERVALS",
+        "en-au": "Intervals",
+        "es-cl": "Intervalos"
+    },
+    {
+        "TAG": "EXPORT_TIMESERIES_UPPER",
+        "en-au": "upper",
+        "es-cl": "alto"
+    },
+    {
+        "TAG": "EXPORT_TIMESERIES_MEAN",
+        "en-au": "mean",
+        "es-cl": "media"
+    },
+    {
+        "TAG": "EXPORT_TIMESERIES_LOWER",
+        "en-au": "lower",
+        "es-cl": "bajo"
+    },
+    {
+        "TAG": "ERROR_MSG_AJAX_ERROR_OCCURRED",
+        "en-au": "An error occurred on the web server!",
+        "es-cl" : "Ha ocurrido un error en el servidor web!"
+    },
+    {
+        "TAG": "ERROR_MSG_AJAX_ERROR_PREFIX",
+        "en-au": "Server operation failed",
+        "es-cl" : "Falla en la operacion del servidor"
+    },
+    {
+        "TAG": "ERROR_MSG_AJAX_SERVER_CODE_PREFIX",
+        "en-au": "The server returned code",
+        "es-cl" : "El servidor devolvio el codigo"
+    }
+]

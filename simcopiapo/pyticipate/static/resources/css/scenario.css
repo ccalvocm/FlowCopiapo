@@ -1,0 +1,1017 @@
+/* GLOBAL */
+
+a {
+    outline: 0;
+}
+
+/* MAP */
+
+#map-div {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+#map-leaflet-div {
+    height: 100%;
+    width: 100%;
+}
+
+/* TITLE */
+
+#scenario-title-div {
+    position:relative;
+    height: 40px;
+    width: 100%;
+    background: #2e6da4;
+}
+
+#scenario-title {
+    display: inline;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 2px;
+    color: white;
+}
+
+/* TOP CONTROLS */
+
+#left-ctrl-bank-div {
+    position: absolute;
+    top: 52px;
+    left: 54px;
+    z-index: 1003;
+    display: inline-block;
+}
+
+#run-scenario-btn-div {
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    top: -2px;
+    z-index: 1003;
+}
+
+#run-timestep-selector-div {
+    display: inline-block;
+    height: 42px;
+    z-index: 1003;
+    padding-top: 3px;
+    padding-left: 2px;
+    padding-right: 3px;
+}
+
+#run-timestep-selector {
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+}
+
+#reset-scenario-div {
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    top: -2px;
+    z-index: 1003;
+}
+
+#map-tile-button-div {
+    position: absolute;
+    top: 104px;
+    left: 54px;
+    z-index: 1003;
+}
+
+#layer-div {
+    position: absolute;
+    top: 104px;
+    left: 98px;
+    z-index: 1003;
+}
+
+#compass-img {
+    position: absolute;
+    top: 52px;
+    right: 114px;
+    z-index: 1003;
+    height: 32px;
+    width: 32px;
+}
+
+#right-ctrl-bank-div {
+    position: absolute;
+    top: 104px;
+    right: 12px;
+    z-index: 1003;
+    display: inline-block;
+}
+
+#description-div {
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    right: -2px;
+    float: right;
+    z-index: 1003;
+}
+
+#export-results-div {
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    right: 8px;
+    float: right;
+    z-index: 1003;
+}
+
+#export-results-icon {
+    height: 20px;
+    filter: invert(100%);
+    margin-top: -6px;
+}
+
+.dropdown, .dropdown-menu {
+  z-index: 1003;
+}
+
+/* SIMULATION DATES */
+
+#status-div {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    margin-left: -25%;
+    width: 50%;
+    height: 70px;
+    display: inline-block;
+    z-index: 1003;
+}
+
+#simulation-date-top-div {
+    height: 65%;
+}
+
+#simulation-date-bottom-div {
+    height: 35%;
+}
+
+#simulation-start-div {
+    display: inline-block;
+    width: 33.3%;
+    float: left;
+}
+
+#simulation-current-div{
+    display: inline-block;
+    width: 33.4%;
+    float: left;
+}
+
+#simulation-end-div {
+    display: inline-block;
+    width: 33.3%;
+    float: left;
+}
+
+#simulation-start {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 4px;
+}
+
+#simulation-current {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 4px;
+}
+
+#simulation-end {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 4px;
+}
+
+#simulation-current-range {
+    width: 100%;
+}
+
+#simulation-current-range-slider  {
+    width: 100%;
+}
+
+#simulation-current-range-slider .slider-selection {
+    background: #BABABA;
+}
+
+#simulation-current-range-slider .slider-handle {
+    background: #428BCA;
+}
+
+.slider > .tooltip {
+    display: none
+}
+
+/* MAP LAYER MULTISELECTOR */
+
+.map-layer-caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-right-width: 4px;
+    border-right-style: solid;
+    border-right-color: transparent;
+    border-left: 4px solid transparent;
+    border-left-width: 4px;
+    border-left-style: solid;
+    border-left-color: transparent;
+}
+
+.multiselect-container > li > a > label {
+    max-width: 285px;
+}
+
+/* DEFAULT DESCRIPTION */
+
+.layer-dropdown-template-description-div {
+    height: 60px;
+}
+
+.layer-dropdown-template-description-text {
+    height: 54px;
+    width: 280px;
+    font-size: 12;
+    margin-top: 3px;
+    margin-left: 3px;
+    resize: none;
+}
+
+/* GEOTIFF COLORBAND AND DESCRIPTION */
+
+.layer-dropdown-template-geotiff-div {
+    height: 82px;
+}
+
+.layer-dropdown-template-geotiff-min {
+    cursor: default !important;
+    width: 30px;
+    padding: 3px 5px 3px 5px !important;
+    display: inline;
+    vertical-align: 4px;
+}
+
+.layer-dropdown-template-geotiff-colorband {
+    height: 20px;
+    width: 200px;
+}
+
+.layer-dropdown-template-geotiff-max {
+    cursor: default !important;
+    width: 30px;
+    padding: 3px 5px 3px 5px !important;
+    display: inline;
+    vertical-align: 4px;
+}
+
+.layer-dropdown-template-geotiff-text {
+    height: 54px;
+    width: 280px;
+    font-size: 12;
+    margin-top:-4px;
+    margin-left:3px;
+    resize: none;
+}
+
+/* LAYER INFO WINDOW  */
+
+#layer-info-div {
+    padding: 5px;
+}
+
+#layer-info-table {
+    width: 100%;
+}
+
+#layer-info-table > tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#layer-info-header-div {
+    height: 20px;
+    text-align: center;
+}
+
+.layer-info-header-layer, .layer-info-row-layer {
+    width: 35%;
+    text-align: center;
+}
+
+.layer-info-header-cell, .layer-info-row-cell {
+    width: 15%;
+    text-align: center;
+}
+
+.layer-info-header-value, .layer-info-row-value {
+    width: 40%;
+    text-align: center;
+}
+
+.layer-info-header-data, .layer-info-row-data {
+    width: 10%;
+    text-align: center;
+}
+
+.layer-info-img {
+    height: 16px;
+    width: 16px;
+}
+
+/* FEATURE FINDER */
+
+#feature-finder-all-div {
+    display: inline-block;
+    margin-right: 18px;
+    z-index: 1003;
+}
+
+#feature-finder-btn-div {
+    display: inline-block;
+    height: 100%;
+    z-index: 1003;
+    float: right;
+}
+
+#feature-finder-btn {
+    height: 38px;
+}
+
+#feature-finder-icon {
+    height: 20px;
+    filter: invert(100%);
+    margin-top: -6px;
+}
+
+#feature-finder-container {
+    position: relative;
+    top: 40px;
+    right: -46px;
+    width: 330px;
+    float: right;
+    z-index: 1003;
+    display: none;
+}
+
+#feature-finder-outer-div {
+    background-color: white;
+    border: solid 1px;
+    border-color: #999;
+    overflow: hidden;
+}
+
+#feature-finder-div {
+    height: 100%;
+    width: 100%;
+    padding-top: 4px;
+}
+
+#feature-finder-search {
+    width: 178px;
+}
+
+.feature-finder-search-div {
+    height: 50px;
+    padding-bottom: 6px;
+}
+
+.feature-finder-groups-div {
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.feature-finder-search-icon {
+    margin-top: -4px;
+}
+
+.feature-finder {
+    padding-top: 10px;
+    padding-right: 0px;
+}
+
+.list-group {
+    padding-right: 14px;
+    padding-bottom: 4px;
+}
+
+.feature-div {
+    width: 100%;
+}
+
+.pin-icon {
+    height: 24px;
+    width: 24px;
+    float: right;
+}
+
+/* INPUT / OUTPUT / INFO */
+
+.scroll_tabs_container {
+    border-width: 1px;
+    border-color: #999;
+    border-bottom-style: solid;
+}
+
+.io-group-div {
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 4px;
+    border-bottom: 1px solid Gainsboro;
+}
+
+.group-template-label {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.group-info-left-div {
+    position: absolute;
+    top: -2px;
+    left: 4px;
+    height: 18px;
+    width: 24px;
+}
+
+.group-info-right-div {
+    position: absolute;
+    top: -2px;
+    right: 4px;
+    height: 18px;
+    width: 24px;
+}
+
+.group-info-img {
+    height: 18px;
+    width: 18px;
+}
+
+.io-subgroup-div {
+    position: relative;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.subgroup-info-left-div {
+    position: absolute;
+    top: -2px;
+    left: 4px;
+    height: 18px;
+    width: 24px;
+}
+
+.subgroup-info-right-div {
+    position: absolute;
+    top: -2px;
+    right: 4px;
+    height: 18px;
+    width: 24px;
+}
+
+.subgroup-info-img {
+    height: 18px;
+    width: 18px;
+}
+
+.tooltip-inner {
+    min-width: 300px;
+    max-width: 100%;
+}
+
+/* INPUTS */
+
+#inputs-div {
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+/* INPUT TABS */
+
+.ui-tabs-panel {
+    padding-left: 0px !important;
+}
+
+.input-tab-div {
+    position: absolute;
+    width: 100%;
+    top: 42px;
+    bottom: 0px;
+    display: inline-block;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* NUMERIC */
+
+.input-template-numeric-label {
+    padding-right: 10px;
+}
+
+.input-template-numeric {
+    float: right;
+    margin-right: 10px;
+    border-width: 1px;
+    border-radius: 4px;
+    width: 180px;
+}
+
+/* BOUND NUMERIC */
+
+.input-template-bound-numeric-label {
+    padding-right: 8px;
+}
+
+.input-template-bound-numeric-slider-div {
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.input-template-bound-numeric-preview {
+    border-width: 1px;
+    border-radius: 4px;
+    width: 60px;
+}
+
+/* BOOLEAN */
+
+.input-template-boolean-label {
+    padding-right: 10px;
+    margin-top: 6px;
+}
+
+.input-template-boolean-div {
+    float: right;
+    margin-right: 10px;
+}
+
+/* SINGLE SELECTION */
+
+.input-template-single-selection-label {
+    padding-right: 10px;
+}
+
+.input-template-single-selection-select {
+    float: right;
+    margin-right: 10px;
+    border-radius: 4px;
+    text-indent: 1px;
+}
+
+/* MULTI SELECTION */
+
+.input-template-multi-selection-label {
+    padding-right: 10px;
+    padding-top: 8px;
+}
+
+.input-template-multi-selection-div {
+    float: right;
+    margin-right: 10px;
+}
+
+/* OUTPUTS */
+
+#outputs-div {
+    width: 100%;
+}
+
+.output {
+    width: 100%;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    resize: vertical;
+    overflow: auto;
+    position: relative;
+    padding-left: 6px;
+    right: 6px;
+}
+
+.output-template-export {
+    position: absolute;
+    right: 0px;
+    top: 2px;
+    height: 16px;
+    width: 16px;
+}
+
+/* OUTPUTS TAB */
+
+.output-tab-div {
+    position: absolute;
+    width: 100%;
+    top: 42px;
+    bottom: 0px;
+    display: inline-block;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* VALUE */
+
+.output-template-value {
+    min-height: 34px;
+    /*max-height: 34px;*/
+}
+
+.output-template-value-label {
+    margin-top: 2px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.output-template-value-value {
+    float: right;
+    margin-right: 25px;
+    border-width: 1px;
+    border-radius: 4px;
+    width: 150px;
+}
+
+/* TIME SERIES */
+
+.output-template-timeseries {
+    min-height: 150px;
+    height: 250px;
+}
+
+.output-template-timeseries-label-div {
+    height: 50px;
+    text-align: center;
+}
+
+.output-template-timeseries-label {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.output-template-timeseries-graph-div {
+    position: absolute;
+    top: 50px;
+    bottom: 10px;
+    left: 0px;
+    right: 0px;    
+}
+
+/* RADAR */
+
+.output-template-radar {
+    min-height: 150px;
+    height: 250px;
+}
+
+.output-template-radar-dropdown-div {
+    float: left;
+    height: 15px;
+    width: 15px;
+    padding-left: 10px;
+}
+
+.output-variable-btn {
+    height: 15px;
+    width: 26px;
+}
+
+.output-template-radar-label-div {
+    height: 50px;
+    text-align: center;
+}
+
+.output-template-radar-label {
+    margin-left: 45px;
+    margin-right: 25px;
+}
+
+.output-template-radar-graph-div {
+    margin: 0 auto;
+    padding-top: 5px;
+    position: absolute;
+    top: 50px;
+    bottom: 10px;
+    left: 10px;
+    right: 0px;
+}
+
+/* DOUGHNUT */
+
+.output-template-doughnut {
+    min-height: 150px;
+    height: 250px;
+}
+
+.output-template-doughnut-label-div {
+    height: 50px;
+    text-align: center;
+}
+
+.output-template-doughnut-label {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.output-template-doughnut-graph-div {
+    margin: 0 auto;
+    padding-top: 5px;
+    padding-right: 10px;
+    position: absolute;
+    top: 50px;
+    bottom: 10px;
+    left: 10px;
+    right: 0px;
+}
+
+/* HISTOGRAM */
+
+.output-template-histogram {
+    min-height: 150px;
+    height: 250px;
+}
+
+.output-template-histogram-label-div {
+    height: 50px;
+    text-align: center;
+}
+
+.output-template-histogram-label {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.output-template-histogram-graph-div {
+    margin: 0 auto;
+    padding-top: 5px;
+    position: absolute;
+    top: 50px;
+    bottom: 10px;
+    left: 10px;
+    right: 0px;
+}
+
+/* PIE */
+
+.output-template-pie {
+    min-height: 150px;
+    height: 250px;
+}
+
+.output-template-pie-label-div {
+    height: 50px;
+    text-align: center;
+}
+
+.output-template-pie-label {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.output-template-pie-graph-div {
+    margin: 0 auto;
+    padding-top: 5px;
+    padding-right: 10px;
+    position: absolute;
+    top: 50px;
+    bottom: 10px;
+    left: 10px;
+    right: 0px;
+}
+
+/* BOX */
+
+.output-template-box {
+    min-height: 150px;
+    height: 250px;
+}
+
+.output-template-box-label-div {
+    height: 50px;
+    text-align: center;
+}
+
+.output-template-box-label {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.output-template-box-graph-div {
+    margin: 0 auto;
+    padding-top: 5px;
+    padding-right: 10px;
+    position: absolute;
+    top: 50px;
+    bottom: 10px;
+    left: 10px;
+    right: 0px;
+}
+
+/* GAUGE */
+
+.output-template-gauge {
+    min-height: 230px;
+    max-height: 230px;
+    height: 230px;
+}
+
+.output-template-gauge-label-div {
+    height: 50px;
+    text-align: center;
+}
+
+.output-template-gauge-label {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.output-template-gauge-canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: -20px;
+}
+
+/* IMAGE */
+
+.output-template-image {
+    min-height: 150px;
+    height: 250px;
+}
+
+.output-template-image-label-div {
+    height: 50px;
+    text-align: center;
+}
+
+.output-template-image-label {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.output-template-image-size-monitor {
+    position: absolute;
+    left: 0px;
+    top: 50px;
+    right: 0px;
+    bottom: 0px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.output-template-image-img {
+    height: 100%;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+/* LAYER DATA DIALOGS */
+
+.layer-data-content {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+.layer-data-dialog-template-export {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 16px;
+    width: 16px;
+}
+
+.layer-data-dialog-template-graph-div {
+    height: 100%;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.layer-data-dialog-template-gauge-graph {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: -20px;
+    height: 140px;
+    width: 280px;
+}
+
+.layer-data-template-image-size-monitor {
+    position: absolute;
+    left: 0px;
+    top: 35px;
+    right: 0px;
+    bottom: 0px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.layer-data-template-image-img {
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+/* SPINNER */
+
+#spinner-div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1005;
+    display: none;
+}
+
+.spinner {
+    /* Spinner size and color */
+    width: 1.5rem;
+    height: 1.5rem;
+    border-top-color: #444;
+    border-left-color: #444;
+    /* Additional spinner styles */
+    animation: spinner 400ms linear infinite;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50%;  
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.spinner-large {
+    width: 20rem;
+    height: 20rem;
+    border-width: 6px;
+}
+
+.spinner-slow {
+    animation: spinner 1s linear infinite;
+}
+
+.spinner-white {
+    border-top-color: #FFFFFF;
+    border-left-color: #FFFFFF;
+}
+
+.spinner-blue {
+    border-top-color: #428BCA;
+    border-left-color: #428BCA;
+}
+
+/* PROGRESS BAR */
+
+#progress-bar-div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1005;
+    display: none;
+    padding: 10px;
+    background-color: snow;
+    min-width: 200px;
+}
+
+#progress-bar-description {
+    text-align: center;
+}

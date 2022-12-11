@@ -1,0 +1,97 @@
+[
+    {
+        "TAG": "LANG_CODE",
+        "en-au": "en",
+        "es-cl": "es"
+    },
+    {
+        "TAG": "TITLE",
+        "en-au": "Simulation",
+        "es-cl": "Simulacion"
+    },
+    {
+        "TAG": "SIMULATION_START_TITLE",
+        "en-au": "Simulation Start",
+        "es-cl": "Comienzo simulacion"
+    },
+    {
+        "TAG": "SIMULATION_NOW_TITLE",
+        "en-au": "Simulation Now",
+        "es-cl": "Actual simulacion"
+    },
+    {
+        "TAG": "SIMULATION_END_TITLE",
+        "en-au": "Simulation End",
+        "es-cl": "Final simulacion"
+    },
+    {
+        "TAG": "FEATURE_FINDER_CLEAR_SEARCH_TITLE",
+        "en-au": "Clear Search",
+        "es-cl": "Limpiar busqueda"
+    },
+    {
+        "TAG": "FEATURE_FINDER_EXPAND_ALL_TITLE",
+        "en-au": "Expand All",
+        "es-cl": "Expandir todo"
+    },
+    {
+        "TAG": "FEATURE_FINDER_COLLAPSE_ALL_TITLE",
+        "en-au": "Collapse All",
+        "es-cl": "Colapsar todo"
+    },
+    {
+        "TAG": "FEATURE_FINDER_EMPTY_LABEL",
+        "en-au": "No Features Present",
+        "es-cl": "Sin propiedades"
+    },
+    {
+        "TAG": "EXPORT_BUTTON_TITLE",
+        "en-au": "Export Simulation Results",
+        "es-cl": ""
+    },
+    {
+        "TAG": "SIMULATION_MODAL_CLOSE_BUTTON_LABEL",
+        "en-au": "Close",
+        "es-cl": "Cerrar"
+    },
+    {
+        "TAG": "SIMULATION_RUN_BUTTON_LABEL",
+        "en-au": "Run",
+        "es-cl": "Correr/Ejecutar"
+    },
+    {
+        "TAG": "SIMULATION_RUN_BUTTON_TITLE",
+        "en-au": "Run Scenario",
+        "es-cl": "Correr escenario"
+    },
+    {
+        "TAG": "SIMULATION_TIMESTEP_SELECTOR_TITLE",
+        "en-au": "The number of timesteps to run per click",
+        "es-cl": "El numero de pasos de tiempo a correr per click"
+    },
+    {
+        "TAG": "SIMULATION_RESET_BUTTON_LABEL",
+        "en-au": "Reset",
+        "es-cl": "Reiniciar"
+    },
+    {
+        "TAG": "SIMULATION_RESET_BUTTON_TITLE",
+        "en-au": "Reset Scenario",
+        "es-cl": "Reiniciar escenario"
+    },
+    {
+        "TAG": "FEATURE_FINDER_BUTTON_TITLE",
+        "en-au": "Feature Finder",
+        "es-cl": "Buscador de funciones"
+    },
+    {
+        "TAG": "SIMULATION_ABOUT_BUTTON_LABEL",
+        "en-au": "About Model",
+        "es-cl": "Acerca del modelo"
+    },
+    {
+        "TAG": "OUTPUT_IMAGE_ALT_TEXT",
+        "en-au": "N/A",
+        "es-cl": "N/A"
+    }
+]
