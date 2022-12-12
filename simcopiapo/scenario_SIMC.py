@@ -2796,5 +2796,5 @@ def main():
     escenario.run_model()
     escenario.export_results()
     
-# if __name__=='__main__':
-#     main()
+if __name__=='__main__':
+    main()
