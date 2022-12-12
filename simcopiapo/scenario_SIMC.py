@@ -2700,7 +2700,7 @@ class Scenario(sb.ScenarioBase):
         result['filename'] = report_filename
         result['type'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
         result['data'] = report_data_b64_str
-        return result
+        return None
 
     def _apply_single_geotiff_layer(self, ml, arr, prop_name, src_srs, src_null_value=-999, dst_null_value=-999):
         # Export as GeoTIFF
@@ -2794,6 +2794,7 @@ def main():
     shutil.rmtree(os.path.join('.','report'), ignore_errors=True)
     escenario=Scenario('.')
     escenario.run_model()
+    escenario.export_results()
     
-if __name__=='__main__':
-    main()
+# if __name__=='__main__':
+#     main()

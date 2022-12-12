@@ -2,3 +2,8 @@
 simcopiapo/modflow/load/SIMCOPIAPO.rch
 simcopiapo/modflow/load/SIMCOPIAPO.hds
 *.hds
+*.rch
+*.evt
+*.rch
+*.cbc
+*.rch
