@@ -9,3 +9,6 @@ simcopiapo/modflow/load/SIMCOPIAPO.hds
 *.rch
 *.rch
 *.rch
+*.rch
+*.rch
+simcopiapo/modflow/run/SIMCOPIAPO.rch

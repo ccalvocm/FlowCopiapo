@@ -32,6 +32,7 @@ from docx.shared import Cm
 from docx.shared import Pt
 
 
+import multiprocessing as mp
 from multiprocessing import Pool
 
 import sys
@@ -75,9 +76,12 @@ class Scenario(sb.ScenarioBase):
         os.makedirs(self.model_modflow_run_dir)
 
     def __init__(self, working_dir):
+        import multiprocessing
         self.report = None
         # Initialize scenario file system
         self.init_file_system(working_dir)
+        # number of processes
+        self.nproc=mp.cpu_count()
         # Define temporal characteristics
         start = dt.datetime(2019,9,30)
         end = dt.datetime(2044,9,30)
@@ -125,8 +129,8 @@ class Scenario(sb.ScenarioBase):
 
         # output_group_1_id = 'output_group_1'
         # super().add_group(sb.GroupDef(output_group_1_id,'Cambio en volumen embalsado'),False)
-        output_group_2_id = 'output_group_2'
-        super().add_group(sb.GroupDef(output_group_2_id,'Profundidad napa y costo de bombeo'),False)
+        # output_group_2_id = 'output_group_2'
+        # super().add_group(sb.GroupDef(output_group_2_id,'Profundidad napa y costo de bombeo'),False)
         output_group_3_id = 'output_group_3'
         super().add_group(sb.GroupDef(output_group_3_id,'Recargas riego'),False)
         output_group_4_id = 'output_group_4'
@@ -191,8 +195,8 @@ class Scenario(sb.ScenarioBase):
         # super().add_output(sb.OutputHistogramDef('output_02','Cambio volumen en almacenamiento Asub año 25',output_group_1_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio (M m3)',output_decimal_places)))
         # super().add_output(sb.OutputHistogramDef('output_03','Cambio volumen (Embalse Lautaro)',output_group_1_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio (factor volumen embalse)',output_decimal_places)))
 
-        super().add_output(sb.OutputHistogramDef('output_04','Cambio en profundidad napa freática',output_group_2_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio promedio (m)',output_decimal_places)))
-        super().add_output(sb.OutputHistogramDef('output_05','Costos promedios de bombeo',output_group_2_id,sector_names,sb.ChartDisplay('Sector acuífero','Costo promedio (CLP/K m3)',output_decimal_places)))
+        # super().add_output(sb.OutputHistogramDef('output_04','Cambio en profundidad napa freática',output_group_2_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio promedio (m)',output_decimal_places)))
+        # super().add_output(sb.OutputHistogramDef('output_05','Costos promedios de bombeo',output_group_2_id,sector_names,sb.ChartDisplay('Sector acuífero','Costo promedio (CLP/K m3)',output_decimal_places)))
 
         temporal_units_label = 'Fecha'
         flow_units_label = 'Litros/segundo'
@@ -888,7 +892,7 @@ class Scenario(sb.ScenarioBase):
 
         def threaded_rch_spd_calc():
 
-            pool = Pool(processes=8)
+            pool = Pool(processes=self.nproc)
 
             workers = []
             for i in range(5):
@@ -931,7 +935,7 @@ class Scenario(sb.ScenarioBase):
                 col = ml.sr.get_rc(irrigation_wells_schedule.geometry.x[well], irrigation_wells_schedule.geometry.y[well])[1]
                 rcs[well] = (row,col)
 
-            pool = Pool(processes=8)
+            pool = Pool(processes=self.nproc)
 
             workers = []
             for i in range(5):
@@ -972,7 +976,7 @@ class Scenario(sb.ScenarioBase):
                 col = ml.sr.get_rc(mine_wells_gdf.geometry.x[well], mine_wells_gdf.geometry.y[well])[1]
                 rcs[well] = (row,col)
 
-            pool = Pool(processes=8)
+            pool = Pool(processes=self.nproc)
 
             workers = []
             for i in range(5):
@@ -1013,7 +1017,7 @@ class Scenario(sb.ScenarioBase):
                 col = ml.sr.get_rc(DW_wells_gdf.geometry.x[well], DW_wells_gdf.geometry.y[well])[1]
                 rcs[well] = (row,col)
 
-            pool = Pool(processes=8)
+            pool = Pool(processes=self.nproc)
 
             workers = []
             for i in range(5):
@@ -1070,7 +1074,7 @@ class Scenario(sb.ScenarioBase):
 
         # GW model
 
-        headfile = flopy.utils.HeadFile(os.path.join(self.model_modflow_run_dir, 'SIMCOPIAPO.hds'), model=ml)
+        headfile=flopy.utils.HeadFile(os.path.join(self.model_modflow_run_dir, 'SIMCOPIAPO.hds'), model=ml)
 
         def read_heads_file(headfile):
             heads = headfile.get_alldata()
@@ -1101,10 +1105,10 @@ class Scenario(sb.ScenarioBase):
 
         # @@@@@
 
-        self._apply_geotiff_layer(ml, heads, 49, 'layer_01', 'EPSG:24879', np.nan)
-        self._apply_geotiff_layer(ml, dtwt, 49, 'layer_02', 'EPSG:24879', np.nan)
-        self._apply_geotiff_layer(ml, gwrecov, 49, 'layer_03', 'EPSG:24879', np.nan)
-        self._apply_geotiff_layer(ml, sat_thickness, 49, 'layer_04', 'EPSG:24879', np.nan)
+        # self._apply_geotiff_layer(ml, heads, 49, 'layer_01', 'EPSG:24879', np.nan)
+        # self._apply_geotiff_layer(ml, dtwt, 49, 'layer_02', 'EPSG:24879', np.nan)
+        # self._apply_geotiff_layer(ml, gwrecov, 49, 'layer_03', 'EPSG:24879', np.nan)
+        # self._apply_geotiff_layer(ml, sat_thickness, 49, 'layer_04', 'EPSG:24879', np.nan)
 
         # @@@@@
 
@@ -1112,7 +1116,7 @@ class Scenario(sb.ScenarioBase):
 
         heads_3D_array_summer = heads_3D_array[::2]
 
-        heads_3D_array_winter = heads_3D_array[1::2]
+        # heads_3D_array_winter = heads_3D_array[1::2]
 
         # Load groundwater heads baseline case
 
@@ -1124,7 +1128,7 @@ class Scenario(sb.ScenarioBase):
 
         # @@@@@
 
-        self._apply_single_geotiff_layer(ml, heads_scenario_improvement, 'layer_06', 'EPSG:24879', np.nan)
+        # self._apply_single_geotiff_layer(ml, heads_scenario_improvement, 'layer_06', 'EPSG:24879', np.nan)
 
         # @@@@@
 
@@ -1168,7 +1172,7 @@ class Scenario(sb.ScenarioBase):
 
         # @@@@@
 
-        self._apply_geotiff_layer(ml, pumping_costs, 49, 'layer_05', 'EPSG:24879', np.nan)
+        # self._apply_geotiff_layer(ml, pumping_costs, 49, 'layer_05', 'EPSG:24879', np.nan)
 
         # @@@@@
 
@@ -1296,7 +1300,7 @@ class Scenario(sb.ScenarioBase):
             zb_grid.fillna(value=pd.np.nan, inplace=True)
             zb_grid.replace(np.nan, 0, inplace=True)
 
-            pool = Pool(processes=8)
+            pool = Pool(processes=self.nproc)
 
             workers = []
             NUM_PER_PROC = 104
@@ -1384,18 +1388,18 @@ class Scenario(sb.ScenarioBase):
 
         # Set Ecological flow at outlet 6 chart
 
-        eco_flow_outlet_6_chart_filename=os.path.join(self.model_output_dir,
-                                                      'eco6out.svg')
-        create_ecological_flow_at_outlet_of_sector_6_chart(zb_df,
-                                            eco_flow_outlet_6_chart_filename)
+        # eco_flow_outlet_6_chart_filename=os.path.join(self.model_output_dir,
+        #                                               'eco6out.svg')
+        # create_ecological_flow_at_outlet_of_sector_6_chart(zb_df,
+        #                                     eco_flow_outlet_6_chart_filename)
 
         # @@@@@
 
-        layer_20_ident = self.get_unique_image_id()
-        with open(eco_flow_outlet_6_chart_filename, 'rb') as fl:
-            self.set_image(layer_20_ident, fl.read(), 'image/svg+xml', True)
-        self.set_layer_data('layer_20', 'Flujos ecológicos del sector 6',
-                            sb.OutputImageVal(layer_20_ident))
+        # layer_20_ident = self.get_unique_image_id()
+        # with open(eco_flow_outlet_6_chart_filename, 'rb') as fl:
+        #     self.set_image(layer_20_ident, fl.read(), 'image/svg+xml', True)
+        # self.set_layer_data('layer_20', 'Flujos ecológicos del sector 6',
+        #                     sb.OutputImageVal(layer_20_ident))
 
         # @@@@@
 
@@ -2794,7 +2798,7 @@ def main():
     shutil.rmtree(os.path.join('.','report'), ignore_errors=True)
     escenario=Scenario('.')
     escenario.run_model()
-    escenario.export_results()
+    # escenario.export_results()
     
 if __name__=='__main__':
     main()
