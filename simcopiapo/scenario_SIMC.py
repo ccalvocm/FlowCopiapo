@@ -567,35 +567,35 @@ class Scenario(sb.ScenarioBase):
         self.set_layer_data('layer_30', 'perdidas infiltracion (L/s)', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Q_InfiltracionLautaro'].values))
         self.set_layer_data('layer_30', 'descarga vertedero (L/s)', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Q_Vertedero'].values))
 
-        self.set_output('output_10', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_riegoycanales_S2'].values))
-        self.set_output('output_11', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_riegoycanales_S3'].values))
-        self.set_output('output_12', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_riegoycanales_S4'].values))
-        self.set_output('output_13', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Q_perdidariego_P_S5'].values))
-        self.set_output('output_14', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Q_perdidariego_P_S6'].values))
+        # self.set_output('output_10', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_riegoycanales_S2'].values))
+        # self.set_output('output_11', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_riegoycanales_S3'].values))
+        # self.set_output('output_12', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_riegoycanales_S4'].values))
+        # self.set_output('output_13', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Q_perdidariego_P_S5'].values))
+        # self.set_output('output_14', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Q_perdidariego_P_S6'].values))
 
-        self.set_output('output_20', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S2'].values))
-        self.set_output('output_21', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S3'].values))
-        self.set_output('output_22', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S4'].values))
-        self.set_output('output_23', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S5'].values))
-        self.set_output('output_24', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S6'].values))
+        # self.set_output('output_20', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S2'].values))
+        # self.set_output('output_21', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S3'].values))
+        # self.set_output('output_22', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S4'].values))
+        # self.set_output('output_23', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S5'].values))
+        # self.set_output('output_24', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S6'].values))
 
-        self.set_output('output_30', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D1'].values))
-        self.set_output('output_31', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D2'].values))
-        self.set_output('output_32', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D3'].values))
-        self.set_output('output_33', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D4'].values))
-        self.set_output('output_34', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D5'].values))
-        self.set_output('output_35', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D6'].values))
-        self.set_output('output_36', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D7'].values))
-        self.set_output('output_37', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D89'].values))
+        # self.set_output('output_30', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D1'].values))
+        # self.set_output('output_31', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D2'].values))
+        # self.set_output('output_32', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D3'].values))
+        # self.set_output('output_33', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D4'].values))
+        # self.set_output('output_34', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D5'].values))
+        # self.set_output('output_35', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D6'].values))
+        # self.set_output('output_36', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D7'].values))
+        # self.set_output('output_37', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D89'].values))
 
-        self.set_output('output_40', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D1'].values))
-        self.set_output('output_41', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D2'].values))
-        self.set_output('output_42', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D3'].values))
-        self.set_output('output_43', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D4'].values))
-        self.set_output('output_44', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D5'].values))
-        self.set_output('output_45', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D6'].values))
-        self.set_output('output_46', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D7'].values))
-        self.set_output('output_47', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D89'].values))
+        # self.set_output('output_40', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D1'].values))
+        # self.set_output('output_41', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D2'].values))
+        # self.set_output('output_42', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D3'].values))
+        # self.set_output('output_43', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D4'].values))
+        # self.set_output('output_44', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D5'].values))
+        # self.set_output('output_45', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D6'].values))
+        # self.set_output('output_46', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D7'].values))
+        # self.set_output('output_47', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D89'].values))
 
         # @@@@@
 
@@ -1124,7 +1124,7 @@ class Scenario(sb.ScenarioBase):
 
         # Compute scenario improvement over baseline
 
-        heads_scenario_improvement = heads_3D_array[49][0] - heads_baseline
+        # heads_scenario_improvement = heads_3D_array[49][0] - heads_baseline
 
         # @@@@@
 
@@ -1154,13 +1154,13 @@ class Scenario(sb.ScenarioBase):
             mfg_out = mfg.loc[mfg['ibound']==1]
             return mfg_out#mfg_out.to_file(os.path.join(self.model_output_dir, 'GW_model_outputs.shp'))
 
-        GW_model_outputs = export_gridded_outputs_to_shapefile(ml, mfg, heads_3D_array_summer)
+        # GW_model_outputs = export_gridded_outputs_to_shapefile(ml, mfg, heads_3D_array_summer)
 
         self.set_run_status(90.0, 'Finalizando Resultados del Modelo...')
 
         # Compute pumping costs (GeoTIFF)
 
-        tarriff_kwh = 80.0
+        # tarriff_kwh = 80.0
 
         def compute_pumping_cost(ml, heads_3D_array, tarriff_kwh):
             dtwt_3D_array = ml.dis.top.array - heads_3D_array
@@ -1168,7 +1168,7 @@ class Scenario(sb.ScenarioBase):
             dtwt_3D_array = vec_func(dtwt_3D_array)
             return np.squeeze(dtwt_3D_array)
 
-        pumping_costs = compute_pumping_cost(ml, heads_3D_array, tarriff_kwh)
+        # pumping_costs = compute_pumping_cost(ml, heads_3D_array, tarriff_kwh)
 
         # @@@@@
 
@@ -1232,19 +1232,19 @@ class Scenario(sb.ScenarioBase):
 
         #GW_model_outputs = gpd.read_file(os.path.join(self.model_output_dir, 'GW_model_outputs.shp'))
 
-        cas_dfs = compute_changes_in_aquifer_storage(GW_model_outputs)
+        # cas_dfs = compute_changes_in_aquifer_storage(GW_model_outputs)
 
         # @@@@@
 
-        output_2_dataset = sb.OutputMultipleNumericDatasetVal()
-        for k in cas_dfs[0]:
-            output_2_dataset.append_dataset(list(cas_dfs[0][k].values), k)
-        self.set_output('output_02', output_2_dataset)
+        # output_2_dataset = sb.OutputMultipleNumericDatasetVal()
+        # for k in cas_dfs[0]:
+        #     output_2_dataset.append_dataset(list(cas_dfs[0][k].values), k)
+        # self.set_output('output_02', output_2_dataset)
 
-        output_3_dataset = sb.OutputMultipleNumericDatasetVal()
-        for k in cas_dfs[1]:
-            output_3_dataset.append_dataset(list(cas_dfs[1][k].values), k)
-        self.set_output('output_03', output_3_dataset)
+        # output_3_dataset = sb.OutputMultipleNumericDatasetVal()
+        # for k in cas_dfs[1]:
+        #     output_3_dataset.append_dataset(list(cas_dfs[1][k].values), k)
+        # self.set_output('output_03', output_3_dataset)
 
         # @@@@@
 
@@ -1261,14 +1261,14 @@ class Scenario(sb.ScenarioBase):
             df.drop('Sector 1', inplace=True)
             return df
 
-        mcdwt_df = compute_mean_change_in_depth_to_water_table(GW_model_outputs)
+        # mcdwt_df = compute_mean_change_in_depth_to_water_table(GW_model_outputs)
 
         # @@@@@
 
-        output_4_dataset = sb.OutputMultipleNumericDatasetVal()
-        for k in mcdwt_df:
-            output_4_dataset.append_dataset(list(mcdwt_df[k].values), k)
-        self.set_output('output_04', output_4_dataset)
+        # output_4_dataset = sb.OutputMultipleNumericDatasetVal()
+        # for k in mcdwt_df:
+        #     output_4_dataset.append_dataset(list(mcdwt_df[k].values), k)
+        # self.set_output('output_04', output_4_dataset)
 
         # @@@@@
 
@@ -1281,14 +1281,14 @@ class Scenario(sb.ScenarioBase):
                 mpc_df[k] = mcdwt_df[k] * (2.725 / 0.7 / 0.95 / 0.9 * tarriff_kwh)            
             return mpc_df
 
-        mpc_df = compute_mean_pumping_costs(mcdwt_df, tarriff_kwh)
+        # mpc_df = compute_mean_pumping_costs(mcdwt_df, tarriff_kwh)
 
         # @@@@@
 
-        output_5_dataset = sb.OutputMultipleNumericDatasetVal()
-        for k in mpc_df:
-            output_5_dataset.append_dataset(list(mpc_df[k].values), k)
-        self.set_output('output_05', output_5_dataset)
+        # output_5_dataset = sb.OutputMultipleNumericDatasetVal()
+        # for k in mpc_df:
+        #     output_5_dataset.append_dataset(list(mpc_df[k].values), k)
+        # self.set_output('output_05', output_5_dataset)
 
         # @@@@@
 
@@ -1405,17 +1405,17 @@ class Scenario(sb.ScenarioBase):
 
         # Store required datasets for report generation
 
-        self.report = {}
-        self.report['zb_array'] = zb_arr
-        self.report['zb_df'] = zb_df
-        self.report['SWMODEL_out_df'] = SWMODEL_out_df
-        self.report['GW_model_outputs'] = GW_model_outputs
-        self.report['ST_lautaro2'] = ST_lautaro2
-        self.report['DW_MODEL_df'] = DW_MODEL_df
-        self.report['ml'] = ml
-        self.report['headfile'] = headfile
-        self.report['heads_scenario_improvement'] = heads_scenario_improvement
-        self.report['compliance'] = compliance
+        # self.report = {}
+        # self.report['zb_array'] = zb_arr
+        # self.report['zb_df'] = zb_df
+        # self.report['SWMODEL_out_df'] = SWMODEL_out_df
+        # self.report['GW_model_outputs'] = GW_model_outputs
+        # self.report['ST_lautaro2'] = ST_lautaro2
+        # self.report['DW_MODEL_df'] = DW_MODEL_df
+        # self.report['ml'] = ml
+        # self.report['headfile'] = headfile
+        # self.report['heads_scenario_improvement'] = heads_scenario_improvement
+        # self.report['compliance'] = compliance
 
         # Force end of simulation period
         self._now = self._end
