@@ -123,8 +123,8 @@ class Scenario(sb.ScenarioBase):
 
         # Define Output Groups
 
-        output_group_1_id = 'output_group_1'
-        super().add_group(sb.GroupDef(output_group_1_id,'Cambio en volumen embalsado'),False)
+        # output_group_1_id = 'output_group_1'
+        # super().add_group(sb.GroupDef(output_group_1_id,'Cambio en volumen embalsado'),False)
         output_group_2_id = 'output_group_2'
         super().add_group(sb.GroupDef(output_group_2_id,'Profundidad napa y costo de bombeo'),False)
         output_group_3_id = 'output_group_3'
@@ -188,8 +188,8 @@ class Scenario(sb.ScenarioBase):
         output_decimal_places = 3
 
         sector_names = ['Sector 2', 'Sector 3', 'Sector 4', 'Sector 5', 'Sector 6']
-        super().add_output(sb.OutputHistogramDef('output_02','Cambio volumen en almacenamiento Asub año 25',output_group_1_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio (M m3)',output_decimal_places)))
-        super().add_output(sb.OutputHistogramDef('output_03','Cambio volumen (Embalse Lautaro)',output_group_1_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio (factor volumen embalse)',output_decimal_places)))
+        # super().add_output(sb.OutputHistogramDef('output_02','Cambio volumen en almacenamiento Asub año 25',output_group_1_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio (M m3)',output_decimal_places)))
+        # super().add_output(sb.OutputHistogramDef('output_03','Cambio volumen (Embalse Lautaro)',output_group_1_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio (factor volumen embalse)',output_decimal_places)))
 
         super().add_output(sb.OutputHistogramDef('output_04','Cambio en profundidad napa freática',output_group_2_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio promedio (m)',output_decimal_places)))
         super().add_output(sb.OutputHistogramDef('output_05','Costos promedios de bombeo',output_group_2_id,sector_names,sb.ChartDisplay('Sector acuífero','Costo promedio (CLP/K m3)',output_decimal_places)))
@@ -2790,7 +2790,7 @@ class Scenario(sb.ScenarioBase):
 def main():
     import shutil
     shutil.rmtree(os.path.join('.','output'), ignore_errors=True)
-    shutil.rmtree(os.path.join('.','modflow'), ignore_errors=True)
+    shutil.rmtree(os.path.join('.','modflow'))
     shutil.rmtree(os.path.join('.','report'), ignore_errors=True)
     escenario=Scenario('.')
     escenario.run_model()
