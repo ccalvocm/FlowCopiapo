@@ -22,7 +22,7 @@ class model(object):
     def run(self):
         # self.model.run()
         self.model.write_input()
-        success, mfoutput = self.model.run_model('MODFLOW-NWT.exe',silent=False)
+        success, mfoutput = self.model.run_model('MODFLOW-NWT.exe')
         print(success)
         
 def main():
