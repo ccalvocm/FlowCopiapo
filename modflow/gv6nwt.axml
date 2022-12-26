@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Model_Archive_List>
+  <bin Model_Name="gv6" FileType="bin">
+    <FileName Model_Name="gv6" FileType="bin">MODFLOW-NWT.exe</FileName>
+  </bin>
+  <ancillary Model_Name="gv6" FileType="ancillary">
+    <FileName Model_Name="gv6" FileType="ancillary">gv6.mmZLib</FileName>
+  </ancillary>
+  <model Model_Name="gv6" FileType="Model Input">
+    <FileName Model_Name="gv6" FileType="Model Input">gv6nwt.bas</FileName>
+    <FileName Model_Name="gv6" FileType="Model Input">gv6nwt.chd</FileName>
+    <FileName Model_Name="gv6" FileType="Model Input">gv6nwt.dis</FileName>
+    <FileName Model_Name="gv6" FileType="Model Input">gv6nwt.drn</FileName>
+    <FileName Model_Name="gv6" FileType="Model Input">gv6nwt.gsf</FileName>
+    <FileName Model_Name="gv6" FileType="Model Input">gv6nwt.nam.archive</FileName>
+    <FileName Model_Name="gv6" FileType="Model Input">gv6nwt.nwt</FileName>
+    <FileName Model_Name="gv6" FileType="Model Input">gv6nwt.oc</FileName>
+    <FileName Model_Name="gv6" FileType="Model Input">gv6nwt.rch</FileName>
+    <FileName Model_Name="gv6" FileType="Model Input">gv6nwt.upw</FileName>
+    <FileName Model_Name="gv6" FileType="Model Input">gv6nwt.wel</FileName>
+    <FileName Model_Name="gv6" FileType="Model Input">RunModflow.Bat.archive</FileName>
+    <FileName Model_Name="gv6" FileType="Model Input">usgs.gv6nwt.reference</FileName>
+  </model>
+  <output Model_Name="gv6" FileType="Model Output">
+    <FileName Model_Name="gv6" FileType="Model Output">gv6nwt.cbc</FileName>
+    <FileName Model_Name="gv6" FileType="Model Output">gv6nwt.fdn</FileName>
+    <FileName Model_Name="gv6" FileType="Model Output">gv6nwt.fhd</FileName>
+    <FileName Model_Name="gv6" FileType="Model Output">gv6nwt.lst</FileName>
+    <FileName Model_Name="gv6" FileType="Model Output">gv6nwt.wel_dewater.txt</FileName>
+  </output>
+</Model_Archive_List>

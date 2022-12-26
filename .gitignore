@@ -12,3 +12,10 @@ simcopiapo/modflow/load/SIMCOPIAPO.hds
 *.rch
 *.rch
 simcopiapo/modflow/run/SIMCOPIAPO.rch
+modflow/Copiapo_CB.gwv
+modflow/gv6.zone
+modflow/gv6nwt.fdn
+modflow/gv6nwt.fhd
+modflow/gv6nwt.lst
+simcopiapo/modflow/run/SIMCOPIAPO.rch
+simcopiapo/modflow/run/SIMCOPIAPO.rch

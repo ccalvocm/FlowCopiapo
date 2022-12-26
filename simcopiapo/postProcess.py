@@ -25,9 +25,13 @@ def main():
 
     # create the vtk object and export heads
     nam_file=os.path.join(model_ws, "SIMCOPIAPO.nam")
-    nam_file=r'G:\OneDrive - ciren.cl\2022_Ficha_Atacama\05_Modelos\DGA-DICTUC\MODFLOW Transiente\Copiapo_12102022.nam'
     # load model
     ml = flopy.modflow.Modflow.load(nam_file, model_ws='.', check=False)
+    
+    
+    from flopy.export.utils import model_export
+    def exportModel():
+        model_export('Copiapo.vtk',ml,fmt='vtk',epsgint=24879)
 
 def exportHds(ml,head_file,model_ws):
     
@@ -40,7 +44,7 @@ def exportWel(ml,well_output_dir):
     ml.wel.export(well_output_dir, fmt="vtk")
     
 def exportDis(ml,dis_output_dir):
-    ml.dis.export(dis_output_dir, fmt="vtk")
+    ml.dis.export(dis_output_dir, fmt="vtk",vertical_exageration=6)
 
 def exportBas(ml,bas_output_dir):
     ml.bas6.export(bas_output_dir, fmt="vtk")
