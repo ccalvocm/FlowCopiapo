@@ -104,6 +104,24 @@ def makeWEL(modelo):
     # overlay con las celdas activas
     daaSubOverlay=gpd.overlay(daaSubt,limit)
     
+    # convertir a unidades de l/s a m/d
+    daaSubOverlay['Caudal Anu']=-86400*1e-3*daaSubOverlay['Caudal Anu'].str.replace(',',
+'.').astype(float)
+    
+    daaSubOverlay['COLROW']=daaSubOverlay.geometry.apply(lambda u: str(int(u.x/200))+','+str(int(u.y/200)))
+    daaSubSum=daaSubOverlay.groupby(['COLROW']).agg('sum')['Caudal Anu']
+    
+    # crear matriz de coordenadas
+    wel0=modelo.model.wel.stress_period_data.array['flux'][0]
+    row,col=np.meshgrid(range(wel0.shape[1]),range(wel0.shape[2]))
+    
+    # actualizar el paquete WEL
+    # crear diccionario del paquete WEL
+    wel_spd={}
+    
+
+    wel = flopy.modflow.ModflowWel(modelo.model,stress_period_data=wel_spd)
+    
 def main():
     # pathNam=os.path.join('..','simcopiapo','modflow','run','SIMCOPIAPO.nam')
     pathNam=os.path.join('..','modflow','gv6nwt.nam')
@@ -112,10 +130,9 @@ def main():
     modelo.load()
     modelo.run()
     
-    modelo2=modelo.copy()
-    makeDIS(modelo2.model)
-    NWT(modelo2.model)
-    makeOC(modelo2.model)
+    makeDIS(modelo.model)
+    NWT(modelo.model)
+    makeOC(modelo.model)
     
     
 # if __name__=='__main__':
