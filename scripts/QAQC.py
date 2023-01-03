@@ -82,7 +82,7 @@ def makeDIS(mf):
     tsmult=[1.2 for x in perlen]
     dis3 = flopy.modflow.ModflowDis(
     mf, nlay, nrow, ncol, delr=delr, delc=delc, top=top, botm=botm,
-    nper=nper,perlen=perlen,nstp=nstp,steady=steady)
+    nper=nper,perlen=perlen,nstp=nstp,steady=steady,unit=111)
     return None
     
 def NWT(mf):
@@ -112,15 +112,32 @@ def makeWEL(modelo):
     daaSubSum=daaSubOverlay.groupby(['COLROW']).agg('sum')['Caudal Anu']
     
     # crear matriz de coordenadas
-    wel0=modelo.model.wel.stress_period_data.array['flux'][0]
-    row,col=np.meshgrid(range(wel0.shape[1]),range(wel0.shape[2]))
+    welAll=modelo.model.wel.stress_period_data.array['flux']
+    colRow=[[x,y] for x in range(modelo.model.dis.ncol) for y in range(modelo.model.dis.nrow)]
     
     # actualizar el paquete WEL
     # crear diccionario del paquete WEL
-    wel_spd={}
+    wel_spd=dict.fromkeys(range(modelo.model.dis.nper))
     
-
+    for stp in wel_spd.keys():
+        listSpd=[]
+        if stp>=300:
+            for col in range(np.shape(welAll[0][0])[1]-1):
+                for row in range(np.shape(welAll[0][0])[0]-1):
+                    try:
+                        flux=daaSubSum.loc[str(col)+','+str(row)]
+                        listSpd.append([0,row,col,flux]) 
+                    except:
+                        continue
+        else:
+            arrayWel=welAll[stp][0]
+            for col in range(np.shape(arrayWel)[1]-1):
+                for row in range(np.shape(arrayWel)[0]-1):
+                    listSpd.append([0,row,col,arrayWel[row,col]])  
+        wel_spd[stp]=listSpd[:]
+        
     wel = flopy.modflow.ModflowWel(modelo.model,stress_period_data=wel_spd)
+
     
 def main():
     # pathNam=os.path.join('..','simcopiapo','modflow','run','SIMCOPIAPO.nam')
@@ -128,12 +145,13 @@ def main():
     os.chdir(os.path.dirname(pathNam))
     modelo=model(pathNam,'Copiapo')
     modelo.load()
-    modelo.run()
     
     makeDIS(modelo.model)
     NWT(modelo.model)
     makeOC(modelo.model)
-    
+    makeWEL(modelo.model)
+    modelo.run()
+
     
 # if __name__=='__main__':
 #     main()
