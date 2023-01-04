@@ -9,6 +9,7 @@ import os
 import flopy
 import pandas as pd
 import numpy as np
+import geopandas as gpd
 
 class model(object):
     def __init__(self,pathNam,name):
@@ -82,11 +83,12 @@ def makeDIS(mf):
     tsmult=[1.2 for x in perlen]
     dis3 = flopy.modflow.ModflowDis(
     mf, nlay, nrow, ncol, delr=delr, delc=delc, top=top, botm=botm,
-    nper=nper,perlen=perlen,nstp=nstp,steady=steady,unit=111)
+    nper=nper,perlen=perlen,nstp=nstp,steady=steady,unitnumber=111)
     return None
     
 def NWT(mf):
-    return flopy.modflow.ModflowNwt(mf)
+    return flopy.modflow.ModflowNwt(mf,headtol=0.001,fluxtol=500,
+                                    maxiterout=500)
     
 def makeWEL(modelo):
     import geopandas as gpd
@@ -113,7 +115,6 @@ def makeWEL(modelo):
     
     # crear matriz de coordenadas
     welAll=modelo.model.wel.stress_period_data.array['flux']
-    colRow=[[x,y] for x in range(modelo.model.dis.ncol) for y in range(modelo.model.dis.nrow)]
     
     # actualizar el paquete WEL
     # crear diccionario del paquete WEL
@@ -149,7 +150,7 @@ def main():
     makeDIS(modelo.model)
     NWT(modelo.model)
     makeOC(modelo.model)
-    makeWEL(modelo.model)
+    makeWEL(modelo)
     modelo.run()
 
     
