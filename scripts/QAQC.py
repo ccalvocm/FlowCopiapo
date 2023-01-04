@@ -141,10 +141,26 @@ def makeWEL(modelo):
 
 def postProcess(model):
     from flopy.utils.zonbud import ZoneBudget, read_zbarray
-    zone_file = os.path.join('.', "gv6.zone")
+    import matplotlib.pyplot as plt
+    zone_file = os.path.join('.', "gv6.zones")
     zon = read_zbarray(zone_file)
     nlay, nrow, ncol = zon.shape    
-        
+    zb = ZoneBudget('gv6nwt.cbc', zon)
+    dfZB=zb.get_dataframes()
+    
+    ruta_lst=os.path.join('.','gv6nwt.lst')
+    mf_list =  flopy.utils.MfListBudget(ruta_lst)
+    incremental, cumulative = mf_list.get_budget()
+    
+    #Leer el balance del primer timestep y primer stress period
+    data = mf_list.get_data(kstpkper=(0,1))
+    plt.bar(data['index'], data['value'])
+    plt.xticks(data['index'], data['name'], rotation=45, size=6)
+    plt.show()
+    plt.ylabel('Balance volumétrico ($m^3$)')
+    plt.tight_layout()
+    plt.grid()
+            
 def main():
     # pathNam=os.path.join('..','simcopiapo','modflow','run','SIMCOPIAPO.nam')
     pathNam=os.path.join('..','modflow','gv6nwt.nam')
