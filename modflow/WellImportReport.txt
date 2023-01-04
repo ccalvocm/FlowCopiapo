@@ -1,0 +1,1039 @@
+
+ Well: PB1-1    X: 403348.724000  Y: 6902546.693000  No. Transient Data Points: 545
+
+ Well: PB1-2    X: 403516.729000  Y: 6897839.694000  No. Transient Data Points: 545
+
+ Well: PB1-3    X: 403592.732000  Y: 6895215.695000  No. Transient Data Points: 545
+
+ Well: PB1-4    X: 403615.729000  Y: 6898303.694000  No. Transient Data Points: 545
+
+ Well: PB1-5    X: 403658.732000  Y: 6894820.695000  No. Transient Data Points: 545
+
+ Well: PB1-6    X: 403703.935000  Y: 6891761.696000  No. Transient Data Points: 545
+
+ Well: PB1-7    X: 403884.736000  Y: 6891183.697000  No. Transient Data Points: 545
+
+ Well: PB1-8    X: 403901.725000  Y: 6902255.694000  No. Transient Data Points: 545
+
+ Well: PB1-9    X: 403950.725000  Y: 6902081.694000  No. Transient Data Points: 545
+
+ Well: PB1-10    X: 403989.737000  Y: 6889744.697000  No. Transient Data Points: 545
+
+ Well: PB1-11    X: 404123.737000  Y: 6889696.697000  No. Transient Data Points: 545
+
+ Well: PB1-12    X: 404269.727000  Y: 6899407.695000  No. Transient Data Points: 545
+
+ Well: PB1-13    X: 404380.727000  Y: 6899832.695000  No. Transient Data Points: 545
+
+ Well: PB1-14    X: 405790.729000  Y: 6896921.697000  No. Transient Data Points: 545
+
+ Well: PB1-15    X: 405856.747000  Y: 6897125.718000  No. Transient Data Points: 545
+
+ Well: PB1-16    X: 405889.729000  Y: 6896950.697000  No. Transient Data Points: 545
+
+ Well: PB1-17    X: 405920.130000  Y: 6896327.697000  No. Transient Data Points: 545
+
+ Well: PB1-18    X: 406329.731000  Y: 6895600.698000  No. Transient Data Points: 545
+
+ Well: PB1-19    X: 407672.734000  Y: 6891888.700000  No. Transient Data Points: 545
+
+ Well: PB1-20    X: 407720.727000  Y: 6898562.698000  No. Transient Data Points: 545
+
+ Well: PB1-21    X: 409753.000000  Y: 6888835.000000  No. Transient Data Points: 545
+
+ Well: PB1-22    X: 410753.000000  Y: 6887662.000000  No. Transient Data Points: 545
+
+ Well: PB1-23    X: 410880.000000  Y: 6887518.000000  No. Transient Data Points: 545
+
+ Well: PB1-24    X: 411100.000000  Y: 6887095.000000  No. Transient Data Points: 545
+
+ Well: PB1-25    X: 411319.000000  Y: 6886658.000000  No. Transient Data Points: 545
+
+ Well: PB1-26    X: 411745.737000  Y: 6886384.706000  No. Transient Data Points: 545
+
+ Well: PB1-27    X: 412908.738000  Y: 6885637.707000  No. Transient Data Points: 545
+
+ Well: PB1-28    X: 413507.738000  Y: 6885155.708000  No. Transient Data Points: 545
+
+ Well: PB1-29    X: 414577.738000  Y: 6884239.709000  No. Transient Data Points: 545
+
+ Well: PB1-30    X: 414736.738000  Y: 6884191.709000  No. Transient Data Points: 545
+
+ Well: PB2-1    X: 388880.000000  Y: 6923432.000000  No. Transient Data Points: 545
+
+ Well: PB2-2    X: 389386.000000  Y: 6921579.000000  No. Transient Data Points: 545
+
+ Well: PB2-3    X: 389684.000000  Y: 6921266.000000  No. Transient Data Points: 545
+
+ Well: PB2-4    X: 389727.000000  Y: 6921202.000000  No. Transient Data Points: 545
+
+ Well: PB2-5    X: 389823.000000  Y: 6921214.000000  No. Transient Data Points: 545
+
+ Well: PB2-6    X: 390010.000000  Y: 6921273.000000  No. Transient Data Points: 545
+
+ Well: PB2-7    X: 390412.000000  Y: 6920899.000000  No. Transient Data Points: 545
+
+ Well: PB2-8    X: 390556.000000  Y: 6920876.000000  No. Transient Data Points: 545
+
+ Well: PB2-9    X: 390734.000000  Y: 6920660.000000  No. Transient Data Points: 545
+
+ Well: PB2-10    X: 390828.000000  Y: 6921152.000000  No. Transient Data Points: 545
+
+ Well: PB2-11    X: 390837.748000  Y: 6921083.644000  No. Transient Data Points: 545
+
+ Well: PB2-12    X: 391058.000000  Y: 6921024.000000  No. Transient Data Points: 545
+
+ Well: PB2-13    X: 391141.000000  Y: 6920976.000000  No. Transient Data Points: 545
+
+ Well: PB2-14    X: 391187.000000  Y: 6920835.000000  No. Transient Data Points: 545
+
+ Well: PB2-15    X: 391679.000000  Y: 6920442.000000  No. Transient Data Points: 545
+
+ Well: PB2-16    X: 392030.000000  Y: 6920405.000000  No. Transient Data Points: 545
+
+ Well: PB2-17    X: 392213.000000  Y: 6920070.000000  No. Transient Data Points: 545
+
+ Well: PB2-18    X: 392248.000000  Y: 6920508.000000  No. Transient Data Points: 545
+
+ Well: PB2-19    X: 392384.000000  Y: 6919740.000000  No. Transient Data Points: 545
+
+ Well: PB2-20    X: 392651.000000  Y: 6919364.000000  No. Transient Data Points: 545
+
+ Well: PB2-21    X: 392658.000000  Y: 6919361.000000  No. Transient Data Points: 545
+
+ Well: PB2-22    X: 392892.000000  Y: 6918489.000000  No. Transient Data Points: 545
+
+ Well: PB2-23    X: 393747.000000  Y: 6917723.000000  No. Transient Data Points: 545
+
+ Well: PB2-24    X: 394544.000000  Y: 6916753.000000  No. Transient Data Points: 545
+
+ Well: PB2-25    X: 394749.000000  Y: 6916859.000000  No. Transient Data Points: 545
+
+ Well: PB2-26    X: 394764.000000  Y: 6916879.000000  No. Transient Data Points: 545
+
+ Well: PB2-27    X: 394896.111000  Y: 6916331.682000  No. Transient Data Points: 545
+
+ Well: PB2-28    X: 394943.000000  Y: 6916401.000000  No. Transient Data Points: 545
+
+ Well: PB2-29    X: 396172.000000  Y: 6915652.000000  No. Transient Data Points: 545
+
+ Well: PB2-30    X: 396214.000000  Y: 6915755.000000  No. Transient Data Points: 545
+
+ Well: PB2-31    X: 396668.000000  Y: 6915096.000000  No. Transient Data Points: 545
+
+ Well: PB2-33    X: 397002.000000  Y: 6915292.000000  No. Transient Data Points: 545
+
+ Well: PB2-34    X: 397299.000000  Y: 6914918.000000  No. Transient Data Points: 545
+
+ Well: PB2-35    X: 397473.000000  Y: 6915038.000000  No. Transient Data Points: 545
+
+ Well: PB2-36    X: 397571.000000  Y: 6914024.000000  No. Transient Data Points: 545
+
+ Well: PB2-37    X: 397648.000000  Y: 6914709.000000  No. Transient Data Points: 545
+
+ Well: PB2-38    X: 397908.000000  Y: 6914038.000000  No. Transient Data Points: 545
+
+ Well: PB2-39    X: 398002.000000  Y: 6912601.000000  No. Transient Data Points: 545
+
+ Well: PB2-40    X: 398039.000000  Y: 6912536.000000  No. Transient Data Points: 545
+
+ Well: PB2-41    X: 398074.000000  Y: 6913331.000000  No. Transient Data Points: 545
+
+ Well: PB2-42    X: 398166.000000  Y: 6913120.000000  No. Transient Data Points: 545
+
+ Well: PB2-43    X: 398231.000000  Y: 6912836.000000  No. Transient Data Points: 545
+
+ Well: PB2-44    X: 399490.000000  Y: 6911474.000000  No. Transient Data Points: 545
+
+ Well: PB2-45    X: 399684.000000  Y: 6910783.000000  No. Transient Data Points: 545
+
+ Well: PB2-46    X: 400082.000000  Y: 6910115.000000  No. Transient Data Points: 545
+
+ Well: PB2-47    X: 400236.000000  Y: 6907007.000000  No. Transient Data Points: 545
+
+ Well: PB2-48    X: 400359.000000  Y: 6909925.000000  No. Transient Data Points: 545
+
+ Well: PB2-49    X: 400364.000000  Y: 6909203.000000  No. Transient Data Points: 545
+
+ Well: PB2-50    X: 400489.000000  Y: 6910081.000000  No. Transient Data Points: 545
+
+ Well: PB2-51    X: 400546.000000  Y: 6907585.000000  No. Transient Data Points: 545
+
+ Well: PB2-52    X: 400553.000000  Y: 6909884.000000  No. Transient Data Points: 545
+
+ Well: PB2-53    X: 400618.720000  Y: 6907327.689000  No. Transient Data Points: 545
+
+ Well: PB2-54    X: 400619.000000  Y: 6907334.000000  No. Transient Data Points: 545
+
+ Well: PB2-55    X: 400656.000000  Y: 6909654.000000  No. Transient Data Points: 545
+
+ Well: PB2-56    X: 400783.000000  Y: 6906865.000000  No. Transient Data Points: 545
+
+ Well: PB2-57    X: 400802.720000  Y: 6906865.690000  No. Transient Data Points: 545
+
+ Well: PB2-58    X: 400817.000000  Y: 6905913.000000  No. Transient Data Points: 545
+
+ Well: PB2-59    X: 400822.000000  Y: 6907679.000000  No. Transient Data Points: 545
+
+ Well: PB2-60    X: 400900.000000  Y: 6906270.000000  No. Transient Data Points: 545
+
+ Well: PB2-62    X: 401003.000000  Y: 6905070.000000  No. Transient Data Points: 545
+
+ Well: PB2-63    X: 401025.000000  Y: 6908171.000000  No. Transient Data Points: 545
+
+ Well: PB2-64    X: 401064.000000  Y: 6907267.000000  No. Transient Data Points: 545
+
+ Well: PB2-65    X: 401072.000000  Y: 6905235.000000  No. Transient Data Points: 545
+
+ Well: PB2-66    X: 401089.000000  Y: 6905387.000000  No. Transient Data Points: 545
+
+ Well: PB2-67    X: 401100.000000  Y: 6905427.000000  No. Transient Data Points: 545
+
+ Well: PB2-68    X: 401579.000000  Y: 6904983.000000  No. Transient Data Points: 545
+
+ Well: PB3-1    X: 374368.000000  Y: 6953124.000000  No. Transient Data Points: 545
+
+ Well: PB3-2    X: 374379.000000  Y: 6953346.000000  No. Transient Data Points: 545
+
+ Well: PB3-3    X: 374385.000000  Y: 6952728.000000  No. Transient Data Points: 545
+
+ Well: PB3-4    X: 374527.000000  Y: 6952647.000000  No. Transient Data Points: 545
+
+ Well: PB3-5    X: 374548.000000  Y: 6953771.000000  No. Transient Data Points: 545
+
+ Well: PB3-6    X: 374558.000000  Y: 6953791.000000  No. Transient Data Points: 545
+
+ Well: PB3-7    X: 374575.000000  Y: 6952708.000000  No. Transient Data Points: 545
+
+ Well: PB3-9    X: 374580.000000  Y: 6953310.000000  No. Transient Data Points: 545
+
+ Well: PB3-10    X: 374586.000000  Y: 6952165.000000  No. Transient Data Points: 545
+
+ Well: PB3-11    X: 374630.000000  Y: 6953907.000000  No. Transient Data Points: 545
+
+ Well: PB3-12    X: 374633.000000  Y: 6952480.000000  No. Transient Data Points: 545
+
+ Well: PB3-13    X: 374637.000000  Y: 6954342.000000  No. Transient Data Points: 545
+
+ Well: PB3-14    X: 374658.000000  Y: 6952284.000000  No. Transient Data Points: 545
+
+ Well: PB3-15    X: 374686.000000  Y: 6954091.000000  No. Transient Data Points: 545
+
+ Well: PB3-16    X: 374716.000000  Y: 6952452.000000  No. Transient Data Points: 545
+
+ Well: PB3-17    X: 374742.000000  Y: 6954171.000000  No. Transient Data Points: 545
+
+ Well: PB3-18    X: 374808.000000  Y: 6952904.000000  No. Transient Data Points: 545
+
+ Well: PB3-19    X: 374813.000000  Y: 6954906.000000  No. Transient Data Points: 545
+
+ Well: PB3-20    X: 374879.000000  Y: 6955209.000000  No. Transient Data Points: 545
+
+ Well: PB3-21    X: 374933.000000  Y: 6954043.000000  No. Transient Data Points: 545
+
+ Well: PB3-22    X: 375064.000000  Y: 6952030.000000  No. Transient Data Points: 545
+
+ Well: PB3-23    X: 375114.000000  Y: 6951542.000000  No. Transient Data Points: 545
+
+ Well: PB3-24    X: 375136.654000  Y: 6952394.677000  No. Transient Data Points: 545
+
+ Well: PB3-25    X: 375202.000000  Y: 6952074.000000  No. Transient Data Points: 545
+
+ Well: PB3-26    X: 375280.000000  Y: 6951476.000000  No. Transient Data Points: 545
+
+ Well: PB3-27    X: 375280.000000  Y: 6951462.000000  No. Transient Data Points: 545
+
+ Well: PB3-28    X: 375311.000000  Y: 6950876.000000  No. Transient Data Points: 545
+
+ Well: PB3-29    X: 375331.000000  Y: 6951097.000000  No. Transient Data Points: 545
+
+ Well: PB3-30    X: 375393.000000  Y: 6951562.000000  No. Transient Data Points: 545
+
+ Well: PB3-31    X: 375444.000000  Y: 6951321.000000  No. Transient Data Points: 545
+
+ Well: PB3-32    X: 375505.000000  Y: 6951540.000000  No. Transient Data Points: 545
+
+ Well: PB3-33    X: 375535.000000  Y: 6951138.000000  No. Transient Data Points: 545
+
+ Well: PB3-34    X: 375541.000000  Y: 6951353.000000  No. Transient Data Points: 545
+
+ Well: PB3-35    X: 375981.700000  Y: 6949807.000000  No. Transient Data Points: 545
+
+ Well: PB3-36    X: 375995.000000  Y: 6949762.000000  No. Transient Data Points: 545
+
+ Well: PB3-37    X: 376004.000000  Y: 6949232.000000  No. Transient Data Points: 545
+
+ Well: PB3-38    X: 376236.000000  Y: 6949546.000000  No. Transient Data Points: 545
+
+ Well: PB3-39    X: 376395.000000  Y: 6946579.000000  No. Transient Data Points: 545
+
+ Well: PB3-40    X: 376426.000000  Y: 6946206.000000  No. Transient Data Points: 545
+
+ Well: PB3-41    X: 376434.000000  Y: 6946365.000000  No. Transient Data Points: 545
+
+ Well: PB3-42    X: 376452.000000  Y: 6945628.000000  No. Transient Data Points: 545
+
+ Well: PB3-43    X: 376525.900000  Y: 6945208.000000  No. Transient Data Points: 545
+
+ Well: PB3-44    X: 376593.000000  Y: 6949458.000000  No. Transient Data Points: 545
+
+ Well: PB3-45    X: 376594.000000  Y: 6946838.000000  No. Transient Data Points: 545
+
+ Well: PB3-46    X: 376603.000000  Y: 6947026.000000  No. Transient Data Points: 545
+
+ Well: PB3-47    X: 376626.000000  Y: 6949277.000000  No. Transient Data Points: 545
+
+ Well: PB3-48    X: 376656.000000  Y: 6949326.000000  No. Transient Data Points: 545
+
+ Well: PB3-49    X: 376817.000000  Y: 6947731.000000  No. Transient Data Points: 545
+
+ Well: PB3-50    X: 376824.000000  Y: 6945248.000000  No. Transient Data Points: 545
+
+ Well: PB3-51    X: 376839.000000  Y: 6948047.000000  No. Transient Data Points: 545
+
+ Well: PB3-52    X: 376852.000000  Y: 6948809.000000  No. Transient Data Points: 545
+
+ Well: PB3-53    X: 376868.000000  Y: 6947888.000000  No. Transient Data Points: 545
+
+ Well: PB3-54    X: 376879.000000  Y: 6945002.000000  No. Transient Data Points: 545
+
+ Well: PB3-55    X: 376887.000000  Y: 6949702.000000  No. Transient Data Points: 545
+
+ Well: PB3-56    X: 376896.000000  Y: 6949743.000000  No. Transient Data Points: 545
+
+ Well: PB3-57    X: 376900.000000  Y: 6949704.000000  No. Transient Data Points: 545
+
+ Well: PB3-58    X: 376943.900000  Y: 6945904.000000  No. Transient Data Points: 545
+
+ Well: PB3-59    X: 376972.000000  Y: 6945283.000000  No. Transient Data Points: 545
+
+ Well: PB3-60    X: 376983.000000  Y: 6949877.000000  No. Transient Data Points: 545
+
+ Well: PB3-61    X: 377003.000000  Y: 6948552.000000  No. Transient Data Points: 545
+
+ Well: PB3-62    X: 377023.900000  Y: 6944923.000000  No. Transient Data Points: 545
+
+ Well: PB3-63    X: 377042.000000  Y: 6944870.000000  No. Transient Data Points: 545
+
+ Well: PB3-64    X: 377108.000000  Y: 6949716.000000  No. Transient Data Points: 545
+
+ Well: PB3-65    X: 377410.000000  Y: 6944509.000000  No. Transient Data Points: 545
+
+ Well: PB3-66    X: 377968.000000  Y: 6944301.000000  No. Transient Data Points: 545
+
+ Well: PB3-67    X: 378159.000000  Y: 6943866.000000  No. Transient Data Points: 545
+
+ Well: PB3-68    X: 378182.000000  Y: 6940010.000000  No. Transient Data Points: 545
+
+ Well: PB3-69    X: 378260.000000  Y: 6940965.000000  No. Transient Data Points: 545
+
+ Well: PB3-70    X: 378298.000000  Y: 6940626.000000  No. Transient Data Points: 545
+
+ Well: PB3-71    X: 378303.000000  Y: 6940078.000000  No. Transient Data Points: 545
+
+ Well: PB3-72    X: 378307.400000  Y: 6940120.000000  No. Transient Data Points: 545
+
+ Well: PB3-73    X: 378361.000000  Y: 6940881.000000  No. Transient Data Points: 545
+
+ Well: PB3-74    X: 378628.000000  Y: 6939355.000000  No. Transient Data Points: 545
+
+ Well: PB3-75    X: 378708.000000  Y: 6943328.000000  No. Transient Data Points: 545
+
+ Well: PB3-76    X: 378716.000000  Y: 6942634.000000  No. Transient Data Points: 545
+
+ Well: PB3-77    X: 378786.400000  Y: 6938983.000000  No. Transient Data Points: 545
+
+ Well: PB3-78    X: 378791.000000  Y: 6938951.000000  No. Transient Data Points: 545
+
+ Well: PB3-79    X: 378795.700000  Y: 6937924.000000  No. Transient Data Points: 545
+
+ Well: PB3-80    X: 378832.000000  Y: 6937861.000000  No. Transient Data Points: 545
+
+ Well: PB3-81    X: 378860.000000  Y: 6938774.000000  No. Transient Data Points: 545
+
+ Well: PB3-82    X: 378868.600000  Y: 6938817.000000  No. Transient Data Points: 545
+
+ Well: PB3-83    X: 379222.000000  Y: 6936808.000000  No. Transient Data Points: 545
+
+ Well: PB3-84    X: 379536.000000  Y: 6936528.000000  No. Transient Data Points: 545
+
+ Well: PB3-85    X: 379916.000000  Y: 6936509.000000  No. Transient Data Points: 545
+
+ Well: PB3-86    X: 380158.000000  Y: 6936398.000000  No. Transient Data Points: 545
+
+ Well: PB3-87    X: 381016.000000  Y: 6935193.000000  No. Transient Data Points: 545
+
+ Well: PB3-88    X: 381406.000000  Y: 6934975.000000  No. Transient Data Points: 545
+
+ Well: PB3-89    X: 382226.000000  Y: 6933372.000000  No. Transient Data Points: 545
+
+ Well: PB3-90    X: 382230.000000  Y: 6933596.000000  No. Transient Data Points: 545
+
+ Well: PB3-91    X: 382321.000000  Y: 6932591.000000  No. Transient Data Points: 545
+
+ Well: PB3-92    X: 382353.000000  Y: 6932992.000000  No. Transient Data Points: 545
+
+ Well: PB3-93    X: 382379.000000  Y: 6932361.000000  No. Transient Data Points: 545
+
+ Well: PB3-94    X: 382483.000000  Y: 6932010.000000  No. Transient Data Points: 545
+
+ Well: PB3-95    X: 382515.000000  Y: 6931650.000000  No. Transient Data Points: 545
+
+ Well: PB3-96    X: 382547.000000  Y: 6933452.000000  No. Transient Data Points: 545
+
+ Well: PB3-97    X: 382550.600000  Y: 6933496.000000  No. Transient Data Points: 545
+
+ Well: PB3-98    X: 382560.000000  Y: 6932747.000000  No. Transient Data Points: 545
+
+ Well: PB3-99    X: 382799.000000  Y: 6931220.000000  No. Transient Data Points: 545
+
+ Well: PB3-100    X: 382825.000000  Y: 6932279.000000  No. Transient Data Points: 545
+
+ Well: PB3-101    X: 382827.000000  Y: 6932284.000000  No. Transient Data Points: 545
+
+ Well: PB3-102    X: 382849.000000  Y: 6930978.000000  No. Transient Data Points: 545
+
+ Well: PB3-103    X: 383290.000000  Y: 6930507.000000  No. Transient Data Points: 545
+
+ Well: PB3-104    X: 383413.000000  Y: 6930432.000000  No. Transient Data Points: 545
+
+ Well: PB3-105    X: 383417.000000  Y: 6930367.000000  No. Transient Data Points: 545
+
+ Well: PB3-106    X: 383845.000000  Y: 6929423.000000  No. Transient Data Points: 545
+
+ Well: PB3-107    X: 383934.000000  Y: 6929189.000000  No. Transient Data Points: 545
+
+ Well: PB3-108    X: 384077.000000  Y: 6929530.000000  No. Transient Data Points: 545
+
+ Well: PB3-109    X: 384238.900000  Y: 6929358.000000  No. Transient Data Points: 545
+
+ Well: PB3-110    X: 384277.000000  Y: 6928939.000000  No. Transient Data Points: 545
+
+ Well: PB3-112    X: 384295.000000  Y: 6929109.000000  No. Transient Data Points: 545
+
+ Well: PB3-113    X: 385327.000000  Y: 6928248.000000  No. Transient Data Points: 545
+
+ Well: PB3-114    X: 385372.000000  Y: 6928293.000000  No. Transient Data Points: 545
+
+ Well: PB3-115    X: 385467.000000  Y: 6927952.000000  No. Transient Data Points: 545
+
+ Well: PB3-116    X: 385953.000000  Y: 6927358.000000  No. Transient Data Points: 545
+
+ Well: PB3-117    X: 385963.200000  Y: 6927404.000000  No. Transient Data Points: 545
+
+ Well: PB3-118    X: 386129.000000  Y: 6927013.000000  No. Transient Data Points: 545
+
+ Well: PB3-119    X: 386194.000000  Y: 6926739.000000  No. Transient Data Points: 545
+
+ Well: PB3-120    X: 386981.000000  Y: 6924965.000000  No. Transient Data Points: 545
+
+ Well: PB3-121    X: 387309.000000  Y: 6924306.000000  No. Transient Data Points: 545
+
+ Well: PB3-122    X: 387317.000000  Y: 6924315.000000  No. Transient Data Points: 545
+
+ Well: PB4-1    X: 367473.000000  Y: 6969127.000000  No. Transient Data Points: 545
+
+ Well: PB4-2    X: 367531.000000  Y: 6971997.000000  No. Transient Data Points: 545
+
+ Well: PB4-3    X: 367742.000000  Y: 6971982.000000  No. Transient Data Points: 545
+
+ Well: PB4-4    X: 367880.000000  Y: 6971861.000000  No. Transient Data Points: 545
+
+ Well: PB4-5    X: 367971.000000  Y: 6971671.000000  No. Transient Data Points: 545
+
+ Well: PB4-6    X: 367990.000000  Y: 6970893.000000  No. Transient Data Points: 545
+
+ Well: PB4-7    X: 368006.000000  Y: 6970958.000000  No. Transient Data Points: 545
+
+ Well: PB4-8    X: 368007.000000  Y: 6970889.000000  No. Transient Data Points: 545
+
+ Well: PB4-9    X: 368023.000000  Y: 6971216.000000  No. Transient Data Points: 545
+
+ Well: PB4-10    X: 368025.000000  Y: 6970084.000000  No. Transient Data Points: 545
+
+ Well: PB4-11    X: 368167.000000  Y: 6971681.000000  No. Transient Data Points: 545
+
+ Well: PB4-12    X: 368237.000000  Y: 6972134.000000  No. Transient Data Points: 545
+
+ Well: PB4-13    X: 368499.000000  Y: 6969775.000000  No. Transient Data Points: 545
+Well PB4-13 is vertically outside the domain
+
+ Well: PB4-14    X: 368719.000000  Y: 6969966.000000  No. Transient Data Points: 545
+
+ Well: PB4-15    X: 368827.000000  Y: 6971105.000000  No. Transient Data Points: 545
+
+ Well: PB4-16    X: 368870.000000  Y: 6971153.000000  No. Transient Data Points: 545
+
+ Well: PB4-17    X: 368909.000000  Y: 6970928.000000  No. Transient Data Points: 545
+
+ Well: PB4-18    X: 368913.000000  Y: 6970779.000000  No. Transient Data Points: 545
+
+ Well: PB4-19    X: 369028.000000  Y: 6970919.000000  No. Transient Data Points: 545
+
+ Well: PB4-20    X: 369109.000000  Y: 6970818.000000  No. Transient Data Points: 545
+
+ Well: PB4-21    X: 369111.000000  Y: 6969755.000000  No. Transient Data Points: 545
+
+ Well: PB4-22    X: 369760.000000  Y: 6968906.000000  No. Transient Data Points: 545
+
+ Well: PB4-23    X: 370005.000000  Y: 6969908.000000  No. Transient Data Points: 545
+
+ Well: PB4-24    X: 370083.000000  Y: 6970159.000000  No. Transient Data Points: 545
+
+ Well: PB4-25    X: 370086.000000  Y: 6970455.000000  No. Transient Data Points: 545
+
+ Well: PB4-26    X: 370094.000000  Y: 6970462.000000  No. Transient Data Points: 545
+
+ Well: PB4-27    X: 370097.000000  Y: 6969943.000000  No. Transient Data Points: 545
+
+ Well: PB4-28    X: 370117.000000  Y: 6970116.000000  No. Transient Data Points: 545
+
+ Well: PB4-29    X: 370143.000000  Y: 6970191.000000  No. Transient Data Points: 545
+
+ Well: PB4-30    X: 370147.000000  Y: 6970407.000000  No. Transient Data Points: 545
+
+ Well: PB4-31    X: 370171.000000  Y: 6970229.000000  No. Transient Data Points: 545
+
+ Well: PB4-32    X: 370193.000000  Y: 6970138.000000  No. Transient Data Points: 545
+
+ Well: PB4-33    X: 370201.000000  Y: 6970194.000000  No. Transient Data Points: 545
+
+ Well: PB4-34    X: 370232.000000  Y: 6968964.000000  No. Transient Data Points: 545
+
+ Well: PB4-35    X: 370305.000000  Y: 6967894.000000  No. Transient Data Points: 545
+
+ Well: PB4-36    X: 370698.000000  Y: 6969944.000000  No. Transient Data Points: 545
+
+ Well: PB4-37    X: 370759.000000  Y: 6967538.000000  No. Transient Data Points: 545
+
+ Well: PB4-38    X: 370786.000000  Y: 6968502.000000  No. Transient Data Points: 545
+
+ Well: PB4-39    X: 370786.000000  Y: 6968502.000000  No. Transient Data Points: 545
+
+ Well: PB4-40    X: 370826.000000  Y: 6968552.000000  No. Transient Data Points: 545
+
+ Well: PB4-41    X: 370840.000000  Y: 6968558.000000  No. Transient Data Points: 545
+
+ Well: PB4-42    X: 370845.000000  Y: 6968448.000000  No. Transient Data Points: 545
+
+ Well: PB4-43    X: 370849.000000  Y: 6968459.000000  No. Transient Data Points: 545
+
+ Well: PB4-44    X: 370911.000000  Y: 6968511.000000  No. Transient Data Points: 545
+
+ Well: PB4-45    X: 370958.000000  Y: 6968007.000000  No. Transient Data Points: 545
+
+ Well: PB4-46    X: 370979.000000  Y: 6968394.000000  No. Transient Data Points: 545
+
+ Well: PB4-47    X: 371256.000000  Y: 6967958.000000  No. Transient Data Points: 545
+
+ Well: PB4-48    X: 371464.000000  Y: 6968425.000000  No. Transient Data Points: 545
+
+ Well: PB4-49    X: 371625.000000  Y: 6967987.000000  No. Transient Data Points: 545
+
+ Well: PB4-50    X: 371736.000000  Y: 6967820.000000  No. Transient Data Points: 545
+
+ Well: PB4-51    X: 371787.000000  Y: 6968024.000000  No. Transient Data Points: 545
+
+ Well: PB4-52    X: 372276.000000  Y: 6967996.000000  No. Transient Data Points: 545
+
+ Well: PB4-53    X: 372503.000000  Y: 6967818.000000  No. Transient Data Points: 545
+
+ Well: PB4-54    X: 372524.000000  Y: 6966478.000000  No. Transient Data Points: 545
+
+ Well: PB4-55    X: 372645.000000  Y: 6967370.000000  No. Transient Data Points: 545
+
+ Well: PB4-56    X: 372766.000000  Y: 6967230.000000  No. Transient Data Points: 545
+
+ Well: PB4-57    X: 372784.000000  Y: 6967722.000000  No. Transient Data Points: 545
+
+ Well: PB4-58    X: 372952.000000  Y: 6967007.000000  No. Transient Data Points: 545
+
+ Well: PB4-59    X: 372985.000000  Y: 6968196.000000  No. Transient Data Points: 545
+
+ Well: PB4-60    X: 373173.000000  Y: 6966445.000000  No. Transient Data Points: 545
+
+ Well: PB4-61    X: 373250.000000  Y: 6966578.000000  No. Transient Data Points: 545
+
+ Well: PB4-62    X: 373265.000000  Y: 6967137.000000  No. Transient Data Points: 545
+
+ Well: PB4-63    X: 373431.000000  Y: 6966803.000000  No. Transient Data Points: 545
+
+ Well: PB4-64    X: 373948.000000  Y: 6966311.000000  No. Transient Data Points: 545
+
+ Well: PB4-65    X: 374138.000000  Y: 6959157.000000  No. Transient Data Points: 545
+
+ Well: PB4-66    X: 374282.000000  Y: 6966061.000000  No. Transient Data Points: 545
+
+ Well: PB4-67    X: 374394.000000  Y: 6959963.000000  No. Transient Data Points: 545
+
+ Well: PB4-68    X: 374399.000000  Y: 6965836.000000  No. Transient Data Points: 545
+
+ Well: PB4-69    X: 374442.000000  Y: 6963824.000000  No. Transient Data Points: 545
+
+ Well: PB4-70    X: 374493.460000  Y: 6965947.100000  No. Transient Data Points: 545
+
+ Well: PB4-71    X: 374493.460000  Y: 6965947.100000  No. Transient Data Points: 545
+
+ Well: PB4-72    X: 374496.000000  Y: 6957677.000000  No. Transient Data Points: 545
+
+ Well: PB4-73    X: 374496.000000  Y: 6958596.000000  No. Transient Data Points: 545
+
+ Well: PB4-74    X: 374505.000000  Y: 6958978.000000  No. Transient Data Points: 545
+
+ Well: PB4-75    X: 374513.000000  Y: 6966439.000000  No. Transient Data Points: 545
+
+ Well: PB4-76    X: 374514.000000  Y: 6957638.000000  No. Transient Data Points: 545
+
+ Well: PB4-77    X: 374530.000000  Y: 6961289.000000  No. Transient Data Points: 545
+
+ Well: PB4-78    X: 374564.000000  Y: 6961088.000000  No. Transient Data Points: 545
+
+ Well: PB4-79    X: 374565.000000  Y: 6959984.000000  No. Transient Data Points: 545
+
+ Well: PB4-80    X: 374566.000000  Y: 6957310.000000  No. Transient Data Points: 545
+
+ Well: PB4-81    X: 374572.000000  Y: 6965580.000000  No. Transient Data Points: 545
+
+ Well: PB4-82    X: 374584.000000  Y: 6965579.000000  No. Transient Data Points: 545
+
+ Well: PB4-83    X: 374602.000000  Y: 6958327.000000  No. Transient Data Points: 545
+
+ Well: PB4-84    X: 374612.000000  Y: 6958612.000000  No. Transient Data Points: 545
+
+ Well: PB4-85    X: 374625.000000  Y: 6962375.000000  No. Transient Data Points: 545
+
+ Well: PB4-86    X: 374634.000000  Y: 6960817.000000  No. Transient Data Points: 545
+
+ Well: PB4-87    X: 374645.000000  Y: 6965638.000000  No. Transient Data Points: 545
+
+ Well: PB4-88    X: 374649.000000  Y: 6958602.000000  No. Transient Data Points: 545
+
+ Well: PB4-89    X: 374650.000000  Y: 6956756.000000  No. Transient Data Points: 545
+
+ Well: PB4-90    X: 374681.000000  Y: 6957016.000000  No. Transient Data Points: 545
+
+ Well: PB4-91    X: 374681.690000  Y: 6965608.700000  No. Transient Data Points: 545
+
+ Well: PB4-92    X: 374694.000000  Y: 6957996.000000  No. Transient Data Points: 545
+
+ Well: PB4-93    X: 374749.000000  Y: 6960367.000000  No. Transient Data Points: 545
+
+ Well: PB4-94    X: 374760.000000  Y: 6957220.000000  No. Transient Data Points: 545
+
+ Well: PB4-95    X: 374768.000000  Y: 6958332.000000  No. Transient Data Points: 545
+
+ Well: PB4-96    X: 374795.000000  Y: 6956871.000000  No. Transient Data Points: 545
+
+ Well: PB4-97    X: 374827.000000  Y: 6962327.000000  No. Transient Data Points: 545
+
+ Well: PB4-98    X: 374839.000000  Y: 6962270.000000  No. Transient Data Points: 545
+
+ Well: PB4-99    X: 374846.000000  Y: 6956781.000000  No. Transient Data Points: 545
+
+ Well: PB4-100    X: 374862.000000  Y: 6958117.000000  No. Transient Data Points: 545
+
+ Well: PB4-101    X: 374869.000000  Y: 6962492.000000  No. Transient Data Points: 545
+
+ Well: PB4-102    X: 374874.000000  Y: 6958020.000000  No. Transient Data Points: 545
+
+ Well: PB4-103    X: 374999.000000  Y: 6956453.000000  No. Transient Data Points: 545
+
+ Well: PB4-104    X: 375001.000000  Y: 6956559.000000  No. Transient Data Points: 545
+
+ Well: PB4-105    X: 375041.000000  Y: 6955345.000000  No. Transient Data Points: 545
+
+ Well: PB4-106    X: 375077.000000  Y: 6955939.000000  No. Transient Data Points: 545
+
+ Well: PB4-107    X: 375097.000000  Y: 6955661.000000  No. Transient Data Points: 545
+
+ Well: PB4-108    X: 375118.000000  Y: 6955731.000000  No. Transient Data Points: 545
+
+ Well: PB4-109    X: 375120.000000  Y: 6955685.000000  No. Transient Data Points: 545
+
+ Well: PB4-110    X: 375125.000000  Y: 6955663.000000  No. Transient Data Points: 545
+
+ Well: PB4-111    X: 375164.000000  Y: 6956638.000000  No. Transient Data Points: 545
+
+ Well: PB4-112    X: 375171.000000  Y: 6955469.000000  No. Transient Data Points: 545
+
+ Well: PB4-113    X: 375335.000000  Y: 6955288.000000  No. Transient Data Points: 545
+
+ Well: PB4-114    X: 376081.000000  Y: 6969897.000000  No. Transient Data Points: 545
+
+ Well: PB4-115    X: 376864.000000  Y: 6970717.000000  No. Transient Data Points: 545
+
+ Well: PB4-116    X: 376869.000000  Y: 6970722.000000  No. Transient Data Points: 545
+
+ Well: PB5-1    X: 352127.900000  Y: 6978909.000000  No. Transient Data Points: 545
+
+ Well: PB5-2    X: 352196.900000  Y: 6979135.000000  No. Transient Data Points: 545
+
+ Well: PB5-3    X: 352217.700000  Y: 6978414.000000  No. Transient Data Points: 545
+
+ Well: PB5-4    X: 352349.900000  Y: 6979068.000000  No. Transient Data Points: 545
+
+ Well: PB5-5    X: 352402.900000  Y: 6977911.000000  No. Transient Data Points: 545
+
+ Well: PB5-6    X: 352470.900000  Y: 6979241.000000  No. Transient Data Points: 545
+
+ Well: PB5-7    X: 352470.900000  Y: 6978216.000000  No. Transient Data Points: 545
+
+ Well: PB5-8    X: 352498.900000  Y: 6978225.000000  No. Transient Data Points: 545
+
+ Well: PB5-9    X: 352606.900000  Y: 6979439.000000  No. Transient Data Points: 545
+
+ Well: PB5-10    X: 352646.000000  Y: 6977912.000000  No. Transient Data Points: 545
+
+ Well: PB5-11    X: 353007.000000  Y: 6978887.000000  No. Transient Data Points: 545
+
+ Well: PB5-12    X: 353299.000000  Y: 6978826.000000  No. Transient Data Points: 545
+
+ Well: PB5-13    X: 353353.000000  Y: 6979038.000000  No. Transient Data Points: 545
+
+ Well: PB5-14    X: 353442.000000  Y: 6979718.000000  No. Transient Data Points: 545
+
+ Well: PB5-15    X: 353449.300000  Y: 6978825.000000  No. Transient Data Points: 545
+
+ Well: PB5-16    X: 353492.000000  Y: 6979547.000000  No. Transient Data Points: 545
+
+ Well: PB5-17    X: 353497.000000  Y: 6979628.000000  No. Transient Data Points: 545
+
+ Well: PB5-18    X: 353635.000000  Y: 6979736.000000  No. Transient Data Points: 545
+
+ Well: PB5-19    X: 353683.000000  Y: 6978320.000000  No. Transient Data Points: 545
+
+ Well: PB5-20    X: 353757.000000  Y: 6979727.000000  No. Transient Data Points: 545
+
+ Well: PB5-21    X: 353790.000000  Y: 6979648.000000  No. Transient Data Points: 545
+
+ Well: PB5-22    X: 353796.000000  Y: 6979595.000000  No. Transient Data Points: 545
+
+ Well: PB5-23    X: 354270.900000  Y: 6979329.000000  No. Transient Data Points: 545
+
+ Well: PB5-24    X: 354818.000000  Y: 6980778.000000  No. Transient Data Points: 545
+
+ Well: PB5-25    X: 354859.000000  Y: 6980383.000000  No. Transient Data Points: 545
+
+ Well: PB5-26    X: 355043.600000  Y: 6980294.000000  No. Transient Data Points: 545
+
+ Well: PB5-27    X: 355226.000000  Y: 6980212.000000  No. Transient Data Points: 545
+
+ Well: PB5-28    X: 356338.500000  Y: 6978936.000000  No. Transient Data Points: 545
+
+ Well: PB5-29    X: 356374.000000  Y: 6979656.000000  No. Transient Data Points: 545
+
+ Well: PB5-30    X: 356685.000000  Y: 6979809.000000  No. Transient Data Points: 545
+
+ Well: PB5-31    X: 356696.000000  Y: 6979462.000000  No. Transient Data Points: 545
+
+ Well: PB5-32    X: 356928.900000  Y: 6979761.000000  No. Transient Data Points: 545
+
+ Well: PB5-33    X: 357094.900000  Y: 6980450.000000  No. Transient Data Points: 545
+
+ Well: PB5-34    X: 357458.000000  Y: 6980627.000000  No. Transient Data Points: 545
+
+ Well: PB5-35    X: 357526.280000  Y: 6978106.100000  No. Transient Data Points: 545
+
+ Well: PB5-36    X: 357526.280000  Y: 6978716.500000  No. Transient Data Points: 545
+
+ Well: PB5-37    X: 357643.900000  Y: 6979338.000000  No. Transient Data Points: 545
+
+ Well: PB5-38    X: 357772.800000  Y: 6979110.000000  No. Transient Data Points: 545
+
+ Well: PB5-39    X: 357840.200000  Y: 6978263.100000  No. Transient Data Points: 545
+
+ Well: PB5-40    X: 357857.640000  Y: 6978559.600000  No. Transient Data Points: 545
+
+ Well: PB5-41    X: 357971.900000  Y: 6980735.000000  No. Transient Data Points: 545
+
+ Well: PB5-42    X: 358010.900000  Y: 6980082.000000  No. Transient Data Points: 545
+
+ Well: PB5-43    X: 358150.600000  Y: 6978879.000000  No. Transient Data Points: 545
+
+ Well: PB5-44    X: 358298.900000  Y: 6980013.000000  No. Transient Data Points: 545
+
+ Well: PB5-45    X: 358504.400000  Y: 6979903.000000  No. Transient Data Points: 545
+
+ Well: PB5-46    X: 358736.000000  Y: 6979212.000000  No. Transient Data Points: 545
+
+ Well: PB5-47    X: 358941.000000  Y: 6979316.000000  No. Transient Data Points: 545
+
+ Well: PB5-48    X: 358951.000000  Y: 6979316.000000  No. Transient Data Points: 545
+
+ Well: PB5-49    X: 359068.900000  Y: 6979946.000000  No. Transient Data Points: 545
+
+ Well: PB5-50    X: 359243.000000  Y: 6979319.000000  No. Transient Data Points: 545
+
+ Well: PB5-51    X: 359308.000000  Y: 6979068.000000  No. Transient Data Points: 545
+
+ Well: PB5-52    X: 359367.900000  Y: 6980429.000000  No. Transient Data Points: 545
+
+ Well: PB5-53    X: 359531.000000  Y: 6979175.000000  No. Transient Data Points: 545
+
+ Well: PB5-54    X: 359559.000000  Y: 6979759.000000  No. Transient Data Points: 545
+
+ Well: PB5-55    X: 359674.000000  Y: 6978805.000000  No. Transient Data Points: 545
+
+ Well: PB5-56    X: 359677.900000  Y: 6978848.000000  No. Transient Data Points: 545
+
+ Well: PB5-57    X: 359781.600000  Y: 6979282.000000  No. Transient Data Points: 545
+
+ Well: PB5-58    X: 359856.000000  Y: 6978822.000000  No. Transient Data Points: 545
+
+ Well: PB5-59    X: 360001.000000  Y: 6979342.000000  No. Transient Data Points: 545
+
+ Well: PB5-60    X: 360117.000000  Y: 6979428.000000  No. Transient Data Points: 545
+
+ Well: PB5-61    X: 360346.000000  Y: 6979792.000000  No. Transient Data Points: 545
+
+ Well: PB5-62    X: 360610.000000  Y: 6978987.000000  No. Transient Data Points: 545
+
+ Well: PB5-63    X: 360777.000000  Y: 6978275.000000  No. Transient Data Points: 545
+
+ Well: PB5-64    X: 360880.900000  Y: 6978664.000000  No. Transient Data Points: 545
+
+ Well: PB5-65    X: 361024.600000  Y: 6978422.000000  No. Transient Data Points: 545
+
+ Well: PB5-66    X: 361076.000000  Y: 6979912.000000  No. Transient Data Points: 545
+
+ Well: PB5-67    X: 361115.000000  Y: 6977822.000000  No. Transient Data Points: 545
+
+ Well: PB5-68    X: 361246.000000  Y: 6977512.000000  No. Transient Data Points: 545
+
+ Well: PB5-69    X: 361276.000000  Y: 6977892.000000  No. Transient Data Points: 545
+
+ Well: PB5-70    X: 361277.000000  Y: 6978384.000000  No. Transient Data Points: 545
+
+ Well: PB5-71    X: 361277.000000  Y: 6977705.000000  No. Transient Data Points: 545
+
+ Well: PB5-72    X: 361366.000000  Y: 6978062.000000  No. Transient Data Points: 545
+
+ Well: PB5-73    X: 361372.300000  Y: 6977852.000000  No. Transient Data Points: 545
+
+ Well: PB5-74    X: 361567.900000  Y: 6976807.000000  No. Transient Data Points: 545
+
+ Well: PB5-75    X: 361573.000000  Y: 6976757.000000  No. Transient Data Points: 545
+
+ Well: PB5-76    X: 361666.900000  Y: 6976575.000000  No. Transient Data Points: 545
+
+ Well: PB5-77    X: 361771.000000  Y: 6976694.000000  No. Transient Data Points: 545
+
+ Well: PB5-78    X: 361776.900000  Y: 6976740.000000  No. Transient Data Points: 545
+
+ Well: PB5-79    X: 362096.000000  Y: 6976342.000000  No. Transient Data Points: 545
+
+ Well: PB5-80    X: 362245.000000  Y: 6976673.000000  No. Transient Data Points: 545
+
+ Well: PB5-81    X: 362499.900000  Y: 6976629.000000  No. Transient Data Points: 545
+
+ Well: PB5-82    X: 362576.000000  Y: 6974362.000000  No. Transient Data Points: 545
+
+ Well: PB5-83    X: 362942.900000  Y: 6976389.000000  No. Transient Data Points: 545
+
+ Well: PB5-84    X: 363196.000000  Y: 6974742.000000  No. Transient Data Points: 545
+
+ Well: PB5-85    X: 363256.000000  Y: 6974022.000000  No. Transient Data Points: 545
+
+ Well: PB5-86    X: 363336.000000  Y: 6974232.000000  No. Transient Data Points: 545
+
+ Well: PB5-87    X: 363390.500000  Y: 6975469.000000  No. Transient Data Points: 545
+
+ Well: PB5-88    X: 363526.000000  Y: 6974462.000000  No. Transient Data Points: 545
+
+ Well: PB5-89    X: 363766.000000  Y: 6975472.000000  No. Transient Data Points: 545
+
+ Well: PB5-90    X: 363956.400000  Y: 6975939.000000  No. Transient Data Points: 545
+
+ Well: PB5-91    X: 364169.900000  Y: 6974703.000000  No. Transient Data Points: 545
+
+ Well: PB5-92    X: 364195.900000  Y: 6975660.000000  No. Transient Data Points: 545
+
+ Well: PB5-93    X: 364246.000000  Y: 6974002.000000  No. Transient Data Points: 545
+
+ Well: PB5-94    X: 364296.000000  Y: 6975412.000000  No. Transient Data Points: 545
+
+ Well: PB5-95    X: 364396.000000  Y: 6974892.000000  No. Transient Data Points: 545
+
+ Well: PB5-96    X: 364675.000000  Y: 6974521.000000  No. Transient Data Points: 545
+
+ Well: PB5-97    X: 364680.600000  Y: 6974560.000000  No. Transient Data Points: 545
+
+ Well: PB5-98    X: 365076.000000  Y: 6975181.000000  No. Transient Data Points: 545
+
+ Well: PB5-99    X: 365454.900000  Y: 6974593.000000  No. Transient Data Points: 545
+
+ Well: PB5-100    X: 366169.900000  Y: 6974284.000000  No. Transient Data Points: 545
+
+ Well: PB5-101    X: 366595.900000  Y: 6972753.000000  No. Transient Data Points: 545
+
+ Well: PB6-1    X: 323237.900000  Y: 6974670.000000  No. Transient Data Points: 545
+
+ Well: PB6-2    X: 324082.900000  Y: 6975129.000000  No. Transient Data Points: 545
+
+ Well: PB6-3    X: 327662.600000  Y: 6974237.000000  No. Transient Data Points: 545
+
+ Well: PB6-4    X: 336440.300000  Y: 6969099.000000  No. Transient Data Points: 545
+
+ Well: PB6-5    X: 338411.000000  Y: 6973846.000000  No. Transient Data Points: 545
+
+ Well: PB6-6    X: 338905.900000  Y: 6973837.000000  No. Transient Data Points: 545
+
+ Well: PB6-7    X: 338934.900000  Y: 6974077.000000  No. Transient Data Points: 545
+
+ Well: PB6-8    X: 339139.000000  Y: 6974129.000000  No. Transient Data Points: 545
+
+ Well: PB6-9    X: 339386.900000  Y: 6974197.000000  No. Transient Data Points: 545
+
+ Well: PB6-10    X: 339520.900000  Y: 6974346.000000  No. Transient Data Points: 545
+
+ Well: PB6-11    X: 339688.000000  Y: 6974345.000000  No. Transient Data Points: 545
+
+ Well: PB6-12    X: 340441.000000  Y: 6974597.000000  No. Transient Data Points: 545
+
+ Well: PB6-13    X: 340998.400000  Y: 6974673.000000  No. Transient Data Points: 545
+
+ Well: PB6-14    X: 341125.000000  Y: 6974871.000000  No. Transient Data Points: 545
+
+ Well: PB6-15    X: 341593.500000  Y: 6974968.000000  No. Transient Data Points: 545
+
+ Well: PB6-16    X: 341910.000000  Y: 6975088.000000  No. Transient Data Points: 545
+
+ Well: PB6-17    X: 342270.000000  Y: 6975119.000000  No. Transient Data Points: 545
+
+ Well: PB6-18    X: 343172.500000  Y: 6975178.000000  No. Transient Data Points: 545
+
+ Well: PB6-19    X: 343918.400000  Y: 6975833.000000  No. Transient Data Points: 545
+
+ Well: PB6-20    X: 344387.100000  Y: 6975759.000000  No. Transient Data Points: 545
+
+ Well: PB6-21    X: 344413.900000  Y: 6974833.000000  No. Transient Data Points: 545
+
+ Well: PB6-22    X: 344562.000000  Y: 6975639.000000  No. Transient Data Points: 545
+
+ Well: PB6-23    X: 344586.500000  Y: 6976047.000000  No. Transient Data Points: 545
+
+ Well: PB6-24    X: 344715.200000  Y: 6976533.000000  No. Transient Data Points: 545
+
+ Well: PB6-25    X: 345024.400000  Y: 6975636.000000  No. Transient Data Points: 545
+
+ Well: PB6-26    X: 345066.000000  Y: 6975282.000000  No. Transient Data Points: 545
+
+ Well: PB6-27    X: 345104.500000  Y: 6975100.000000  No. Transient Data Points: 545
+
+ Well: PB6-28    X: 345281.900000  Y: 6976081.000000  No. Transient Data Points: 545
+
+ Well: PB6-29    X: 345596.000000  Y: 6976067.000000  No. Transient Data Points: 545
+
+ Well: PB6-30    X: 345682.900000  Y: 6975216.000000  No. Transient Data Points: 545
+
+ Well: PB6-31    X: 345990.900000  Y: 6976478.000000  No. Transient Data Points: 545
+
+ Well: PB6-32    X: 346406.400000  Y: 6975462.000000  No. Transient Data Points: 545
+
+ Well: PB6-33    X: 346451.500000  Y: 6975910.000000  No. Transient Data Points: 545
+
+ Well: PB6-34    X: 346922.000000  Y: 6975511.000000  No. Transient Data Points: 545
+
+ Well: PB6-35    X: 346972.300000  Y: 6975701.000000  No. Transient Data Points: 545
+
+ Well: PB6-36    X: 347012.900000  Y: 6976831.000000  No. Transient Data Points: 545
+
+ Well: PB6-37    X: 347144.900000  Y: 6975582.000000  No. Transient Data Points: 545
+
+ Well: PB6-38    X: 347213.600000  Y: 6976391.000000  No. Transient Data Points: 545
+
+ Well: PB6-39    X: 347364.000000  Y: 6975830.000000  No. Transient Data Points: 545
+
+ Well: PB6-40    X: 347385.000000  Y: 6975628.000000  No. Transient Data Points: 545
+
+ Well: PB6-41    X: 347497.000000  Y: 6975958.000000  No. Transient Data Points: 545
+
+ Well: PB6-42    X: 347541.000000  Y: 6975773.000000  No. Transient Data Points: 545
+
+ Well: PB6-43    X: 347546.000000  Y: 6977062.000000  No. Transient Data Points: 545
+
+ Well: PB6-44    X: 347769.900000  Y: 6977055.000000  No. Transient Data Points: 545
+
+ Well: PB6-45    X: 347950.000000  Y: 6976425.000000  No. Transient Data Points: 545
+
+ Well: PB6-46    X: 347950.000000  Y: 6976425.000000  No. Transient Data Points: 545
+
+ Well: PB6-47    X: 348000.900000  Y: 6976362.000000  No. Transient Data Points: 545
+
+ Well: PB6-48    X: 348024.000000  Y: 6976248.000000  No. Transient Data Points: 545
+
+ Well: PB6-49    X: 348173.900000  Y: 6977220.000000  No. Transient Data Points: 545
+
+ Well: PB6-50    X: 348294.900000  Y: 6975935.000000  No. Transient Data Points: 545
+
+ Well: PB6-51    X: 348365.000000  Y: 6975820.000000  No. Transient Data Points: 545
+
+ Well: PB6-52    X: 348430.000000  Y: 6976023.000000  No. Transient Data Points: 545
+
+ Well: PB6-53    X: 348451.900000  Y: 6977257.000000  No. Transient Data Points: 545
+
+ Well: PB6-54    X: 348489.600000  Y: 6975728.000000  No. Transient Data Points: 545
+
+ Well: PB6-55    X: 348504.300000  Y: 6976621.000000  No. Transient Data Points: 545
+
+ Well: PB6-56    X: 348507.000000  Y: 6977029.000000  No. Transient Data Points: 545
+
+ Well: PB6-57    X: 348513.900000  Y: 6976410.000000  No. Transient Data Points: 545
+
+ Well: PB6-58    X: 348580.300000  Y: 6975868.000000  No. Transient Data Points: 545
+
+ Well: PB6-59    X: 348596.000000  Y: 6977022.000000  No. Transient Data Points: 545
+
+ Well: PB6-60    X: 348672.000000  Y: 6976523.000000  No. Transient Data Points: 545
+
+ Well: PB6-61    X: 348713.400000  Y: 6975789.000000  No. Transient Data Points: 545
+
+ Well: PB6-62    X: 348741.000000  Y: 6976942.000000  No. Transient Data Points: 545
+
+ Well: PB6-63    X: 348783.100000  Y: 6976810.000000  No. Transient Data Points: 545
+
+ Well: PB6-64    X: 348872.000000  Y: 6977184.000000  No. Transient Data Points: 545
+
+ Well: PB6-65    X: 349005.500000  Y: 6976427.000000  No. Transient Data Points: 545
+
+ Well: PB6-66    X: 349411.000000  Y: 6976996.000000  No. Transient Data Points: 545
+
+ Well: PB6-67    X: 349685.800000  Y: 6977443.000000  No. Transient Data Points: 545
+
+ Well: PB6-68    X: 349741.300000  Y: 6977546.000000  No. Transient Data Points: 545
+
+ Well: PB6-69    X: 349880.600000  Y: 6977457.000000  No. Transient Data Points: 545
+
+ Well: PB6-70    X: 349944.000000  Y: 6977723.000000  No. Transient Data Points: 545
+
+ Well: PB6-71    X: 350036.000000  Y: 6976792.000000  No. Transient Data Points: 545
+
+ Well: PB6-72    X: 350312.200000  Y: 6977396.000000  No. Transient Data Points: 545
+
+ Well: PB6-73    X: 350329.100000  Y: 6977217.000000  No. Transient Data Points: 545
+
+ Well: PB6-74    X: 350445.000000  Y: 6976935.000000  No. Transient Data Points: 545
+
+ Well: PB6-75    X: 350634.200000  Y: 6977462.000000  No. Transient Data Points: 545
+
+ Well: PB6-76    X: 350660.000000  Y: 6976989.000000  No. Transient Data Points: 545
+
+ Well: PB6-77    X: 350749.800000  Y: 6977284.000000  No. Transient Data Points: 545
+
+ Well: PB6-78    X: 350824.500000  Y: 6977321.000000  No. Transient Data Points: 545
+
+ Well: PB6-79    X: 351029.000000  Y: 6977402.000000  No. Transient Data Points: 545
+
+ Well: PB6-80    X: 351202.900000  Y: 6978112.000000  No. Transient Data Points: 545
+
+ Well: PB6-81    X: 351212.000000  Y: 6977785.000000  No. Transient Data Points: 545
+
+ Well: PB6-82    X: 351268.000000  Y: 6977416.000000  No. Transient Data Points: 545
+
+ Well: PB6-83    X: 351390.900000  Y: 6976961.000000  No. Transient Data Points: 545
+
+ Well: PB6-84    X: 351730.000000  Y: 6977646.000000  No. Transient Data Points: 545
+
+ Well: PB6-85    X: 352246.000000  Y: 6977232.000000  No. Transient Data Points: 545
+
+ Well: APR_Loros    X: 391137.750000  Y: 6920966.690000  No. Transient Data Points: 545

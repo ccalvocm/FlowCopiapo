@@ -1,0 +1,14 @@
+LIST 2 D:\Modelos DGA\01 Copiapó WEAP-Modflow\Copiapó Modelo GWV 2019\02 Caso Base 93-18-38\Escenario Caso Base\gv6.lst
+BAS6 1 D:\Modelos DGA\01 Copiapó WEAP-Modflow\Copiapó Modelo GWV 2019\02 Caso Base 93-18-38\Escenario Caso Base\gv6.bas
+LPF 11 C:\GWV\Copiapo\Copiapo_Esc1_Iter8\gv6.lpf
+DIS 29 C:\GWV\Copiapo\Copiapo_Esc1_Iter8\gv6.dis
+ZONE 14 C:\GWV\Copiapo\Copiapo_Esc1_Iter8\gv6.zone
+WEL 12 C:\GWV\Copiapo\Copiapo_Esc1_Iter8\gv6.wel
+DRN 13 C:\GWV\Copiapo\Copiapo_Esc1_Iter8\gv6.drn
+RCH 18 C:\GWV\Copiapo\Copiapo_Esc1_Iter8\gv6.rch
+OC 22 C:\GWV\Copiapo\Copiapo_Esc1_Iter8\gv6.oc
+PCG 19 C:\GWV\Copiapo\Copiapo_Esc1_Iter8\gv6.pcg
+CHD 40 C:\GWV\Copiapo\Copiapo_Esc1_Iter8\gv6.chd
+DATA(BINARY) 50 C:\GWV\Copiapo\Copiapo_Esc1_Iter8\gv6.cbb
+DATA(BINARY) 30 C:\GWV\Copiapo\Copiapo_Esc1_Iter8\gv6.hds
+DATA(BINARY) 31 C:\GWV\Copiapo\Copiapo_Esc1_Iter8\gv6.ddn

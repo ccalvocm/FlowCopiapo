@@ -2195,3 +2195,4 @@ Warning,WEL,402,400,370,0.000000,BC in inactive cell
 Warning,WEL,368,363,361,0.000000,BC in inactive cell
 Warning,WEL,350,349,346,0.000000,BC in inactive cell
 Warning,WEL,340,335,264,0.000000,BC in inactive cell
+Warning,OC,0,0,0,0.000000,action(s) defined in OC stress_period_data ignored as they are not part the stress periods defined by DIS

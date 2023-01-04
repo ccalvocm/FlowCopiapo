@@ -1,0 +1,25 @@
+
+simcopiapo/modflow/load/SIMCOPIAPO.rch
+simcopiapo/modflow/load/SIMCOPIAPO.hds
+*.hds
+*.rch
+*.evt
+*.rch
+*.cbc
+*.rch
+*.rch
+*.rch
+*.rch
+*.rch
+simcopiapo/modflow/run/SIMCOPIAPO.rch
+modflow/Copiapo_CB.gwv
+modflow/gv6.zone
+modflow/gv6nwt.fdn
+modflow/gv6nwt.fhd
+modflow/gv6nwt.lst
+simcopiapo/modflow/run/SIMCOPIAPO.rch
+simcopiapo/modflow/run/SIMCOPIAPO.rch
+simcopiapo/modflow/run/SIMCOPIAPO.rch
+modflow/gv6.bak
+modflow/gv6 2022_12_26.zip
+modflow/gv6 2022_12_26.zip

@@ -32,6 +32,7 @@ from docx.shared import Cm
 from docx.shared import Pt
 
 
+import multiprocessing as mp
 from multiprocessing import Pool
 
 import sys
@@ -43,6 +44,9 @@ from model.surface_water import dam_operations as dam_ops
 
 class Scenario(sb.ScenarioBase):
 
+    import warnings
+    warnings.filterwarnings("ignore")
+    
     def dispose(self):
         pass
 
@@ -56,23 +60,28 @@ class Scenario(sb.ScenarioBase):
         self.layer_dir = os.path.join(scenario_dir, 'layers')
         self.model_data_dir = os.path.join(scenario_dir, 'model', 'data')
         self.model_geodata_dir = os.path.join(scenario_dir, 'model', 'geodata')
-        self.model_modflow_bin_dir = os.path.join(scenario_dir, 'model', 'modflow', 'bin')
-        self.model_modflow_data_dir = os.path.join(scenario_dir, 'model', 'modflow', 'data')
-        self.model_report_data_dir = os.path.join(self.model_data_dir, 'report')
+        self.model_modflow_bin_dir=os.path.join(scenario_dir,'model','modflow',
+                                                'bin')
+        self.model_modflow_data_dir=os.path.join(scenario_dir,'model','modflow',
+                                                 'data')
+        self.model_report_data_dir=os.path.join(self.model_data_dir,'report')
         self.working_dir = working_dir
         self.model_output_dir = os.path.join(working_dir, 'output')
         os.makedirs(self.model_output_dir)
         self.model_report_dir = os.path.join(working_dir, 'report')
         os.makedirs(self.model_report_dir)
-        self.model_modflow_load_dir = os.path.join(working_dir, 'modflow', 'load')
+        self.model_modflow_load_dir=os.path.join(working_dir,'modflow','load')
         os.makedirs(self.model_modflow_load_dir)
-        self.model_modflow_run_dir = os.path.join(working_dir, 'modflow', 'run')
+        self.model_modflow_run_dir=os.path.join(working_dir,'modflow','run')
         os.makedirs(self.model_modflow_run_dir)
 
     def __init__(self, working_dir):
+        import multiprocessing
         self.report = None
         # Initialize scenario file system
         self.init_file_system(working_dir)
+        # number of processes
+        self.nproc=mp.cpu_count()
         # Define temporal characteristics
         start = dt.datetime(2019,9,30)
         end = dt.datetime(2044,9,30)
@@ -86,42 +95,42 @@ class Scenario(sb.ScenarioBase):
         input_group_0_id = 'input_group_0'
         input_group_0a_id = 'input_group_0_subgroup_a'
         super().add_group(sb.GroupDef(input_group_0_id,'Series Hidrológicas',None),True)
-        super().add_group(sb.GroupDef(input_group_0a_id,'Series Hidrológicas',input_group_0_id,os.path.join(self.static_dir,'html/input/group_0.html')),True)
-        input_group_1_id = 'input_group_1'
+        # super().add_group(sb.GroupDef(input_group_0a_id,'Series Hidrológicas',input_group_0_id,os.path.join(self.static_dir,'html/input/group_0.html')),True)
+        # input_group_1_id = 'input_group_1'
         input_group_1a_id = 'input_group_1_subgroup_a'
         input_group_1b_id = 'input_group_1_subgroup_b'
         input_group_1c_id = 'input_group_1_subgroup_c'
-        super().add_group(sb.GroupDef(input_group_1_id,'Swap Hídrico'),True)
-        super().add_group(sb.GroupDef(input_group_1a_id,'Candelaria 175 L/s a Aguas Chañar?',input_group_1_id,os.path.join(self.static_dir,'html/input/group_1a.html')),True)
-        super().add_group(sb.GroupDef(input_group_1b_id,'Caserones 200 L/s a Rio Ramadilla?',input_group_1_id,os.path.join(self.static_dir,'html/input/group_1b.html')),True)
-        super().add_group(sb.GroupDef(input_group_1c_id,'Redistribuir Agua Superficial Distritos 8/9?',input_group_1_id,os.path.join(self.static_dir,'html/input/group_1c.html')),True)
-        input_group_2_id = 'input_group_2'
+        # super().add_group(sb.GroupDef(input_group_1_id,'Swap Hídrico'),True)
+        # super().add_group(sb.GroupDef(input_group_1a_id,'Candelaria 175 L/s a Aguas Chañar?',input_group_1_id,os.path.join(self.static_dir,'html/input/group_1a.html')),True)
+        # super().add_group(sb.GroupDef(input_group_1b_id,'Caserones 200 L/s a Rio Ramadilla?',input_group_1_id,os.path.join(self.static_dir,'html/input/group_1b.html')),True)
+        # super().add_group(sb.GroupDef(input_group_1c_id,'Redistribuir Agua Superficial Distritos 8/9?',input_group_1_id,os.path.join(self.static_dir,'html/input/group_1c.html')),True)
+        # input_group_2_id = 'input_group_2'
         input_group_2a_id = 'input_group_2_subgroup_a'
         input_group_2b_id = 'input_group_2_subgroup_b'
         input_group_2c_id = 'input_group_2_subgroup_c'
-        super().add_group(sb.GroupDef(input_group_2_id,'Inversion infraestructura'),True)
-        super().add_group(sb.GroupDef(input_group_2a_id,'Lautaro 2.0?',input_group_2_id,os.path.join(self.static_dir,'html/input/group_2a.html')),True)
-        super().add_group(sb.GroupDef(input_group_2b_id,'Entubamiento canales de riego?',input_group_2_id,os.path.join(self.static_dir,'html/input/group_2b.html')),True)
-        super().add_group(sb.GroupDef(input_group_2c_id,'Operacion Desaladora (Año desactivación)',input_group_2_id,os.path.join(self.static_dir,'html/input/group_2c.html')),True)
-        input_group_3_id = 'input_group_3'
+        # super().add_group(sb.GroupDef(input_group_2_id,'Inversion infraestructura'),True)
+        # super().add_group(sb.GroupDef(input_group_2a_id,'Lautaro 2.0?',input_group_2_id,os.path.join(self.static_dir,'html/input/group_2a.html')),True)
+        # super().add_group(sb.GroupDef(input_group_2b_id,'Entubamiento canales de riego?',input_group_2_id,os.path.join(self.static_dir,'html/input/group_2b.html')),True)
+        # super().add_group(sb.GroupDef(input_group_2c_id,'Operacion Desaladora (Año desactivación)',input_group_2_id,os.path.join(self.static_dir,'html/input/group_2c.html')),True)
+        # input_group_3_id = 'input_group_3'
         input_group_3a_id = 'input_group_3_subgroup_a'
-        super().add_group(sb.GroupDef(input_group_3_id,'Recarga Artificial Acuífero'),True)
-        super().add_group(sb.GroupDef(input_group_3a_id,'Obras de recarga artificial en cauce Rio Copiapó?',input_group_3_id,os.path.join(self.static_dir,'html/input/group_3.html')),True)
-        input_group_4_id = 'input_group_4'
+        # super().add_group(sb.GroupDef(input_group_3_id,'Recarga Artificial Acuífero'),True)
+        # super().add_group(sb.GroupDef(input_group_3a_id,'Obras de recarga artificial en cauce Rio Copiapó?',input_group_3_id,os.path.join(self.static_dir,'html/input/group_3.html')),True)
+        # input_group_4_id = 'input_group_4'
         input_group_4a_id = 'input_group_4_subgroup_a'
-        super().add_group(sb.GroupDef(input_group_4_id,'Prorrata aguas subterráneas'),True)
-        super().add_group(sb.GroupDef(input_group_4a_id,'Prorrateo aguas subterráneas minería y agricultura?',input_group_4_id,os.path.join(self.static_dir,'html/input/group_4.html')),True)
-        input_group_5_id = 'input_group_5'
+        # super().add_group(sb.GroupDef(input_group_4_id,'Prorrata aguas subterráneas'),True)
+        # super().add_group(sb.GroupDef(input_group_4a_id,'Prorrateo aguas subterráneas minería y agricultura?',input_group_4_id,os.path.join(self.static_dir,'html/input/group_4.html')),True)
+        # input_group_5_id = 'input_group_5'
         input_group_5a_id = 'input_group_5_subgroup_a'
-        super().add_group(sb.GroupDef(input_group_5_id,'Reutilización aguas grises domésticas'),True)
-        super().add_group(sb.GroupDef(input_group_5a_id,'Incentivos o infraestructura para reutilizar aguas grises?',input_group_5_id,os.path.join(self.static_dir,'html/input/group_5.html')),True)
+        # super().add_group(sb.GroupDef(input_group_5_id,'Reutilización aguas grises domésticas'),True)
+        # super().add_group(sb.GroupDef(input_group_5a_id,'Incentivos o infraestructura para reutilizar aguas grises?',input_group_5_id,os.path.join(self.static_dir,'html/input/group_5.html')),True)
 
         # Define Output Groups
 
-        output_group_1_id = 'output_group_1'
-        super().add_group(sb.GroupDef(output_group_1_id,'Cambio en volumen embalsado'),False)
-        output_group_2_id = 'output_group_2'
-        super().add_group(sb.GroupDef(output_group_2_id,'Profundidad napa y costo de bombeo'),False)
+        # output_group_1_id = 'output_group_1'
+        # super().add_group(sb.GroupDef(output_group_1_id,'Cambio en volumen embalsado'),False)
+        # output_group_2_id = 'output_group_2'
+        # super().add_group(sb.GroupDef(output_group_2_id,'Profundidad napa y costo de bombeo'),False)
         output_group_3_id = 'output_group_3'
         super().add_group(sb.GroupDef(output_group_3_id,'Recargas riego'),False)
         output_group_4_id = 'output_group_4'
@@ -135,7 +144,7 @@ class Scenario(sb.ScenarioBase):
 
         # Define Inputs
 
-        super().add_input(sb.InputSingleSelectionDef('input_0','Series',input_group_0a_id,['Historico','Reduccion 50%','Invertida'],'Historico'))
+        super().add_input(sb.InputSingleSelectionDef('input_0','Series',input_group_0a_id,['Historico'],'Historico'))
 
         super().add_input(sb.InputBooleanDef('input_1a01','Swap Candelaria-AChañar',input_group_1a_id,False))
         super().add_input(sb.InputSingleSelectionDef('input_1a02','Dejar de bombear pozos',input_group_1a_id,['PC','PU'],'PC'))
@@ -183,47 +192,47 @@ class Scenario(sb.ScenarioBase):
         output_decimal_places = 3
 
         sector_names = ['Sector 2', 'Sector 3', 'Sector 4', 'Sector 5', 'Sector 6']
-        super().add_output(sb.OutputHistogramDef('output_02','Cambio volumen en almacenamiento Asub año 25',output_group_1_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio (M m3)',output_decimal_places)))
-        super().add_output(sb.OutputHistogramDef('output_03','Cambio volumen (Embalse Lautaro)',output_group_1_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio (factor volumen embalse)',output_decimal_places)))
+        # super().add_output(sb.OutputHistogramDef('output_02','Cambio volumen en almacenamiento Asub año 25',output_group_1_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio (M m3)',output_decimal_places)))
+        # super().add_output(sb.OutputHistogramDef('output_03','Cambio volumen (Embalse Lautaro)',output_group_1_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio (factor volumen embalse)',output_decimal_places)))
 
-        super().add_output(sb.OutputHistogramDef('output_04','Cambio en profundidad napa freática',output_group_2_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio promedio (m)',output_decimal_places)))
-        super().add_output(sb.OutputHistogramDef('output_05','Costos promedios de bombeo',output_group_2_id,sector_names,sb.ChartDisplay('Sector acuífero','Costo promedio (CLP/K m3)',output_decimal_places)))
+        # super().add_output(sb.OutputHistogramDef('output_04','Cambio en profundidad napa freática',output_group_2_id,sector_names,sb.ChartDisplay('Sector acuífero','Cambio promedio (m)',output_decimal_places)))
+        # super().add_output(sb.OutputHistogramDef('output_05','Costos promedios de bombeo',output_group_2_id,sector_names,sb.ChartDisplay('Sector acuífero','Costo promedio (CLP/K m3)',output_decimal_places)))
 
         temporal_units_label = 'Fecha'
         flow_units_label = 'Litros/segundo'
         percentage_units_label = '%'
 
-        super().add_output(sb.OutputTimeSeriesDef('output_10','Recarga desde riego (Sector 2)',output_group_3_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_11','Recarga desde riego (Sector 3)',output_group_3_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_12','Recarga desde riego (Sector 4)',output_group_3_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_13','Recarga desde riego (Sector 5)',output_group_3_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_14','Recarga desde riego (Sector 6)',output_group_3_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_10','Recarga desde riego (Sector 2)',output_group_3_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_11','Recarga desde riego (Sector 3)',output_group_3_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_12','Recarga desde riego (Sector 4)',output_group_3_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_13','Recarga desde riego (Sector 5)',output_group_3_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_14','Recarga desde riego (Sector 6)',output_group_3_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
 
-        super().add_output(sb.OutputTimeSeriesDef('output_20','Recarga desde el rio Copiapó (Sector 2)',output_group_4_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_21','Recarga desde el rio Copiapó (Sector 3)',output_group_4_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_22','Recarga desde el rio Copiapó (Sector 4)',output_group_4_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_23','Recarga desde el rio Copiapó (Sector 5)',output_group_4_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_24','Recarga desde el rio Copiapó (Sector 6)',output_group_4_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_20','Recarga desde el rio Copiapó (Sector 2)',output_group_4_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_21','Recarga desde el rio Copiapó (Sector 3)',output_group_4_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_22','Recarga desde el rio Copiapó (Sector 4)',output_group_4_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_23','Recarga desde el rio Copiapó (Sector 5)',output_group_4_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_24','Recarga desde el rio Copiapó (Sector 6)',output_group_4_id,sb.ChartDisplay(temporal_units_label,flow_units_label,output_decimal_places)))
 
-        super().add_output(sb.OutputTimeSeriesDef('output_30','Demanda satisfecha ASup distrito de riego (Canales D1)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_31','Demanda satisfecha ASup distrito de riego (Canales D2)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_32','Demanda satisfecha ASup distrito de riego (Canales D3)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_33','Demanda satisfecha ASup distrito de riego (Canales D4)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_34','Demanda satisfecha ASup distrito de riego (Canales D5)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_35','Demanda satisfecha ASup distrito de riego (Canales D6)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_36','Demanda satisfecha ASup distrito de riego (Canales D7)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_37','Demanda satisfecha ASup distrito de riego (Canales D89)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_30','Demanda satisfecha ASup distrito de riego (Canales D1)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_31','Demanda satisfecha ASup distrito de riego (Canales D2)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_32','Demanda satisfecha ASup distrito de riego (Canales D3)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_33','Demanda satisfecha ASup distrito de riego (Canales D4)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_34','Demanda satisfecha ASup distrito de riego (Canales D5)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_35','Demanda satisfecha ASup distrito de riego (Canales D6)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_36','Demanda satisfecha ASup distrito de riego (Canales D7)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_37','Demanda satisfecha ASup distrito de riego (Canales D89)',output_group_5_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
 
-        super().add_output(sb.OutputTimeSeriesDef('output_40','Demanda satisfecha ASup distrito de riego (Mixto D1)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_41','Demanda satisfecha ASup distrito de riego (Mixto D2)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_42','Demanda satisfecha ASup distrito de riego (Mixto D3)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_43','Demanda satisfecha ASup distrito de riego (Mixto D4)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_44','Demanda satisfecha ASup distrito de riego (Mixto D5)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_45','Demanda satisfecha ASup distrito de riego (Mixto D6)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_46','Demanda satisfecha ASup distrito de riego (Mixto D7)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
-        super().add_output(sb.OutputTimeSeriesDef('output_47','Demanda satisfecha ASup distrito de riego (Mixto D89)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_40','Demanda satisfecha ASup distrito de riego (Mixto D1)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_41','Demanda satisfecha ASup distrito de riego (Mixto D2)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_42','Demanda satisfecha ASup distrito de riego (Mixto D3)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_43','Demanda satisfecha ASup distrito de riego (Mixto D4)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_44','Demanda satisfecha ASup distrito de riego (Mixto D5)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_45','Demanda satisfecha ASup distrito de riego (Mixto D6)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_46','Demanda satisfecha ASup distrito de riego (Mixto D7)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputTimeSeriesDef('output_47','Demanda satisfecha ASup distrito de riego (Mixto D89)',output_group_6_id,sb.ChartDisplay(temporal_units_label,percentage_units_label,output_decimal_places)))
 
-        super().add_output(sb.OutputHistogramDef('output_50','Operacion planta desaladora estatal',output_group_7_id,[str(y) for y in range(0, 25)],sb.ChartDisplay('Años',flow_units_label,output_decimal_places)))
+        # super().add_output(sb.OutputHistogramDef('output_50','Operacion planta desaladora estatal',output_group_7_id,[str(y) for y in range(0, 25)],sb.ChartDisplay('Años',flow_units_label,output_decimal_places)))
 
         # Define Layers
 
@@ -345,30 +354,30 @@ class Scenario(sb.ScenarioBase):
         metadata['exports_results'] = True
         return metadata
 
-    def load_constant_layers(self):
+    # def load_constant_layers(self):
 
-        self.set_layer('layer_801', sb.LayerShapefileVal(os.path.join(self.layer_dir,'sectores_acuiferos.shp'),4326,['Sector_DGA'],['Sector_DGA']))
-        props = ['Predio','Cultivo','Tipo_Riego','Fuen_Riego','SectorRieg','Distrito_r','demanda_ri','perdidas_r','perdidas_c','demanda_br']
-        self.set_layer('layer_802', sb.LayerShapefileVal(os.path.join(self.layer_dir,'distritos_riego.shp'),4326,['Predio'], props))
-        self.set_layer('layer_803', sb.LayerShapefileVal(os.path.join(self.layer_dir,'canales.shp'),4326,['Nombre'],['Nombre']))
-        self.set_layer('layer_804', sb.LayerShapefileVal(os.path.join(self.layer_dir,'bocatomas_principales.shp'),4326,['Canal'],['Canal']))
-        self.set_layer('layer_805', sb.LayerShapefileVal(os.path.join(self.layer_dir,'fluviometricas_DGA.shp'),4326,['NOMBRE'],['NOMBRE']))
-        self.set_layer('layer_806', sb.LayerShapefileVal(os.path.join(self.layer_dir,'pozos_DGA.shp'),4326,['NOMBRE'],['NOMBRE']))
-        self.set_layer('layer_807', sb.LayerShapefileVal(os.path.join(self.layer_dir,'pozos_agricolas.shp'),24879,['id'],['id']))
-        self.set_layer('layer_808', sb.LayerShapefileVal(os.path.join(self.layer_dir,'pozos_mineria.shp'),4326,['WellName'],['WellName']))
-        self.set_layer('layer_809', sb.LayerShapefileVal(os.path.join(self.layer_dir,'pozos_sanitaria.shp'),4326,['Nombre'],['Nombre']))
+    #     self.set_layer('layer_801', sb.LayerShapefileVal(os.path.join(self.layer_dir,'sectores_acuiferos.shp'),4326,['Sector_DGA'],['Sector_DGA']))
+    #     props = ['Predio','Cultivo','Tipo_Riego','Fuen_Riego','SectorRieg','Distrito_r','demanda_ri','perdidas_r','perdidas_c','demanda_br']
+    #     self.set_layer('layer_802', sb.LayerShapefileVal(os.path.join(self.layer_dir,'distritos_riego.shp'),4326,['Predio'], props))
+    #     self.set_layer('layer_803', sb.LayerShapefileVal(os.path.join(self.layer_dir,'canales.shp'),4326,['Nombre'],['Nombre']))
+    #     self.set_layer('layer_804', sb.LayerShapefileVal(os.path.join(self.layer_dir,'bocatomas_principales.shp'),4326,['Canal'],['Canal']))
+    #     self.set_layer('layer_805', sb.LayerShapefileVal(os.path.join(self.layer_dir,'fluviometricas_DGA.shp'),4326,['NOMBRE'],['NOMBRE']))
+    #     self.set_layer('layer_806', sb.LayerShapefileVal(os.path.join(self.layer_dir,'pozos_DGA.shp'),4326,['NOMBRE'],['NOMBRE']))
+    #     self.set_layer('layer_807', sb.LayerShapefileVal(os.path.join(self.layer_dir,'pozos_agricolas.shp'),24879,['id'],['id']))
+    #     self.set_layer('layer_808', sb.LayerShapefileVal(os.path.join(self.layer_dir,'pozos_mineria.shp'),4326,['WellName'],['WellName']))
+    #     self.set_layer('layer_809', sb.LayerShapefileVal(os.path.join(self.layer_dir,'pozos_sanitaria.shp'),4326,['Nombre'],['Nombre']))
 
-        points_10 = [[-28.00227,-69.97823],[-27.97788,-69.99981],[-28.00227,-69.97823],[-27.51865,-70.26610],[-27.51894,-70.26604],[-27.51865,-70.26610],[-27.32316,-70.84007]]
-        names_10 = ['Copiapo en pastillo', 'Copiapo en Lautaro', 'Copiapo en La Puerta', 'Mal Paso en Canal', 'Copiapo en Mal Paso', 'Copiapo en Ciudad', 'Copiapo en Angostura']
-        self.set_layer('layer_10', sb.LayerPointsVal(points_10, names_10))
+    #     points_10 = [[-28.00227,-69.97823],[-27.97788,-69.99981],[-28.00227,-69.97823],[-27.51865,-70.26610],[-27.51894,-70.26604],[-27.51865,-70.26610],[-27.32316,-70.84007]]
+    #     names_10 = ['Copiapo en pastillo', 'Copiapo en Lautaro', 'Copiapo en La Puerta', 'Mal Paso en Canal', 'Copiapo en Mal Paso', 'Copiapo en Ciudad', 'Copiapo en Angostura']
+    #     self.set_layer('layer_10', sb.LayerPointsVal(points_10, names_10))
 
-        points_20 = [[-27.32316,-70.84007]]
-        names_20 = ['Flujos ecológicos del sector 6']
-        self.set_layer('layer_20', sb.LayerPointsVal(points_20, names_20))
+    #     points_20 = [[-27.32316,-70.84007]]
+    #     names_20 = ['Flujos ecológicos del sector 6']
+    #     self.set_layer('layer_20', sb.LayerPointsVal(points_20, names_20))
 
-        points_30 = [[-27.98060,-69.99798],[-27.98460,-69.99798],[-27.98860,-69.99798],[-27.97752,-69.99844]]
-        names_30 = ['volumen embalsado (m)', 'capacidad (%)', 'perdidas infiltracion (L/s)', 'descarga vertedero (L/s)']
-        self.set_layer('layer_30', sb.LayerPointsVal(points_30, names_30))
+    #     points_30 = [[-27.98060,-69.99798],[-27.98460,-69.99798],[-27.98860,-69.99798],[-27.97752,-69.99844]]
+    #     names_30 = ['volumen embalsado (m)', 'capacidad (%)', 'perdidas infiltracion (L/s)', 'descarga vertedero (L/s)']
+    #     self.set_layer('layer_30', sb.LayerPointsVal(points_30, names_30))
 
     def initialise(self):
         pass
@@ -558,35 +567,35 @@ class Scenario(sb.ScenarioBase):
         self.set_layer_data('layer_30', 'perdidas infiltracion (L/s)', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Q_InfiltracionLautaro'].values))
         self.set_layer_data('layer_30', 'descarga vertedero (L/s)', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Q_Vertedero'].values))
 
-        self.set_output('output_10', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_riegoycanales_S2'].values))
-        self.set_output('output_11', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_riegoycanales_S3'].values))
-        self.set_output('output_12', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_riegoycanales_S4'].values))
-        self.set_output('output_13', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Q_perdidariego_P_S5'].values))
-        self.set_output('output_14', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Q_perdidariego_P_S6'].values))
+        # self.set_output('output_10', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_riegoycanales_S2'].values))
+        # self.set_output('output_11', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_riegoycanales_S3'].values))
+        # self.set_output('output_12', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_riegoycanales_S4'].values))
+        # self.set_output('output_13', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Q_perdidariego_P_S5'].values))
+        # self.set_output('output_14', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Q_perdidariego_P_S6'].values))
 
-        self.set_output('output_20', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S2'].values))
-        self.set_output('output_21', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S3'].values))
-        self.set_output('output_22', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S4'].values))
-        self.set_output('output_23', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S5'].values))
-        self.set_output('output_24', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S6'].values))
+        # self.set_output('output_20', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S2'].values))
+        # self.set_output('output_21', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S3'].values))
+        # self.set_output('output_22', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S4'].values))
+        # self.set_output('output_23', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S5'].values))
+        # self.set_output('output_24', sb.TimseriesBaseVal(dates, SWMODEL_out_df['RCH_rio_S6'].values))
 
-        self.set_output('output_30', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D1'].values))
-        self.set_output('output_31', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D2'].values))
-        self.set_output('output_32', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D3'].values))
-        self.set_output('output_33', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D4'].values))
-        self.set_output('output_34', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D5'].values))
-        self.set_output('output_35', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D6'].values))
-        self.set_output('output_36', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D7'].values))
-        self.set_output('output_37', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D89'].values))
+        # self.set_output('output_30', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D1'].values))
+        # self.set_output('output_31', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D2'].values))
+        # self.set_output('output_32', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D3'].values))
+        # self.set_output('output_33', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D4'].values))
+        # self.set_output('output_34', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D5'].values))
+        # self.set_output('output_35', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D6'].values))
+        # self.set_output('output_36', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D7'].values))
+        # self.set_output('output_37', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_C_D89'].values))
 
-        self.set_output('output_40', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D1'].values))
-        self.set_output('output_41', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D2'].values))
-        self.set_output('output_42', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D3'].values))
-        self.set_output('output_43', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D4'].values))
-        self.set_output('output_44', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D5'].values))
-        self.set_output('output_45', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D6'].values))
-        self.set_output('output_46', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D7'].values))
-        self.set_output('output_47', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D89'].values))
+        # self.set_output('output_40', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D1'].values))
+        # self.set_output('output_41', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D2'].values))
+        # self.set_output('output_42', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D3'].values))
+        # self.set_output('output_43', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D4'].values))
+        # self.set_output('output_44', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D5'].values))
+        # self.set_output('output_45', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D6'].values))
+        # self.set_output('output_46', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D7'].values))
+        # self.set_output('output_47', sb.TimseriesBaseVal(dates, SWMODEL_out_df['Satisfaccion_dda_M_D89'].values))
 
         # @@@@@
 
@@ -883,7 +892,7 @@ class Scenario(sb.ScenarioBase):
 
         def threaded_rch_spd_calc():
 
-            pool = Pool(processes=4)
+            pool = Pool(processes=self.nproc)
 
             workers = []
             for i in range(5):
@@ -926,7 +935,7 @@ class Scenario(sb.ScenarioBase):
                 col = ml.sr.get_rc(irrigation_wells_schedule.geometry.x[well], irrigation_wells_schedule.geometry.y[well])[1]
                 rcs[well] = (row,col)
 
-            pool = Pool(processes=4)
+            pool = Pool(processes=self.nproc)
 
             workers = []
             for i in range(5):
@@ -967,7 +976,7 @@ class Scenario(sb.ScenarioBase):
                 col = ml.sr.get_rc(mine_wells_gdf.geometry.x[well], mine_wells_gdf.geometry.y[well])[1]
                 rcs[well] = (row,col)
 
-            pool = Pool(processes=4)
+            pool = Pool(processes=self.nproc)
 
             workers = []
             for i in range(5):
@@ -1008,7 +1017,7 @@ class Scenario(sb.ScenarioBase):
                 col = ml.sr.get_rc(DW_wells_gdf.geometry.x[well], DW_wells_gdf.geometry.y[well])[1]
                 rcs[well] = (row,col)
 
-            pool = Pool(processes=4)
+            pool = Pool(processes=self.nproc)
 
             workers = []
             for i in range(5):
@@ -1065,7 +1074,7 @@ class Scenario(sb.ScenarioBase):
 
         # GW model
 
-        headfile = flopy.utils.HeadFile(os.path.join(self.model_modflow_run_dir, 'SIMCOPIAPO.hds'), model=ml)
+        headfile=flopy.utils.HeadFile(os.path.join(self.model_modflow_run_dir, 'SIMCOPIAPO.hds'), model=ml)
 
         def read_heads_file(headfile):
             heads = headfile.get_alldata()
@@ -1096,10 +1105,10 @@ class Scenario(sb.ScenarioBase):
 
         # @@@@@
 
-        self._apply_geotiff_layer(ml, heads, 49, 'layer_01', 'EPSG:24879', np.nan)
-        self._apply_geotiff_layer(ml, dtwt, 49, 'layer_02', 'EPSG:24879', np.nan)
-        self._apply_geotiff_layer(ml, gwrecov, 49, 'layer_03', 'EPSG:24879', np.nan)
-        self._apply_geotiff_layer(ml, sat_thickness, 49, 'layer_04', 'EPSG:24879', np.nan)
+        # self._apply_geotiff_layer(ml, heads, 49, 'layer_01', 'EPSG:24879', np.nan)
+        # self._apply_geotiff_layer(ml, dtwt, 49, 'layer_02', 'EPSG:24879', np.nan)
+        # self._apply_geotiff_layer(ml, gwrecov, 49, 'layer_03', 'EPSG:24879', np.nan)
+        # self._apply_geotiff_layer(ml, sat_thickness, 49, 'layer_04', 'EPSG:24879', np.nan)
 
         # @@@@@
 
@@ -1107,7 +1116,7 @@ class Scenario(sb.ScenarioBase):
 
         heads_3D_array_summer = heads_3D_array[::2]
 
-        heads_3D_array_winter = heads_3D_array[1::2]
+        # heads_3D_array_winter = heads_3D_array[1::2]
 
         # Load groundwater heads baseline case
 
@@ -1115,11 +1124,11 @@ class Scenario(sb.ScenarioBase):
 
         # Compute scenario improvement over baseline
 
-        heads_scenario_improvement = heads_3D_array[49][0] - heads_baseline
+        # heads_scenario_improvement = heads_3D_array[49][0] - heads_baseline
 
         # @@@@@
 
-        self._apply_single_geotiff_layer(ml, heads_scenario_improvement, 'layer_06', 'EPSG:24879', np.nan)
+        # self._apply_single_geotiff_layer(ml, heads_scenario_improvement, 'layer_06', 'EPSG:24879', np.nan)
 
         # @@@@@
 
@@ -1145,13 +1154,13 @@ class Scenario(sb.ScenarioBase):
             mfg_out = mfg.loc[mfg['ibound']==1]
             return mfg_out#mfg_out.to_file(os.path.join(self.model_output_dir, 'GW_model_outputs.shp'))
 
-        GW_model_outputs = export_gridded_outputs_to_shapefile(ml, mfg, heads_3D_array_summer)
+        # GW_model_outputs = export_gridded_outputs_to_shapefile(ml, mfg, heads_3D_array_summer)
 
         self.set_run_status(90.0, 'Finalizando Resultados del Modelo...')
 
         # Compute pumping costs (GeoTIFF)
 
-        tarriff_kwh = 80.0
+        # tarriff_kwh = 80.0
 
         def compute_pumping_cost(ml, heads_3D_array, tarriff_kwh):
             dtwt_3D_array = ml.dis.top.array - heads_3D_array
@@ -1159,11 +1168,11 @@ class Scenario(sb.ScenarioBase):
             dtwt_3D_array = vec_func(dtwt_3D_array)
             return np.squeeze(dtwt_3D_array)
 
-        pumping_costs = compute_pumping_cost(ml, heads_3D_array, tarriff_kwh)
+        # pumping_costs = compute_pumping_cost(ml, heads_3D_array, tarriff_kwh)
 
         # @@@@@
 
-        self._apply_geotiff_layer(ml, pumping_costs, 49, 'layer_05', 'EPSG:24879', np.nan)
+        # self._apply_geotiff_layer(ml, pumping_costs, 49, 'layer_05', 'EPSG:24879', np.nan)
 
         # @@@@@
 
@@ -1223,19 +1232,19 @@ class Scenario(sb.ScenarioBase):
 
         #GW_model_outputs = gpd.read_file(os.path.join(self.model_output_dir, 'GW_model_outputs.shp'))
 
-        cas_dfs = compute_changes_in_aquifer_storage(GW_model_outputs)
+        # cas_dfs = compute_changes_in_aquifer_storage(GW_model_outputs)
 
         # @@@@@
 
-        output_2_dataset = sb.OutputMultipleNumericDatasetVal()
-        for k in cas_dfs[0]:
-            output_2_dataset.append_dataset(list(cas_dfs[0][k].values), k)
-        self.set_output('output_02', output_2_dataset)
+        # output_2_dataset = sb.OutputMultipleNumericDatasetVal()
+        # for k in cas_dfs[0]:
+        #     output_2_dataset.append_dataset(list(cas_dfs[0][k].values), k)
+        # self.set_output('output_02', output_2_dataset)
 
-        output_3_dataset = sb.OutputMultipleNumericDatasetVal()
-        for k in cas_dfs[1]:
-            output_3_dataset.append_dataset(list(cas_dfs[1][k].values), k)
-        self.set_output('output_03', output_3_dataset)
+        # output_3_dataset = sb.OutputMultipleNumericDatasetVal()
+        # for k in cas_dfs[1]:
+        #     output_3_dataset.append_dataset(list(cas_dfs[1][k].values), k)
+        # self.set_output('output_03', output_3_dataset)
 
         # @@@@@
 
@@ -1252,14 +1261,14 @@ class Scenario(sb.ScenarioBase):
             df.drop('Sector 1', inplace=True)
             return df
 
-        mcdwt_df = compute_mean_change_in_depth_to_water_table(GW_model_outputs)
+        # mcdwt_df = compute_mean_change_in_depth_to_water_table(GW_model_outputs)
 
         # @@@@@
 
-        output_4_dataset = sb.OutputMultipleNumericDatasetVal()
-        for k in mcdwt_df:
-            output_4_dataset.append_dataset(list(mcdwt_df[k].values), k)
-        self.set_output('output_04', output_4_dataset)
+        # output_4_dataset = sb.OutputMultipleNumericDatasetVal()
+        # for k in mcdwt_df:
+        #     output_4_dataset.append_dataset(list(mcdwt_df[k].values), k)
+        # self.set_output('output_04', output_4_dataset)
 
         # @@@@@
 
@@ -1272,14 +1281,14 @@ class Scenario(sb.ScenarioBase):
                 mpc_df[k] = mcdwt_df[k] * (2.725 / 0.7 / 0.95 / 0.9 * tarriff_kwh)            
             return mpc_df
 
-        mpc_df = compute_mean_pumping_costs(mcdwt_df, tarriff_kwh)
+        # mpc_df = compute_mean_pumping_costs(mcdwt_df, tarriff_kwh)
 
         # @@@@@
 
-        output_5_dataset = sb.OutputMultipleNumericDatasetVal()
-        for k in mpc_df:
-            output_5_dataset.append_dataset(list(mpc_df[k].values), k)
-        self.set_output('output_05', output_5_dataset)
+        # output_5_dataset = sb.OutputMultipleNumericDatasetVal()
+        # for k in mpc_df:
+        #     output_5_dataset.append_dataset(list(mpc_df[k].values), k)
+        # self.set_output('output_05', output_5_dataset)
 
         # @@@@@
 
@@ -1291,7 +1300,7 @@ class Scenario(sb.ScenarioBase):
             zb_grid.fillna(value=pd.np.nan, inplace=True)
             zb_grid.replace(np.nan, 0, inplace=True)
 
-            pool = Pool(processes=4)
+            pool = Pool(processes=self.nproc)
 
             workers = []
             NUM_PER_PROC = 104
@@ -1367,7 +1376,7 @@ class Scenario(sb.ScenarioBase):
             plt.legend()
             plt.ylim(0,300)
             plt.axhline(y=caudal_ecologico_historico, color='g', linestyle='-')
-            plt.text('2018-6-1', caudal_ecologico_historico+10, 'caudal ecologico historico\n     (minimo) pre-1985', color='k', bbox=dict(boxstyle="round",
+            plt.text('2018-6-1',caudal_ecologico_historico+10,'caudal ecologico historico\n     (minimo) pre-1985',color='k',bbox=dict(boxstyle="round",
                                ec=(1., 0.5, 0.5),
                                fc=(1., 0.8, 0.8),))
 
@@ -1379,32 +1388,34 @@ class Scenario(sb.ScenarioBase):
 
         # Set Ecological flow at outlet 6 chart
 
-        eco_flow_outlet_6_chart_filename = os.path.join(self.model_output_dir, 'eco6out.svg')
-        create_ecological_flow_at_outlet_of_sector_6_chart(zb_df, eco_flow_outlet_6_chart_filename)
+        # eco_flow_outlet_6_chart_filename=os.path.join(self.model_output_dir,
+        #                                               'eco6out.svg')
+        # create_ecological_flow_at_outlet_of_sector_6_chart(zb_df,
+        #                                     eco_flow_outlet_6_chart_filename)
 
         # @@@@@
 
-        layer_20_ident = self.get_unique_image_id()
-        with open(eco_flow_outlet_6_chart_filename, 'rb') as fl:
-            self.set_image(layer_20_ident, fl.read(), 'image/svg+xml', True)
-        self.set_layer_data('layer_20', 'Flujos ecológicos del sector 6' , sb.OutputImageVal(layer_20_ident))
+        # layer_20_ident = self.get_unique_image_id()
+        # with open(eco_flow_outlet_6_chart_filename, 'rb') as fl:
+        #     self.set_image(layer_20_ident, fl.read(), 'image/svg+xml', True)
+        # self.set_layer_data('layer_20', 'Flujos ecológicos del sector 6',
+        #                     sb.OutputImageVal(layer_20_ident))
 
         # @@@@@
 
         # Store required datasets for report generation
 
-        self.report = {}
-
-        self.report['zb_array'] = zb_arr
-        self.report['zb_df'] = zb_df
-        self.report['SWMODEL_out_df'] = SWMODEL_out_df
-        self.report['GW_model_outputs'] = GW_model_outputs
-        self.report['ST_lautaro2'] = ST_lautaro2
-        self.report['DW_MODEL_df'] = DW_MODEL_df
-        self.report['ml'] = ml
-        self.report['headfile'] = headfile
-        self.report['heads_scenario_improvement'] = heads_scenario_improvement
-        self.report['compliance'] = compliance
+        # self.report = {}
+        # self.report['zb_array'] = zb_arr
+        # self.report['zb_df'] = zb_df
+        # self.report['SWMODEL_out_df'] = SWMODEL_out_df
+        # self.report['GW_model_outputs'] = GW_model_outputs
+        # self.report['ST_lautaro2'] = ST_lautaro2
+        # self.report['DW_MODEL_df'] = DW_MODEL_df
+        # self.report['ml'] = ml
+        # self.report['headfile'] = headfile
+        # self.report['heads_scenario_improvement'] = heads_scenario_improvement
+        # self.report['compliance'] = compliance
 
         # Force end of simulation period
         self._now = self._end
@@ -2114,6 +2125,7 @@ class Scenario(sb.ScenarioBase):
         plt.figure(figsize=(12,8))
 
         plt.plot(df_Angostura.aporte_subterraneo + df_Angostura.aporte_superficial, label='superficial + subterraneo')
+        # df_Angostura['total'].plot(label='superficial + subterraneo')
         plt.title('caudal humedal sector Angostura (aportes superficiales y subterraneos)', weight='bold', size=16)
         plt.ylabel('L/s', weight='bold');
         plt.legend()
@@ -2124,7 +2136,7 @@ class Scenario(sb.ScenarioBase):
             Lautaro2_axvline_color = 'r'
             plt.axvline('2024-1-1', color=Lautaro2_axvline_color, linestyle=':', linewidth=2)
 
-        plt.text('2036-6-1', caudal_ecologico_historico+10, 'caudal ecologico historico\n     (minimo) pre-1985', color='k', bbox=dict(boxstyle="round",
+        plt.text(pd.to_datetime('2036-06-01'), caudal_ecologico_historico+10, 'caudal ecologico historico\n     (minimo) pre-1985', color='k', bbox=dict(boxstyle="round",
                            ec=(1., 0.5, 0.5),
                            fc=(1., 0.8, 0.8),))
 
@@ -2680,7 +2692,7 @@ class Scenario(sb.ScenarioBase):
     def export_results(self):
         if self.report is None:
             raise RuntimeError('Unable to generate report - no model run data available.')
-        report_filename = 'sim_copiapo_' + dt.datetime.now().strftime("%d-%m-%Y_%H%M") + '.docx'
+        report_filename = 'sim_copiapo_'+dt.datetime.now().strftime("%d-%m-%Y_%H%M")+'.docx'
         report_filepath = os.path.join(self.model_report_dir, report_filename)
         # Generate report
         self.generate_report(report_filepath)
@@ -2692,7 +2704,7 @@ class Scenario(sb.ScenarioBase):
         result['filename'] = report_filename
         result['type'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
         result['data'] = report_data_b64_str
-        return result
+        return None
 
     def _apply_single_geotiff_layer(self, ml, arr, prop_name, src_srs, src_null_value=-999, dst_null_value=-999):
         # Export as GeoTIFF
@@ -2780,10 +2792,13 @@ class Scenario(sb.ScenarioBase):
             self.set_layer_data(prop_name, (r,c), sb.TimseriesBaseVal(dates, values))
 
 def main():
-    os.rmdir(os.path.join('.','output'))
-    os.rmdir(os.path.join('.','modflow'))
-    os.rmdir(os.path.join('.','report'))
+    import shutil
+    shutil.rmtree(os.path.join('.','output'), ignore_errors=True)
+    shutil.rmtree(os.path.join('.','modflow'))
+    shutil.rmtree(os.path.join('.','report'), ignore_errors=True)
     escenario=Scenario('.')
+    escenario.run_model()
+    # escenario.export_results()
     
-# if __name__=='__main__':
-#     main()
+if __name__=='__main__':
+    main()

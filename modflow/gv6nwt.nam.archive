@@ -1,0 +1,15 @@
+# Name File for MODFLOW created on 26-12-2022 by ModelMuse Version 5.0.0.0
+LIST             11 ..\..\output\output.gv6nwt\gv6nwt.lst REPLACE
+DATA(BINARY)      9 ..\..\output\output.gv6nwt\gv6nwt.cbc REPLACE
+DIS              12 ..\..\model\model.gv6nwt\gv6nwt.dis OLD
+BAS6             13 ..\..\model\model.gv6nwt\gv6nwt.bas OLD
+OC               39 ..\..\model\model.gv6nwt\gv6nwt.oc OLD
+DATA             37 ..\..\output\output.gv6nwt\gv6nwt.fhd REPLACE
+DATA             38 ..\..\output\output.gv6nwt\gv6nwt.fdn REPLACE
+NWT             133 ..\..\model\model.gv6nwt\gv6nwt.nwt OLD
+UPW             134 ..\..\model\model.gv6nwt\gv6nwt.upw OLD
+CHD              17 ..\..\model\model.gv6nwt\gv6nwt.chd OLD
+DATA            141 ..\..\output\output.gv6nwt\gv6nwt.wel_dewater.txt REPLACE
+WEL              20 ..\..\model\model.gv6nwt\gv6nwt.wel OLD
+DRN              22 ..\..\model\model.gv6nwt\gv6nwt.drn OLD
+RCH              24 ..\..\model\model.gv6nwt\gv6nwt.rch OLD
