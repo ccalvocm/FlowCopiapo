@@ -87,8 +87,8 @@ def makeDIS(mf):
     return None
     
 def NWT(mf):
-    return flopy.modflow.ModflowNwt(mf,headtol=0.001,fluxtol=500,
-                                    maxiterout=500)
+    return flopy.modflow.ModflowNwt(mf,headtol=0.001,fluxtol=600,
+maxiterout=600,thickfact=1e-05,linmeth=2,iprnwt=1,ibotav=1,options='COMPLEX')
     
 def makeWEL(modelo):
     import geopandas as gpd
@@ -110,7 +110,7 @@ def makeWEL(modelo):
     daaSubOverlay['Caudal Anu']=-86400*1e-3*daaSubOverlay['Caudal Anu'].str.replace(',',
 '.').astype(float)
     
-    daaSubOverlay['COLROW']=daaSubOverlay.geometry.apply(lambda u: str(int(u.x/200))+','+str(int(u.y/200)))
+    daaSubOverlay['COLROW']=daaSubOverlay.geometry.apply(lambda u: str(int(u.x/200))+','+str(530-int(u.y/200)))
     daaSubSum=daaSubOverlay.groupby(['COLROW']).agg('sum')['Caudal Anu']
     
     # crear matriz de coordenadas
@@ -122,7 +122,7 @@ def makeWEL(modelo):
     
     for stp in wel_spd.keys():
         listSpd=[]
-        if stp>=300:
+        if stp>300:
             for col in range(np.shape(welAll[0][0])[1]-1):
                 for row in range(np.shape(welAll[0][0])[0]-1):
                     try:
@@ -135,11 +135,16 @@ def makeWEL(modelo):
             for col in range(np.shape(arrayWel)[1]-1):
                 for row in range(np.shape(arrayWel)[0]-1):
                     listSpd.append([0,row,col,arrayWel[row,col]])  
-        wel_spd[stp]=listSpd[:]
+        wel_spd[stp]=[x for x in listSpd if x[-1]<=0]
         
     wel = flopy.modflow.ModflowWel(modelo.model,stress_period_data=wel_spd)
 
-    
+def postProcess(model):
+    from flopy.utils.zonbud import ZoneBudget, read_zbarray
+    zone_file = os.path.join('.', "gv6.zone")
+    zon = read_zbarray(zone_file)
+    nlay, nrow, ncol = zon.shape    
+        
 def main():
     # pathNam=os.path.join('..','simcopiapo','modflow','run','SIMCOPIAPO.nam')
     pathNam=os.path.join('..','modflow','gv6nwt.nam')
