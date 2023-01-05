@@ -179,6 +179,7 @@ def processBudget():
     plt.ylabel('Balance ($m^3/s$)')
     plt.savefig(os.path.join('.','out','balanceCopiapo.svg'),
                 bbox_inches='tight')    
+    df_incremental.to_excel(os.path.join('.','out','balanceCopiapo.xlsx'))
     # incremental, cumulative = mf_list.get_budget()
     
     #Leer el balance del primer timestep y primer stress period
@@ -203,7 +204,7 @@ def processHeads(mf):
     import flopy.utils.binaryfile as bf
     hdobj = bf.HeadFile(head_file, precision='single')
     hdobj.list_records()
-    rec = hdobj.get_data(kstpkper=(0, 50))
+    rec = hdobj.get_data(kstpkper=(0, 351))
     rec[0][rec[0]==999]=np.nan
     plt.figure()
     plt.imshow(rec[0],vmin=0,interpolation='nearest')
@@ -211,7 +212,7 @@ def processHeads(mf):
     # create the vtk object and export heads
     vtkobj = vtk.Vtk(mf)
     otfolder=os.path.join('.','out')
-    vtk.export_heads(mf, hdsfile=head_file, otfolder=otfolder,kstpkper=(0,0))  
+    vtk.export_heads(mf, hdsfile=head_file, otfolder=otfolder,kstpkper=(0,351))  
     # vtkobj.add_heads(hds)
     # vtkobj.write(os.path.join('.','out', "gv6nwt_head.vtu"))
 
