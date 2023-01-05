@@ -9,6 +9,7 @@ import os
 import flopy
 import pandas as pd
 import numpy as np
+import geopandas as gpd
 
 class model(object):
     def __init__(self,pathNam,name):
@@ -82,11 +83,12 @@ def makeDIS(mf):
     tsmult=[1.2 for x in perlen]
     dis3 = flopy.modflow.ModflowDis(
     mf, nlay, nrow, ncol, delr=delr, delc=delc, top=top, botm=botm,
-    nper=nper,perlen=perlen,nstp=nstp,steady=steady,unit=111)
+    nper=nper,perlen=perlen,nstp=nstp,steady=steady,unitnumber=29)
     return None
     
 def NWT(mf):
-    return flopy.modflow.ModflowNwt(mf)
+    return flopy.modflow.ModflowNwt(mf,headtol=0.001,fluxtol=600,
+maxiterout=600,thickfact=1e-05,linmeth=2,iprnwt=1,ibotav=1,options='COMPLEX')
     
 def makeWEL(modelo):
     import geopandas as gpd
@@ -95,25 +97,32 @@ def makeWEL(modelo):
     pathDAA=r'G:\OneDrive - ciren.cl\2022_Ficha_Atacama\03_Entregas\ICTF_agosto\DAA_Atacama_shacs_val_revE.shp'
     daa=gpd.read_file(pathDAA)
     daaSubt=gpd.GeoDataFrame(daa[daa['Naturaleza']=='Subterranea'])
-    daaSubt.geometry=daaSubt.geometry.apply(lambda x: shapely.affinity.translate(x, 
+    daaSubCons=daaSubt[daaSubt['Tipo Derec']!='No Consuntivo']
+    daaSubConsCont=daaSubCons[(daaSubCons['Ejercicio'].str.contains('Cont')) | (daaSubCons['Ejercicio'].isna())]
+    
+    daaSubConsCont.geometry=daaSubConsCont.geometry.apply(lambda x: shapely.affinity.translate(x, 
                                     xoff=-modelo.deltaX, yoff=-modelo.deltaY))
     # celdas activas
     modelLimit=gpd.read_file('bas6.shp')
     limit=modelLimit[modelLimit['ibound_1']>0]
     
     # overlay con las celdas activas
-    daaSubOverlay=gpd.overlay(daaSubt,limit)
+    daaSubOverlay=gpd.overlay(daaSubConsCont,limit)
+    daaSubOverlay.drop_duplicates('Nombre Sol',inplace=True)
     
     # convertir a unidades de l/s a m/d
-    daaSubOverlay['Caudal Anu']=-86400*1e-3*daaSubOverlay['Caudal Anu'].str.replace(',',
+    daaSubOverlay['Caudal Anu']=daaSubOverlay['Caudal Anu'].str.replace(',',
 '.').astype(float)
+    idx=daaSubOverlay[daaSubOverlay['Unidad D_1']=='Lt/min'].index
+    daaSubOverlay.loc[idx,'Caudal Anu']=daaSubOverlay.loc[idx,'Caudal Anu'].values/60
+    daaSubOverlay['Caudal Anu']=-86400*1e-3*daaSubOverlay['Caudal Anu']
     
-    daaSubOverlay['COLROW']=daaSubOverlay.geometry.apply(lambda u: str(int(u.x/200))+','+str(int(u.y/200)))
+    
+    daaSubOverlay['COLROW']=daaSubOverlay.geometry.apply(lambda u: str(int(u.x/200))+','+str(530-int(u.y/200)))
     daaSubSum=daaSubOverlay.groupby(['COLROW']).agg('sum')['Caudal Anu']
     
     # crear matriz de coordenadas
     welAll=modelo.model.wel.stress_period_data.array['flux']
-    colRow=[[x,y] for x in range(modelo.model.dis.ncol) for y in range(modelo.model.dis.nrow)]
     
     # actualizar el paquete WEL
     # crear diccionario del paquete WEL
@@ -121,7 +130,7 @@ def makeWEL(modelo):
     
     for stp in wel_spd.keys():
         listSpd=[]
-        if stp>=300:
+        if stp>300:
             for col in range(np.shape(welAll[0][0])[1]-1):
                 for row in range(np.shape(welAll[0][0])[0]-1):
                     try:
@@ -134,11 +143,80 @@ def makeWEL(modelo):
             for col in range(np.shape(arrayWel)[1]-1):
                 for row in range(np.shape(arrayWel)[0]-1):
                     listSpd.append([0,row,col,arrayWel[row,col]])  
-        wel_spd[stp]=listSpd[:]
+        wel_spd[stp]=[x for x in listSpd if x[-1]<=0]
         
     wel = flopy.modflow.ModflowWel(modelo.model,stress_period_data=wel_spd)
 
+def processBudget():
+    import matplotlib.pyplot as plt
+    import flopy
+    # zone_file = os.path.join('.', "gv6.zones")
+    # zon = read_zbarray(zone_file)
+    # nlay, nrow, ncol = zon.shape    
+    # zb = ZoneBudget('gv6nwt.cbc', zon)
+    # dfZB=zb.get_dataframes()
+    # names=list(zb.get_record_names())
+    # names=[ 'TOTAL_IN','TOTAL_OUT']
+    # names=['TOTAL_IN']
     
+    
+    # dateidx1 = dfZB.index[0][0]
+    # dateidx2 = dfZB.index[-1][0]
+    # zones = ['ZONE_1']
+    # dfParsed=dfZB.reset_index()
+    # dfZB=dfParsed.pivot_table(index='totim',columns='name',values='ZONE_1',aggfunc='last')
+    # # cols=[x for x in dfZB (if 'TOTAL' not in x) | ('ZONE' not in x) | ]
+    # dfZB[list(dfZB.columns[dfZB.columns.str.contains('TO_')])]=-dfZB[list(dfZB.columns[dfZB.columns.str.contains('TO_')])]
+    # dfZB[cols].plot()
+    
+    ruta_lst=os.path.join('.','gv6nwt.lst')
+    mf_list =  flopy.utils.MfListBudget(ruta_lst)
+    df_incremental, df_cumulative = mf_list.get_dataframes(start_datetime="1993-01-01")
+    cols=[x for x in df_incremental.columns if ('TOTAL_' not in x) & ('IN-OUT' not in x) & ('PERCENT' not in x)]
+    df_incremental[[x for x in cols if '_OUT' in x]]=-df_incremental[[x for x in cols if '_OUT' in x]]
+    df_incremental=df_incremental/86400
+    df_incremental[cols].plot()
+    plt.ylabel('Balance ($m^3/s$)')
+    plt.savefig(os.path.join('.','out','balanceCopiapo.svg'),
+                bbox_inches='tight')    
+    df_incremental.to_excel(os.path.join('.','out','balanceCopiapo.xlsx'))
+    # incremental, cumulative = mf_list.get_budget()
+    
+    #Leer el balance del primer timestep y primer stress period
+    data = mf_list.get_data()
+    plt.bar(data['index'], data['value'])
+    plt.xticks(data['index'], data['name'], rotation=45, size=6)
+    plt.show()
+    plt.ylabel('Balance volumétrico ($m^3$)')
+    plt.tight_layout()
+    plt.grid()
+
+def processHeads(mf):
+    
+    
+    # import the HeadFile reader and read in the head file
+    from flopy.utils import HeadFile
+    from flopy.export import vtk
+    import matplotlib.pyplot as plt
+    head_file = os.path.join('.', "gv6nwt.hds")
+    hds = HeadFile(head_file)
+    
+    import flopy.utils.binaryfile as bf
+    hdobj = bf.HeadFile(head_file, precision='single')
+    hdobj.list_records()
+    rec = hdobj.get_data(kstpkper=(0, 351))
+    rec[0][rec[0]==999]=np.nan
+    plt.figure()
+    plt.imshow(rec[0],vmin=0,interpolation='nearest')
+    
+    # create the vtk object and export heads
+    vtkobj = vtk.Vtk(mf)
+    otfolder=os.path.join('.','out')
+    vtk.export_heads(mf, hdsfile=head_file, otfolder=otfolder,kstpkper=(0,351))  
+    # vtkobj.add_heads(hds)
+    # vtkobj.write(os.path.join('.','out', "gv6nwt_head.vtu"))
+
+
 def main():
     # pathNam=os.path.join('..','simcopiapo','modflow','run','SIMCOPIAPO.nam')
     pathNam=os.path.join('..','modflow','gv6nwt.nam')
@@ -149,7 +227,7 @@ def main():
     makeDIS(modelo.model)
     NWT(modelo.model)
     makeOC(modelo.model)
-    makeWEL(modelo.model)
+    makeWEL(modelo)
     modelo.run()
 
     
