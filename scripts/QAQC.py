@@ -97,18 +97,26 @@ def makeWEL(modelo):
     pathDAA=r'G:\OneDrive - ciren.cl\2022_Ficha_Atacama\03_Entregas\ICTF_agosto\DAA_Atacama_shacs_val_revE.shp'
     daa=gpd.read_file(pathDAA)
     daaSubt=gpd.GeoDataFrame(daa[daa['Naturaleza']=='Subterranea'])
-    daaSubt.geometry=daaSubt.geometry.apply(lambda x: shapely.affinity.translate(x, 
+    daaSubCons=daaSubt[daaSubt['Tipo Derec']!='No Consuntivo']
+    daaSubConsCont=daaSubCons[(daaSubCons['Ejercicio'].str.contains('Cont')) | (daaSubCons['Ejercicio'].isna())]
+    
+    daaSubConsCont.geometry=daaSubConsCont.geometry.apply(lambda x: shapely.affinity.translate(x, 
                                     xoff=-modelo.deltaX, yoff=-modelo.deltaY))
     # celdas activas
     modelLimit=gpd.read_file('bas6.shp')
     limit=modelLimit[modelLimit['ibound_1']>0]
     
     # overlay con las celdas activas
-    daaSubOverlay=gpd.overlay(daaSubt,limit)
+    daaSubOverlay=gpd.overlay(daaSubConsCont,limit)
+    daaSubOverlay.drop_duplicates('Nombre Sol',inplace=True)
     
     # convertir a unidades de l/s a m/d
-    daaSubOverlay['Caudal Anu']=-86400*1e-3*daaSubOverlay['Caudal Anu'].str.replace(',',
+    daaSubOverlay['Caudal Anu']=daaSubOverlay['Caudal Anu'].str.replace(',',
 '.').astype(float)
+    idx=daaSubOverlay[daaSubOverlay['Unidad D_1']=='Lt/min'].index
+    daaSubOverlay.loc[idx,'Caudal Anu']=daaSubOverlay.loc[idx,'Caudal Anu'].values/60
+    daaSubOverlay['Caudal Anu']=-86400*1e-3*daaSubOverlay['Caudal Anu']
+    
     
     daaSubOverlay['COLROW']=daaSubOverlay.geometry.apply(lambda u: str(int(u.x/200))+','+str(530-int(u.y/200)))
     daaSubSum=daaSubOverlay.groupby(['COLROW']).agg('sum')['Caudal Anu']
@@ -142,18 +150,37 @@ def makeWEL(modelo):
 def postProcess(model):
     from flopy.utils.zonbud import ZoneBudget, read_zbarray
     import matplotlib.pyplot as plt
-    zone_file = os.path.join('.', "gv6.zones")
-    zon = read_zbarray(zone_file)
-    nlay, nrow, ncol = zon.shape    
-    zb = ZoneBudget('gv6nwt.cbc', zon)
-    dfZB=zb.get_dataframes()
+    # zone_file = os.path.join('.', "gv6.zones")
+    # zon = read_zbarray(zone_file)
+    # nlay, nrow, ncol = zon.shape    
+    # zb = ZoneBudget('gv6nwt.cbc', zon)
+    # dfZB=zb.get_dataframes()
+    # names=list(zb.get_record_names())
+    # names=[ 'TOTAL_IN','TOTAL_OUT']
+    # names=['TOTAL_IN']
+    
+    
+    # dateidx1 = dfZB.index[0][0]
+    # dateidx2 = dfZB.index[-1][0]
+    # zones = ['ZONE_1']
+    # dfParsed=dfZB.reset_index()
+    # dfZB=dfParsed.pivot_table(index='totim',columns='name',values='ZONE_1',aggfunc='last')
+    # # cols=[x for x in dfZB (if 'TOTAL' not in x) | ('ZONE' not in x) | ]
+    # dfZB[list(dfZB.columns[dfZB.columns.str.contains('TO_')])]=-dfZB[list(dfZB.columns[dfZB.columns.str.contains('TO_')])]
+    # dfZB[cols].plot()
     
     ruta_lst=os.path.join('.','gv6nwt.lst')
     mf_list =  flopy.utils.MfListBudget(ruta_lst)
+    df_incremental, df_cumulative = mf_list.get_dataframes(start_datetime="01-01-1993")
+    cols=[x for x in df_incremental.columns if ('TOTAL_' not in x) & ('IN-OUT' not in x)]
+
+    df_incremental[[x for x in cols if '_OUT' in x]]=-df_incremental[[x for x in cols if '_OUT' in x]]
+    df_incremental[cols].plot()
+    
     incremental, cumulative = mf_list.get_budget()
     
     #Leer el balance del primer timestep y primer stress period
-    data = mf_list.get_data(kstpkper=(0,1))
+    data = mf_list.get_data()
     plt.bar(data['index'], data['value'])
     plt.xticks(data['index'], data['name'], rotation=45, size=6)
     plt.show()
