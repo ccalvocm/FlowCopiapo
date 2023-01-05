@@ -172,12 +172,13 @@ def postProcess(model):
     ruta_lst=os.path.join('.','gv6nwt.lst')
     mf_list =  flopy.utils.MfListBudget(ruta_lst)
     df_incremental, df_cumulative = mf_list.get_dataframes(start_datetime="01-01-1993")
-    cols=[x for x in df_incremental.columns if ('TOTAL_' not in x) & ('IN-OUT' not in x)]
-
+    cols=[x for x in df_incremental.columns if ('TOTAL_' not in x) & ('IN-OUT' not in x) & ('PERCENT' not in x)]
     df_incremental[[x for x in cols if '_OUT' in x]]=-df_incremental[[x for x in cols if '_OUT' in x]]
+    df_incremental=df_incremental/86400
     df_incremental[cols].plot()
-    
-    incremental, cumulative = mf_list.get_budget()
+    plt.ylabel('Balance ($m^3/s$)')
+    plt.savefig(os.path.join('.','out','balanceCopiapo.csvg'))    
+    # incremental, cumulative = mf_list.get_budget()
     
     #Leer el balance del primer timestep y primer stress period
     data = mf_list.get_data()
