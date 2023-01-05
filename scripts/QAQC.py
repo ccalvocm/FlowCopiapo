@@ -83,7 +83,7 @@ def makeDIS(mf):
     tsmult=[1.2 for x in perlen]
     dis3 = flopy.modflow.ModflowDis(
     mf, nlay, nrow, ncol, delr=delr, delc=delc, top=top, botm=botm,
-    nper=nper,perlen=perlen,nstp=nstp,steady=steady,unitnumber=111)
+    nper=nper,perlen=perlen,nstp=nstp,steady=steady,unitnumber=29)
     return None
     
 def NWT(mf):
@@ -147,9 +147,9 @@ def makeWEL(modelo):
         
     wel = flopy.modflow.ModflowWel(modelo.model,stress_period_data=wel_spd)
 
-def postProcess(model):
-    from flopy.utils.zonbud import ZoneBudget, read_zbarray
+def processBudget():
     import matplotlib.pyplot as plt
+    import flopy
     # zone_file = os.path.join('.', "gv6.zones")
     # zon = read_zbarray(zone_file)
     # nlay, nrow, ncol = zon.shape    
@@ -171,13 +171,14 @@ def postProcess(model):
     
     ruta_lst=os.path.join('.','gv6nwt.lst')
     mf_list =  flopy.utils.MfListBudget(ruta_lst)
-    df_incremental, df_cumulative = mf_list.get_dataframes(start_datetime="01-01-1993")
+    df_incremental, df_cumulative = mf_list.get_dataframes(start_datetime="1993-01-01")
     cols=[x for x in df_incremental.columns if ('TOTAL_' not in x) & ('IN-OUT' not in x) & ('PERCENT' not in x)]
     df_incremental[[x for x in cols if '_OUT' in x]]=-df_incremental[[x for x in cols if '_OUT' in x]]
     df_incremental=df_incremental/86400
     df_incremental[cols].plot()
     plt.ylabel('Balance ($m^3/s$)')
-    plt.savefig(os.path.join('.','out','balanceCopiapo.csvg'))    
+    plt.savefig(os.path.join('.','out','balanceCopiapo.svg'),
+                bbox_inches='tight')    
     # incremental, cumulative = mf_list.get_budget()
     
     #Leer el balance del primer timestep y primer stress period
@@ -188,7 +189,33 @@ def postProcess(model):
     plt.ylabel('Balance volumétrico ($m^3$)')
     plt.tight_layout()
     plt.grid()
-            
+
+def processHeads(mf):
+    
+    
+    # import the HeadFile reader and read in the head file
+    from flopy.utils import HeadFile
+    from flopy.export import vtk
+    import matplotlib.pyplot as plt
+    head_file = os.path.join('.', "gv6nwt.hds")
+    hds = HeadFile(head_file)
+    
+    import flopy.utils.binaryfile as bf
+    hdobj = bf.HeadFile(head_file, precision='single')
+    hdobj.list_records()
+    rec = hdobj.get_data(kstpkper=(0, 50))
+    rec[0][rec[0]==999]=np.nan
+    plt.figure()
+    plt.imshow(rec[0],vmin=0,interpolation='nearest')
+    
+    # create the vtk object and export heads
+    vtkobj = vtk.Vtk(mf)
+    otfolder=os.path.join('.','out')
+    vtk.export_heads(mf, hdsfile=head_file, otfolder=otfolder,kstpkper=(0,0))  
+    # vtkobj.add_heads(hds)
+    # vtkobj.write(os.path.join('.','out', "gv6nwt_head.vtu"))
+
+
 def main():
     # pathNam=os.path.join('..','simcopiapo','modflow','run','SIMCOPIAPO.nam')
     pathNam=os.path.join('..','modflow','gv6nwt.nam')
