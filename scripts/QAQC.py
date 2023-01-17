@@ -172,11 +172,21 @@ def processBudget():
     ruta_lst=os.path.join('.','gv6nwt.lst')
     mf_list =  flopy.utils.MfListBudget(ruta_lst)
     df_incremental, df_cumulative = mf_list.get_dataframes(start_datetime="1993-01-01")
+    dfError=df_incremental[['IN-OUT','PERCENT_DISCREPANCY']]/86400
+    dfError.columns=['Entradas-salidas','Discrepancia del balance (%)']
+    fig,ax=plt.subplots(1)
+    dfError.plot(ax=ax)
+    ax.set_ylim([-1e-3,1e-3])
+    ax.set_ylabel('Entradas-salidas ($m^3/s$)',fontsize=14)
+    plt.grid()
+    plt.savefig(os.path.join('.','out','cierreBalanceCopiapo.svg'),
+                bbox_inches='tight')  
+
     cols=[x for x in df_incremental.columns if ('TOTAL_' not in x) & ('IN-OUT' not in x) & ('PERCENT' not in x)]
     df_incremental[[x for x in cols if '_OUT' in x]]=-df_incremental[[x for x in cols if '_OUT' in x]]
     df_incremental=df_incremental/86400
     df_incremental[cols].plot()
-    plt.ylabel('Balance ($m^3/s$)')
+    plt.ylabel('Balance ($m^3/s$)',fontsize=14)
     plt.savefig(os.path.join('.','out','balanceCopiapo.svg'),
                 bbox_inches='tight')    
     df_incremental.to_excel(os.path.join('.','out','balanceCopiapo.xlsx'))
@@ -216,9 +226,136 @@ def processHeads(mf):
     # vtkobj.add_heads(hds)
     # vtkobj.write(os.path.join('.','out', "gv6nwt_head.vtu"))
 
+def damModel():
+    # correr modelo de embalse
+    from surface_water import dam_operations as dam_ops
+    
+    # Run Lautaro Dam operations submodel
+    sw_output = dam_ops.run_dam_operation_model('Historico', False, False)
+    ModeloEmbalseLautaro_df_6h = sw_output[0]
+    LaPuerta_GWSW_df_6h = sw_output[1]
+
+    # Resample submodel from 6-hour to monthly timesteps
+    ModeloEmbalseLautaro_df_M = ModeloEmbalseLautaro_df_6h.resample('M').mean()
+    LaPuerta_GWSW_df_M = LaPuerta_GWSW_df_6h.resample('M').mean()
+
+    # Apply rolling filter to Q_Afloramiento and then recalculate Q_LaPuerta_sim
+    a = LaPuerta_GWSW_df_M.Q_Afloramiento
+    b = LaPuerta_GWSW_df_M.Q_Afloramiento.rolling(20, center=True).mean()
+    b = b.fillna(b.mean())
+    LaPuerta_GWSW_df_M['Q_Afloramiento'] = b
+    LaPuerta_GWSW_df_M['Q_LaPuerta_sim'] = LaPuerta_GWSW_df_M['Q_Afloramiento'] + ModeloEmbalseLautaro_df_M['Q_Lautaro_sim'] + ModeloEmbalseLautaro_df_M['Q_Vertedero_sim']
+
+    return ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M
+
+def SWmodel(ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M):
+    # definir variables
+    prorrata_S2_agricola=0.1
+    prorrata_S3_agricola=0.60
+    prorrata_S4_agricola=0.60
+    prorrata_S5_agricola=0.6
+    prorrata_S6_agricola=1.0
+    # los resultados del ABM se guardan en compilance
+    compliance=0
+    ST_swap_89_a_17=False
+    ST_swap_89_a_ACH=False
+    ST_swap_89_a_S56_rio=False
+    ST_swap_89_a_S5_tubo_rio=False
+    ST_swap_89_a_S5_tubo_mar=False
+    ST_lautaro2=False
+    ST_entubamiento_canales=False
+    ST_recarga_artificial_S3Nantoco=False
+    MAR_capacity_S3Nantoco=0
+    ST_recarga_artificial_S4AntesKaukari=False
+    MAR_capacity_S4AntesKaukari=0
+    ST_recarga_artificial_S4DespuesKaukari=False
+    MAR_capacity_S4DespuesKaukari=0
+    ST_recarga_artificial_S5PiedraColgada=False
+    MAR_capacity_S5PiedraColgada=0
+    
+    # correr modelo de embalses
+    ModeloEmbalseLautaro_df_M=damModel()[0]
+    LaPuerta_GWSW_df_M=damModel()[1]
+    
+    # cargar las demandas de agua superficial
+    # Load base irrigation demands for JVRC irrigation districts (Sectors 2, 3, 4)
+    model_data_dir='data'
+    irrigationdemands_S234_df = pd.read_pickle(os.path.join(model_data_dir, 'demandas_riego_S234.pkl'))
+
+    # Load base irrigation demands for GW irrigation districts (Sectors 5, 6)
+    irrigationdemands_S56_df = pd.read_pickle(os.path.join(model_data_dir, 'demandas_riego_S56.pkl'))
+
+    # Load seasonal demand curves
+    demandcurves_df = pd.read_pickle(os.path.join(model_data_dir, 'curvas_demandas_riego.pkl'))
+    
+    #correr modelo de aguas superficiales
+    from surface_water.swmodel import run_swmodel
+        
+    SWMODEL_out_df = run_swmodel(
+    prorrata_S2_agricola, prorrata_S3_agricola, prorrata_S4_agricola, prorrata_S5_agricola, prorrata_S6_agricola, compliance,
+    ST_swap_89_a_17, ST_swap_89_a_ACH, ST_swap_89_a_S56_rio, ST_swap_89_a_S5_tubo_rio, ST_swap_89_a_S5_tubo_mar,
+    ST_lautaro2, ST_entubamiento_canales,
+    ST_recarga_artificial_S3Nantoco, MAR_capacity_S3Nantoco, ST_recarga_artificial_S4AntesKaukari, MAR_capacity_S4AntesKaukari,
+    ST_recarga_artificial_S4DespuesKaukari, MAR_capacity_S4DespuesKaukari, ST_recarga_artificial_S5PiedraColgada, MAR_capacity_S5PiedraColgada,
+    ModeloEmbalseLautaro_df_M, LaPuerta_GWSW_df_M,
+    irrigationdemands_S234_df, irrigationdemands_S56_df, demandcurves_df)
+    
+    # guardar outputs
+    SWMODEL_out_df.to_pickle(os.path.join('outputs', 'SW_model_outputs.pkl'))
+
+    # calcular la recarga a partir del modelo superficial
+
+    # Import GeoDataframes with irrigation, river and city cells
+    model_irrcells_gdf = pd.read_pickle(os.path.join(model_data_dir,'model_irrcells.pkl'))
+    model_rivcells_gdf = pd.read_pickle(os.path.join(model_data_dir,'model_rivcells.pkl'))
+    model_citcells_gdf = pd.read_pickle(os.path.join(model_data_dir,'model_citcells.pkl'))
+
+    # Compute irrigation (infiltration + canal) RCH fluxes per aquifer sector
+    RCH_irr_df_1M = SWMODEL_out_df[['RCH_riegoycanales_S2', 'RCH_riegoycanales_S3', 'RCH_riegoycanales_S4', 'Q_perdidariego_P_S5', 'Q_perdidariego_P_S6']]
+    RCH_irr_df_3M = RCH_irr_df_1M.resample('Q').mean()
+    RCH_irr_df_3M = RCH_irr_df_3M.reset_index().drop(columns='date').head(100)
+    RCH_irr_df_3M.columns = ['Sector 2', 'Sector 3', 'Sector 4', 'Sector 5', 'Sector 6']
+    RCH_irr_df_3M['Sector 5'] = RCH_irr_df_3M['Sector 5'] * (prorrata_S5_agricola + (1 - prorrata_S5_agricola) * (1 - compliance))
+    RCH_irr_df_3M['Sector 6'] = RCH_irr_df_3M['Sector 6'] * (prorrata_S6_agricola + (1 - prorrata_S6_agricola) * (1 - compliance))
+
+    # Compute Copiapo River RCH fluxes per aquifer sector
+    RCH_riv_df_1M = SWMODEL_out_df[['RCH_rio_S2', 'RCH_rio_S3', 'RCH_rio_S4', 'RCH_rio_S5', 'RCH_rio_S6']]
+    RCH_riv_df_3M = RCH_riv_df_1M.resample('Q').mean()
+    RCH_riv_df_3M = RCH_riv_df_3M.reset_index().drop(columns='date').head(100)
+    RCH_riv_df_3M.columns = ['Sector 2','Sector 3','Sector 4','Sector 5','Sector 6']
+
+    # Compute Lautaro Dam RCH fluxes
+    model_laucells_gdf = gpd.read_file(os.path.join('geodata', 'Lautaro_recharge.shp'))[['row','column','geometry']]
+    # RCH_lau_df_3M = RCH_lau_df_1M.resample('Q').mean().reset_index().drop(columns='date').head(100)
+    return SWMODEL_out_df['Q_InfiltracionLautaro']
+
+def makeRCH(modelo,rchLautaro):
+
+    # crear matriz de coordenadas
+    rchAll=modelo.model.rch.rech.array[0][0]
+    # identificar las celdas con recarga desde el embalse
+    mask=rchAll>0.054
+
+    # actualizar el paquete RCH
+    # actualizar la tasa de recarga por celda
+    # match con los srtress periods
+    rchByCell=rchLautaro.loc[(rchLautaro.index>='1993-01-01') & (rchLautaro.index<='2022-03-31')]
+    rchByCell=rchByCell.values*1e-03*86499/200/200/len(rchAll[mask])
+
+    # crear diccionario del paquete RCH
+    rch_spd=dict.fromkeys(range(modelo.model.dis.nper))
+    
+    for stp in rch_spd.keys():
+        listSpd={}
+        
+        rechStp=modelo.model.rch.rech.array[stp][0]
+        rechStp[mask]=rchByCell[stp]
+        rch_spd[stp]=rechStp
+      
+    rch=flopy.modflow.ModflowRch(modelo.model,nrchop=3,rech=rch_spd)
 
 def main():
-    # pathNam=os.path.join('..','simcopiapo','modflow','run','SIMCOPIAPO.nam')
+
     pathNam=os.path.join('..','modflow','gv6nwt.nam')
     os.chdir(os.path.dirname(pathNam))
     modelo=model(pathNam,'Copiapo')
@@ -228,6 +365,14 @@ def main():
     NWT(modelo.model)
     makeOC(modelo.model)
     makeWEL(modelo)
+    
+    # correr modelo de embalse
+    ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M=damModel()
+   
+    # correr modelo hidrológico
+    rchLautaro=SWmodel(ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M)
+    
+    # correro modelo hidrogeológico
     modelo.run()
 
     

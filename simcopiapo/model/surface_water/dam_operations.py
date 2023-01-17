@@ -123,12 +123,42 @@ class DamOperationModel():
 
         self.t_0 = False
 
+def resampleQ():
+    qDay=pd.read_excel(os.path.join(DATA_DIR,
+'CaudalesDGAyMOP_Atacama_2022_revA.xlsx'),
+                       sheet_name='Datos',index_col=0,parse_dates=True)
+    qPastillo=qDay['03430003-8'].iloc[1:]
+    qPastillo6H=qPastillo.resample("6H").ffill()
+    qPastillo6H=qPastillo6H.loc[(qPastillo6H.index>='1991-09-01') & (qPastillo6H.index<='2022-03-31')]
+    return qPastillo6H
 
+def fillQ(df1,df2):
+    df1=pd.DataFrame(df1.copy())
+    idx=df1[df1.squeeze().isna()].index
+    idx2=idx.intersection(df2.index)
+    df1.loc[idx2,df1.columns]=df2.loc[idx2].values
+    return df1
+
+def extendArray(arr,df):
+    steps=len(df)
+    return np.append(arr,np.array([np.nan]*(steps-len(arr)+1)))
+    
 def run(Q_Pastillo_ts, lautaro2, record=[]):
 
+    # Q Copiapo Pastillo CSIRO    
+    dfQPastilloTs=pd.DataFrame(Q_Pastillo_ts,index=pd.date_range('1991-09-01',
+'2017-03-31 18:00:00',freq='6H'))
+
+    # Q Copiapo en Pastillo DGA
+    dfQPastilloDGA=resampleQ()
+    print(dfQPastilloDGA)
+    dfQPastilloDGAfill=fillQ(dfQPastilloDGA,dfQPastilloTs)
+    Q_Pastillo_ts=dfQPastilloDGAfill.values
+        
     delta = timedelta(hours=6)
     start = datetime(1991,9,1,0)
-    end = datetime(2017,3,31,18)
+    # end = datetime(2017,3,31,18)
+    end=datetime(2022,3,31,0)
 
     dates = []
     steps = 0
@@ -160,10 +190,12 @@ def run(Q_Pastillo_ts, lautaro2, record=[]):
         12: 1.5
     }
 
-    Q_Lautaro_obs_ts = np.loadtxt(os.path.join(DATA_DIR, 'Q_Lautaro_obs.dat'))
-    Q_LaPuerta_obs_ts = np.loadtxt(os.path.join(DATA_DIR, 'Q_LaPuerta_obs.dat'))
+    Q_Lautaro_obs_ts=np.loadtxt(os.path.join(DATA_DIR, 'Q_Lautaro_obs.dat'))
+    Q_Lautaro_obs_ts=extendArray(Q_Lautaro_obs_ts,Q_Pastillo_ts)
+    Q_LaPuerta_obs_ts=np.loadtxt(os.path.join(DATA_DIR,'Q_LaPuerta_obs.dat'))
+    Q_LaPuerta_obs_ts=extendArray(Q_LaPuerta_obs_ts,Q_Pastillo_ts)
 
-    model = DamOperationModel(storage_areas, curva_descarga_controlada, lautaro2)
+    model=DamOperationModel(storage_areas,curva_descarga_controlada,lautaro2)
     model.reset()
 
     model.Q_Evap = 0.0
@@ -194,8 +226,9 @@ def run_model(Q_Pastillo_ts, lautaro2):
     return (ModeloEmbalseLautaro_df_6h, LaPuerta_GWSW_df_6h)
 
 def run_dam_operation_model(Q_Pastillo_ts_name, swap_CAS_RAM, lautaro2):
-    Q_Pastillo_ts = pd.read_csv(os.path.join(DATA_DIR, 'Q_Pastillo.csv'))[Q_Pastillo_ts_name].values
-
+    Q_Pastillo_ts=pd.read_csv(os.path.join(DATA_DIR, 
+                                'Q_Pastillo.csv'))[Q_Pastillo_ts_name].values
+    print('1 OK')
     if swap_CAS_RAM:
         reduce_by = 200.0 / 1000.0 # 200L/s
         for i in range(len(Q_Pastillo_ts)):
