@@ -325,14 +325,14 @@ def SWmodel(ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M):
     RCH_riv_df_3M.columns = ['Sector 2','Sector 3','Sector 4','Sector 5','Sector 6']
 
     # Compute Lautaro Dam RCH fluxes
-    model_laucells_gdf = gpd.read_file(os.path.join('geodata', 'Lautaro_recharge.shp'))[['row','column','geometry']]
+    # model_laucells_gdf = gpd.read_file(os.path.join('geodata', 'Lautaro_recharge.shp'))[['row','column','geometry']]
     # RCH_lau_df_3M = RCH_lau_df_1M.resample('Q').mean().reset_index().drop(columns='date').head(100)
     return SWMODEL_out_df['Q_InfiltracionLautaro']
 
-def makeRCH(modelo,rchLautaro):
+def makeRCH(model_,rchLautaro):
 
     # crear matriz de coordenadas
-    rchAll=modelo.model.rch.rech.array[0][0]
+    rchAll=model_.rch.rech.array[0][0]
     # identificar las celdas con recarga desde el embalse
     mask=rchAll>0.054
 
@@ -340,19 +340,19 @@ def makeRCH(modelo,rchLautaro):
     # actualizar la tasa de recarga por celda
     # match con los srtress periods
     rchByCell=rchLautaro.loc[(rchLautaro.index>='1993-01-01') & (rchLautaro.index<='2022-03-31')]
-    rchByCell=rchByCell.values*1e-03*86499/200/200/len(rchAll[mask])
+    rchByCell=rchByCell.values*1e-03*86400./200./200./len(rchAll[mask])
 
     # crear diccionario del paquete RCH
-    rch_spd=dict.fromkeys(range(modelo.model.dis.nper))
+    rch_spd=dict.fromkeys(range(model_.dis.nper))
     
-    for stp in rch_spd.keys():
-        listSpd={}
-        
-        rechStp=modelo.model.rch.rech.array[stp][0]
-        rechStp[mask]=rchByCell[stp]
+    for stp in range(list(rch_spd.keys())[-1]+1):       
+        rechStp=model_.rch.rech.array[stp][0]
+        if stp>1:
+            rechStp[mask]=rchByCell[stp-1]
         rch_spd[stp]=rechStp
       
-    rch=flopy.modflow.ModflowRch(modelo.model,nrchop=3,rech=rch_spd)
+    rch=flopy.modflow.ModflowRch(model_,nrchop=3,rech=rch_spd)
+    return rch
 
 def main():
 
@@ -361,16 +361,20 @@ def main():
     modelo=model(pathNam,'Copiapo')
     modelo.load()
     
-    makeDIS(modelo.model)
-    NWT(modelo.model)
-    makeOC(modelo.model)
-    makeWEL(modelo)
+    # makeDIS(modelo.model)
+    # NWT(modelo.model)
+    # makeOC(modelo.model)
+    # makeWEL(modelo)
     
     # correr modelo de embalse
+    os.chdir(os.path.join('..','Scripts'))
     ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M=damModel()
    
     # correr modelo hidrológico
     rchLautaro=SWmodel(ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M)
+    
+    # incoporar la recarga del modelo superficial
+    makeRCH(modelo.model,rchLautaro)
     
     # correro modelo hidrogeológico
     modelo.run()
