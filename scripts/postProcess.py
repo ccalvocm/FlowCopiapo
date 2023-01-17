@@ -50,6 +50,13 @@ def exportBas(ml,bas_output_dir):
     ml.bas6.export(bas_output_dir, fmt="vtk")
 
 def exportUpw(ml,upw_output_dir):
+    # Make sure spatial reference set to epsg 24879 to create RCH and WEL packages
+    xul = 309000
+    yul = 6993800
+    rot = 0
+    model_epsg = 24879
+    ml.sr = flopy.utils.reference.SpatialReference(delr=ml.dis.delr.array, delc=ml.dis.delc.array, xul=xul, yul=yul, rotation=rot, epsg=model_epsg)
+
     ml.upw.export(upw_output_dir, fmt="vtk")
 
 def exportLpf(ml,lpf_output_dir):

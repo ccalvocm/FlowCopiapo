@@ -9,11 +9,11 @@ UPW              134  gv6nwt.upw
 CHD               17  gv6nwt.chd
 WEL               20  gv6nwt.wel
 DRN               22  gv6nwt.drn
-RCH               18  gv6nwt.rch
-DATA             141  .\..\modflow\.\..\modflow\gv6nwt.wel_dewater.txt
-DATA              37  .\..\modflow\.\..\modflow\gv6nwt.fhd
-DATA              38  .\..\modflow\.\..\modflow\gv6nwt.fdn
-DATA(BINARY)      31  gv6nwt.ddn REPLACE
+RCH               19  gv6nwt.rch
+DATA             141  .\..\modflow\.\..\modflow\.\..\modflow\gv6nwt.wel_dewater.txt
+DATA              37  .\..\modflow\.\..\modflow\.\..\modflow\gv6nwt.fhd
+DATA              38  .\..\modflow\.\..\modflow\.\..\modflow\gv6nwt.fdn
+DATA(BINARY)      31  .\..\modflow\gv6nwt.ddn
+DATA(BINARY)      51  gv6nwt.hds REPLACE
 DATA(BINARY)       9  gv6nwt.cbc REPLACE
 DATA(BINARY)      50  gv6nwt.WEL.cbc REPLACE
-DATA(BINARY)      51  gv6nwt.hds REPLACE

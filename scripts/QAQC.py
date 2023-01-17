@@ -194,24 +194,27 @@ def processBudget():
     
     #Leer el balance del primer timestep y primer stress period
     data = mf_list.get_data()
+    plt.figure()
     plt.bar(data['index'], data['value'])
     plt.xticks(data['index'], data['name'], rotation=45, size=6)
     plt.show()
     plt.ylabel('Balance volumétrico ($m^3$)')
     plt.tight_layout()
     plt.grid()
-
+    plt.savefig(os.path.join('.','out','balancePromedioCopiapo.svg'),
+                bbox_inches='tight')    
+    
 def processHeads(mf):
-    
-    
+
     # import the HeadFile reader and read in the head file
     from flopy.utils import HeadFile
     from flopy.export import vtk
     import matplotlib.pyplot as plt
+    import flopy.utils.binaryfile as bf
+    
     head_file = os.path.join('.', "gv6nwt.hds")
     hds = HeadFile(head_file)
-    
-    import flopy.utils.binaryfile as bf
+        
     hdobj = bf.HeadFile(head_file, precision='single')
     hdobj.list_records()
     rec = hdobj.get_data(kstpkper=(0, 351))
@@ -222,7 +225,7 @@ def processHeads(mf):
     # create the vtk object and export heads
     vtkobj = vtk.Vtk(mf)
     otfolder=os.path.join('.','out')
-    vtk.export_heads(mf, hdsfile=head_file, otfolder=otfolder,kstpkper=(0,351))  
+    vtk.export_heads(mf, hdsfile=head_file, otfolder=otfolder,kstpkper=(0,351),point_scalars=True)  
     # vtkobj.add_heads(hds)
     # vtkobj.write(os.path.join('.','out', "gv6nwt_head.vtu"))
 
@@ -356,6 +359,13 @@ def makeRCH(model_,rchLautaro):
 
 def main():
 
+    # correr modelo de embalse
+    os.chdir(os.path.join('..','Scripts'))
+    ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M=damModel()
+   
+    # correr modelo hidrológico
+    rchLautaro=SWmodel(ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M)
+    
     pathNam=os.path.join('..','modflow','gv6nwt.nam')
     os.chdir(os.path.dirname(pathNam))
     modelo=model(pathNam,'Copiapo')
@@ -366,19 +376,14 @@ def main():
     # makeOC(modelo.model)
     # makeWEL(modelo)
     
-    # correr modelo de embalse
-    os.chdir(os.path.join('..','Scripts'))
-    ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M=damModel()
-   
-    # correr modelo hidrológico
-    rchLautaro=SWmodel(ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M)
-    
     # incoporar la recarga del modelo superficial
     makeRCH(modelo.model,rchLautaro)
     
-    # correro modelo hidrogeológico
+    # correro modelo de aguas subterráneas
     modelo.run()
-
     
-# if __name__=='__main__':
-#     main()
+    processHeads(modelo.model)
+    processBudget(modelo.model)
+
+if __name__=='__main__':
+    main()
