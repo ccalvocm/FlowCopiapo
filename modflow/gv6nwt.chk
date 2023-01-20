@@ -965,4 +965,55 @@ Warning,UPW,0,492,430,0.005000,specific yield values below checker threshold of 
 Warning,UPW,0,492,447,0.005000,specific yield values below checker threshold of 0.01
 Warning,UPW,0,493,448,0.005000,specific yield values below checker threshold of 0.01
 Warning,UPW,0,494,448,0.005000,specific yield values below checker threshold of 0.01
-Warning,RCH,0,0,0,0.000000,Mean R/T ratio < checker warning threshold of 2e-08 for 289 stress periods
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,WEL,0,62,165,0.000000,BC in inactive cell
+Warning,RCH,0,0,0,0.000000,Mean R/T ratio < checker warning threshold of 2e-08 for 340 stress periods
