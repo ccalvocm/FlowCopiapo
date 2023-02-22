@@ -2,6 +2,6 @@
  
 Actualización del modelo hidrológico superficial y subterráneo escrito completamente en Python a partir de GORE Atacama (2019). 
 
-![alt text](https://uc934c299f765aa369736d265fe7.previews.dropboxusercontent.com/p/thumb/AByZ-2LC4C7S9T9aztpeE7QwWbZTWaNRKsATrDxzDf3hlu87TcuHblJdHLm_MN8EJ7MXlAa6e4J2LVv35LjmLSiIaiSKI2Z3LiAJdaQvewSa9y8oUdNiy5NwjW14MnSf8XgiS29ACAthCXV7DviEUA8j-_jj3TGq4vmf6CNGZUyhah1BShkPBlRNc3X6WcETGwSjUHya5SJcFsarBKHo8opq-JuWz6iFuuVQ-8tdkI85cn9aqJqOBuIfr6uP2ZsybPTQNSccXZLoE67gqpJZpVpQ-Vtw4ubyb2y0ytj0suSBBMz6XfefroRoSZdYx1tNL4kTDnZJyLUYnBlBRic2N6XyCTzNxeISKaNWlnuW0lkHeQI7TlfzS_WOfPUxd1FNyU6r4N8VbdLIwNPKeLdkN-TXQIlV05DaMgdZo83QeDeaWtqiEG9lOtDnz2sBRvpQwaxZWpOY4exhfB_TQci-jV_2V9Ue9Rst_YM8ga9QQl7Z3Q/p.png)
+![alt text](https://github.com/ccalvocm/FlowCopiapo/blob/pruebas/imgs/Niveles2022.png?raw=true)
 
 <span style="font-family:Papyrus; font-size:.5em;">No poseo derechos de autor. </span>
