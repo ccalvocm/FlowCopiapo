@@ -1,5 +1,4 @@
 type,package,k,i,j,value,desc
-Warning,OC,0,0,0,0.000000,action(s) defined in OC stress_period_data ignored as they are not part the stress periods defined by DIS
 Warning,UPW,0,112,277,0.007971,specific yield values below checker threshold of 0.01
 Warning,UPW,0,112,278,0.007971,specific yield values below checker threshold of 0.01
 Warning,UPW,0,112,279,0.007971,specific yield values below checker threshold of 0.01
@@ -1016,4 +1015,3 @@ Warning,WEL,0,62,165,0.000000,BC in inactive cell
 Warning,WEL,0,62,165,0.000000,BC in inactive cell
 Warning,WEL,0,62,165,0.000000,BC in inactive cell
 Warning,WEL,0,62,165,0.000000,BC in inactive cell
-Warning,RCH,0,0,0,0.000000,Mean R/T ratio < checker warning threshold of 2e-08 for 340 stress periods

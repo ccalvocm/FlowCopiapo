@@ -90,25 +90,40 @@ def NWT(mf):
     return flopy.modflow.ModflowNwt(mf,headtol=0.001,fluxtol=600,
 maxiterout=600,thickfact=1e-05,linmeth=2,iprnwt=1,ibotav=1,options='COMPLEX')
     
-def makeWEL(modelo):
+def parseDates(df):
+    colDate=df.columns[df.columns.str.contains('Fecha')][0]
+    df[colDate]=df[colDate].apply(lambda x: pd.to_datetime(x))
+    return df,colDate
+
+def getDate():
+    return pd.date_range('1993-01-01','2022-04-01',freq='MS')
+    
+def wellsMFP(modelo):
+    pathWells=os.path.join('.','geodata','CaudalTotal_CAS123.shp')
+    wellsMFP=gpd.read_file(pathWells)
+    wellsMFP.drop_duplicates(inplace=True)
+
+def makeWEL(modelo,modelLimit):
     import geopandas as gpd
     import shapely
     # DAA subterraneos
     pathDAA=r'G:\OneDrive - ciren.cl\2022_Ficha_Atacama\03_Entregas\ICTF_agosto\DAA_Atacama_shacs_val_revE.shp'
+    pathDAA=r'E:\CIREN\OneDrive - ciren.cl\2022_Ficha_Atacama\03_Entregas\ICTF_agosto\DAA_Atacama_shacs_val_revE.shp'
     daa=gpd.read_file(pathDAA)
     daaSubt=gpd.GeoDataFrame(daa[daa['Naturaleza']=='Subterranea'])
     daaSubCons=daaSubt[daaSubt['Tipo Derec']!='No Consuntivo']
     daaSubConsCont=daaSubCons[(daaSubCons['Ejercicio'].str.contains('Cont')) | (daaSubCons['Ejercicio'].isna())]
     
+    # trasladar el modelo
     daaSubConsCont.geometry=daaSubConsCont.geometry.apply(lambda x: shapely.affinity.translate(x, 
                                     xoff=-modelo.deltaX, yoff=-modelo.deltaY))
     # celdas activas
-    modelLimit=gpd.read_file('bas6.shp')
+    modelLimit=gpd.read_file(os.path.join('.','geodata','bas6.shp'))
     limit=modelLimit[modelLimit['ibound_1']>0]
     
     # overlay con las celdas activas
     daaSubOverlay=gpd.overlay(daaSubConsCont,limit)
-    daaSubOverlay.drop_duplicates('Nombre Sol',inplace=True)
+    # daaSubOverlay.drop_duplicates('Nombre Sol',inplace=True)
     
     # convertir a unidades de l/s a m/d
     daaSubOverlay['Caudal Anu']=daaSubOverlay['Caudal Anu'].str.replace(',',
@@ -117,9 +132,10 @@ def makeWEL(modelo):
     daaSubOverlay.loc[idx,'Caudal Anu']=daaSubOverlay.loc[idx,'Caudal Anu'].values/60
     daaSubOverlay['Caudal Anu']=-86400*1e-3*daaSubOverlay['Caudal Anu']
     
-    
     daaSubOverlay['COLROW']=daaSubOverlay.geometry.apply(lambda u: str(int(u.x/200))+','+str(530-int(u.y/200)))
-    daaSubSum=daaSubOverlay.groupby(['COLROW']).agg('sum')['Caudal Anu']
+    daaSubOverlay,colDate=parseDates(daaSubOverlay)
+    # sumar los pozos por celda pero por año de sp
+    # daaSubSum=daaSubOverlay.groupby(['COLROW']).agg('sum')['Caudal Anu']
     
     # crear matriz de coordenadas
     welAll=modelo.model.wel.stress_period_data.array['flux']
@@ -128,9 +144,17 @@ def makeWEL(modelo):
     # crear diccionario del paquete WEL
     wel_spd=dict.fromkeys(range(modelo.model.dis.nper))
     
+    # lista años
+    listDates=getDate()
     for stp in wel_spd.keys():
+        date=listDates[stp]
         listSpd=[]
         if stp>300:
+            # sumar los DAA antes del año del stp
+            daaSubSum=daaSubOverlay.copy()
+            daaSubSum=daaSubSum[daaSubSum[colDate].apply(lambda x: x)<=date]
+            daaSubSum=daaSubSum.groupby(['COLROW']).agg('sum')['Caudal Anu']
+            
             for col in range(np.shape(welAll[0][0])[1]-1):
                 for row in range(np.shape(welAll[0][0])[0]-1):
                     try:
