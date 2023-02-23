@@ -1016,4 +1016,4 @@ Warning,WEL,0,62,165,0.000000,BC in inactive cell
 Warning,WEL,0,62,165,0.000000,BC in inactive cell
 Warning,WEL,0,62,165,0.000000,BC in inactive cell
 Warning,WEL,0,62,165,0.000000,BC in inactive cell
-Warning,RCH,0,0,0,0.000000,Mean R/T ratio < checker warning threshold of 2e-08 for 340 stress periods
+Warning,RCH,0,0,0,0.000000,Mean R/T ratio < checker warning threshold of 2e-08 for 326 stress periods

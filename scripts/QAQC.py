@@ -75,7 +75,8 @@ def makeDIS(mf):
     delc=dis.delc
     top=dis.top
     botm=dis.botm
-    perlen=list(dis.perlen.array)+list(pd.date_range('2018-01-01','2022-03-01',freq='MS').days_in_month)
+    perlen=list(dis.perlen.array)+list(pd.date_range('2018-01-01','2022-03-01',
+                                                     freq='MS').days_in_month)
     nper=len(perlen)
     nstp=list(np.ones(len(perlen)).astype(int))
     steady=[False if ind>0 else True for ind,x in enumerate(nstp)]
@@ -90,36 +91,59 @@ def NWT(mf):
     return flopy.modflow.ModflowNwt(mf,headtol=0.001,fluxtol=600,
 maxiterout=600,thickfact=1e-05,linmeth=2,iprnwt=1,ibotav=1,options='COMPLEX')
     
+def parseDates(df):
+    colDate=df.columns[df.columns.str.contains('Fecha')][0]
+    df[colDate]=df[colDate].apply(lambda x: pd.to_datetime(x))
+    return df,colDate
+
+def getDate():
+    return pd.date_range('1993-01-01','2022-04-01',freq='MS')
+    
+def wellsMFP(modelo):
+    pathWells=os.path.join('.','geodata','CaudalTotal_CAS123.shp')
+    wellsMFP=gpd.read_file(pathWells)
+    wellsMFP.drop_duplicates(inplace=True)
+
 def makeWEL(modelo):
     import geopandas as gpd
     import shapely
     # DAA subterraneos
-    pathDAA=r'G:\OneDrive - ciren.cl\2022_Ficha_Atacama\03_Entregas\ICTF_agosto\DAA_Atacama_shacs_val_revE.shp'
+    pathDAA=r'G:\OneDrive - ciren.cl\2022_Ficha_Atacama\03_Entregas\ICTF_agosto\DAA_Atacama_shacs_val_revH.shp'
     daa=gpd.read_file(pathDAA)
     daaSubt=gpd.GeoDataFrame(daa[daa['Naturaleza']=='Subterranea'])
     daaSubCons=daaSubt[daaSubt['Tipo Derec']!='No Consuntivo']
     daaSubConsCont=daaSubCons[(daaSubCons['Ejercicio'].str.contains('Cont')) | (daaSubCons['Ejercicio'].isna())]
     
+    # daa que no caducaron
+    daaSubConsCont.loc[daaSubConsCont[daaSubConsCont['Fecha Fin'].notnull()]['Fecha Fin'].index,
+                       'Fecha Fin']='2022-01-01'
+    daaSubConsCont.loc[daaSubConsCont[daaSubConsCont['Fecha Fin'].isnull()]['Fecha Fin'].index,
+                       'Fecha Fin']='2023-04-01'
+    
+    # trasladar el modelo
     daaSubConsCont.geometry=daaSubConsCont.geometry.apply(lambda x: shapely.affinity.translate(x, 
                                     xoff=-modelo.deltaX, yoff=-modelo.deltaY))
     # celdas activas
-    modelLimit=gpd.read_file('bas6.shp')
+    modelLimit=gpd.read_file(os.path.join('.','geodata','bas6.shp'))
     limit=modelLimit[modelLimit['ibound_1']>0]
     
     # overlay con las celdas activas
     daaSubOverlay=gpd.overlay(daaSubConsCont,limit)
-    daaSubOverlay.drop_duplicates('Nombre Sol',inplace=True)
+    # daaSubOverlay.drop_duplicates('Nombre Sol',inplace=True)
     
     # convertir a unidades de l/s a m/d
     daaSubOverlay['Caudal Anu']=daaSubOverlay['Caudal Anu'].str.replace(',',
 '.').astype(float)
     idx=daaSubOverlay[daaSubOverlay['Unidad D_1']=='Lt/min'].index
-    daaSubOverlay.loc[idx,'Caudal Anu']=daaSubOverlay.loc[idx,'Caudal Anu'].values/60
+    daaSubOverlay.loc[idx,
+                      'Caudal Anu']=daaSubOverlay.loc[idx,
+                                                      'Caudal Anu'].values/60
     daaSubOverlay['Caudal Anu']=-86400*1e-3*daaSubOverlay['Caudal Anu']
     
-    
     daaSubOverlay['COLROW']=daaSubOverlay.geometry.apply(lambda u: str(int(u.x/200))+','+str(530-int(u.y/200)))
-    daaSubSum=daaSubOverlay.groupby(['COLROW']).agg('sum')['Caudal Anu']
+    daaSubOverlay,colDate=parseDates(daaSubOverlay)
+    # sumar los pozos por celda pero por año de sp
+    # daaSubSum=daaSubOverlay.groupby(['COLROW']).agg('sum')['Caudal Anu']
     
     # crear matriz de coordenadas
     welAll=modelo.model.wel.stress_period_data.array['flux']
@@ -128,9 +152,28 @@ def makeWEL(modelo):
     # crear diccionario del paquete WEL
     wel_spd=dict.fromkeys(range(modelo.model.dis.nper))
     
+    useFactor=0.6203315705096603
+    # El factor de uso se obtiene al comparar los bombeos de diciembre de 2017
+    # y enero de 2018. Viene del hecho que los pozos no bombean el 100% del derecho
+
+    
+    # lista años
+    listDates=getDate()
     for stp in wel_spd.keys():
+        date=listDates[stp]
         listSpd=[]
         if stp>300:
+            # sumar los DAA antes del año del stp
+            daaSubSum=daaSubOverlay.copy()
+            # filtrar los daa otorgados a la fecha
+            daaSubSum=daaSubSum[daaSubSum[colDate].apply(lambda x: x)<=date]
+            
+            # filtrar los daa caducos
+            daaSubSum=daaSubSum[daaSubSum['Fecha Fin'].apply(lambda x: pd.to_datetime(x))>date]
+
+            
+            daaSubSum=daaSubSum.groupby(['COLROW']).agg('sum')['Caudal Anu']*useFactor
+            
             for col in range(np.shape(welAll[0][0])[1]-1):
                 for row in range(np.shape(welAll[0][0])[0]-1):
                     try:
@@ -171,7 +214,7 @@ def processBudget():
     
     ruta_lst=os.path.join('.','gv6nwt.lst')
     mf_list =  flopy.utils.MfListBudget(ruta_lst)
-    df_incremental, df_cumulative = mf_list.get_dataframes(start_datetime="1993-01-01")
+    df_incremental, df_cumulative=mf_list.get_dataframes(start_datetime="1993-01-01")
     dfError=df_incremental[['IN-OUT','PERCENT_DISCREPANCY']]/86400
     dfError.columns=['Entradas-salidas','Discrepancia del balance (%)']
     fig,ax=plt.subplots(1)
@@ -225,9 +268,10 @@ def processHeads(mf):
     # create the vtk object and export heads
     vtkobj = vtk.Vtk(mf)
     otfolder=os.path.join('.','out')
-    vtk.export_heads(mf, hdsfile=head_file, otfolder=otfolder,kstpkper=(0,351),point_scalars=True)  
-    # vtkobj.add_heads(hds)
-    # vtkobj.write(os.path.join('.','out', "gv6nwt_head.vtu"))
+    vtk.export_heads(mf, hdsfile=head_file, otfolder=otfolder,kstpkper=(0,351),
+                     point_scalars=True)  
+    vtkobj.add_heads(hds)
+    vtkobj.write(os.path.join('.','out', "gv6nwt_head.vtu"))
 
 def damModel():
     # correr modelo de embalse
@@ -283,13 +327,16 @@ def SWmodel(ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M):
     # cargar las demandas de agua superficial
     # Load base irrigation demands for JVRC irrigation districts (Sectors 2, 3, 4)
     model_data_dir='data'
-    irrigationdemands_S234_df = pd.read_pickle(os.path.join(model_data_dir, 'demandas_riego_S234.pkl'))
+    irrigationdemands_S234_df = pd.read_pickle(os.path.join(model_data_dir,
+                                                    'demandas_riego_S234.pkl'))
 
     # Load base irrigation demands for GW irrigation districts (Sectors 5, 6)
-    irrigationdemands_S56_df = pd.read_pickle(os.path.join(model_data_dir, 'demandas_riego_S56.pkl'))
+    irrigationdemands_S56_df=pd.read_pickle(os.path.join(model_data_dir,
+                                                    'demandas_riego_S56.pkl'))
 
     # Load seasonal demand curves
-    demandcurves_df = pd.read_pickle(os.path.join(model_data_dir, 'curvas_demandas_riego.pkl'))
+    demandcurves_df=pd.read_pickle(os.path.join(model_data_dir,
+                                                  'curvas_demandas_riego.pkl'))
     
     #correr modelo de aguas superficiales
     from surface_water.swmodel import run_swmodel
@@ -309,23 +356,31 @@ def SWmodel(ModeloEmbalseLautaro_df_M,LaPuerta_GWSW_df_M):
     # calcular la recarga a partir del modelo superficial
 
     # Import GeoDataframes with irrigation, river and city cells
-    model_irrcells_gdf = pd.read_pickle(os.path.join(model_data_dir,'model_irrcells.pkl'))
-    model_rivcells_gdf = pd.read_pickle(os.path.join(model_data_dir,'model_rivcells.pkl'))
-    model_citcells_gdf = pd.read_pickle(os.path.join(model_data_dir,'model_citcells.pkl'))
+    model_irrcells_gdf = pd.read_pickle(os.path.join(model_data_dir,
+                                                     'model_irrcells.pkl'))
+    model_rivcells_gdf = pd.read_pickle(os.path.join(model_data_dir,
+                                                     'model_rivcells.pkl'))
+    model_citcells_gdf = pd.read_pickle(os.path.join(model_data_dir,
+                                                     'model_citcells.pkl'))
 
     # Compute irrigation (infiltration + canal) RCH fluxes per aquifer sector
-    RCH_irr_df_1M = SWMODEL_out_df[['RCH_riegoycanales_S2', 'RCH_riegoycanales_S3', 'RCH_riegoycanales_S4', 'Q_perdidariego_P_S5', 'Q_perdidariego_P_S6']]
+    RCH_irr_df_1M = SWMODEL_out_df[['RCH_riegoycanales_S2', 
+'RCH_riegoycanales_S3', 'RCH_riegoycanales_S4', 'Q_perdidariego_P_S5',
+ 'Q_perdidariego_P_S6']]
     RCH_irr_df_3M = RCH_irr_df_1M.resample('Q').mean()
     RCH_irr_df_3M = RCH_irr_df_3M.reset_index().drop(columns='date').head(100)
-    RCH_irr_df_3M.columns = ['Sector 2', 'Sector 3', 'Sector 4', 'Sector 5', 'Sector 6']
+    RCH_irr_df_3M.columns = ['Sector 2', 'Sector 3', 'Sector 4', 'Sector 5', 
+                             'Sector 6']
     RCH_irr_df_3M['Sector 5'] = RCH_irr_df_3M['Sector 5'] * (prorrata_S5_agricola + (1 - prorrata_S5_agricola) * (1 - compliance))
     RCH_irr_df_3M['Sector 6'] = RCH_irr_df_3M['Sector 6'] * (prorrata_S6_agricola + (1 - prorrata_S6_agricola) * (1 - compliance))
 
     # Compute Copiapo River RCH fluxes per aquifer sector
-    RCH_riv_df_1M = SWMODEL_out_df[['RCH_rio_S2', 'RCH_rio_S3', 'RCH_rio_S4', 'RCH_rio_S5', 'RCH_rio_S6']]
+    RCH_riv_df_1M = SWMODEL_out_df[['RCH_rio_S2', 'RCH_rio_S3',
+                                    'RCH_rio_S4', 'RCH_rio_S5', 'RCH_rio_S6']]
     RCH_riv_df_3M = RCH_riv_df_1M.resample('Q').mean()
     RCH_riv_df_3M = RCH_riv_df_3M.reset_index().drop(columns='date').head(100)
-    RCH_riv_df_3M.columns = ['Sector 2','Sector 3','Sector 4','Sector 5','Sector 6']
+    RCH_riv_df_3M.columns = ['Sector 2','Sector 3','Sector 4',
+                             'Sector 5','Sector 6']
 
     # Compute Lautaro Dam RCH fluxes
     # model_laucells_gdf = gpd.read_file(os.path.join('geodata', 'Lautaro_recharge.shp'))[['row','column','geometry']]
@@ -348,12 +403,13 @@ def makeRCH(model_,rchLautaro):
     # crear diccionario del paquete RCH
     rch_spd=dict.fromkeys(range(model_.dis.nper))
     
-    for stp in range(list(rch_spd.keys())[-1]+1):       
+    for stp in range(list(rch_spd.keys())[-1]+1):  
         rechStp=model_.rch.rech.array[stp][0]
         if stp>1:
             rechStp[mask]=rchByCell[stp-1]
-        rch_spd[stp]=rechStp
-      
+        rch_spd[stp]=rechStp.astype(np.float16)[:]
+        del rechStp
+        
     rch=flopy.modflow.ModflowRch(model_,nrchop=3,rech=rch_spd)
     return rch
 
