@@ -1,6 +1,6 @@
 # FlowCopiapo
  
-Actualización del modelo hidrológico superficial y subterráneo escrito completamente en Python a partir de GORE Atacama (2019) e información de terreno (2022). 
+Actualización del modelo hidrológico superficial y subterráneo a partir de GORE Atacama (2019) y datos de terreno (2022) escrito en Python. 
 
 ![alt text](https://github.com/ccalvocm/FlowCopiapo/blob/pruebas/imgs/Niveles2022.png?raw=true)
 
