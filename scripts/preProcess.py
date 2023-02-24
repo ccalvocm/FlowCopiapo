@@ -439,7 +439,7 @@ def main():
     modelo.run()
     
     processHeads(modelo.model)
-    processBudget(modelo.model)
+    processBudget()
 
 if __name__=='__main__':
     main()
