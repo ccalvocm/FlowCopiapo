@@ -112,7 +112,8 @@ def makeWEL(modelo):
     daa=gpd.read_file(pathDAA)
     daaSubt=gpd.GeoDataFrame(daa[daa['Naturaleza']=='Subterranea'])
     daaSubCons=daaSubt[daaSubt['Tipo Derec']!='No Consuntivo']
-    daaSubConsCont=daaSubCons[(daaSubCons['Ejercicio'].str.contains('Cont')) | (daaSubCons['Ejercicio'].isna())]
+    daaSubConsCont=daaSubCons[(daaSubCons['Ejercicio'].str.contains('Cont',
+                                na=False)) | (daaSubCons['Ejercicio'].isna())]
     
     # daa que no caducaron
     daaSubConsCont.loc[daaSubConsCont[daaSubConsCont['Fecha Fin'].notnull()]['Fecha Fin'].index,
@@ -436,7 +437,7 @@ def main():
     makeRCH(modelo.model,rchLautaro)
     
     # correro modelo de aguas subterráneas
-    modelo.run()
+    modelo.model.run_model(silent=False)
     
     processHeads(modelo.model)
     processBudget()
