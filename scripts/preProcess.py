@@ -227,18 +227,20 @@ def processBudget():
     # dfZB[list(dfZB.columns[dfZB.columns.str.contains('TO_')])]=-dfZB[list(dfZB.columns[dfZB.columns.str.contains('TO_')])]
     # dfZB[cols].plot()
 
-    ruta_lst = os.path.join('.', 'gv6nwt.lst')
+    ruta_lst = os.path.join('..','modflow', 'gv6nwt.lst')
     mf_list = flopy.utils.MfListBudget(ruta_lst)
     df_incremental, df_cumulative = mf_list.get_dataframes(
         start_datetime="1993-01-01")
     dfError = df_incremental[['IN-OUT', 'PERCENT_DISCREPANCY']]/86400
     dfError.columns = ['Entradas-salidas', 'Discrepancia del balance (%)']
     fig, ax = plt.subplots(1)
-    dfError.plot(ax=ax)
+    dfError.plot(ax=ax,legend=False)
+    ax.legend(list(dfError.columns),fontsize=14)
     ax.set_ylim([-1e-3, 1e-3])
     ax.set_ylabel('Entradas-salidas ($m^3/s$)', fontsize=14)
     plt.grid()
-    plt.savefig(os.path.join('.', 'out', 'cierreBalanceCopiapo.svg'),
+    plt.tick_params(axis='both', which='major', labelsize=12)
+    plt.savefig(os.path.join('..','modflow','out', 'cierreBalanceCopiapo.svg'),
                 bbox_inches='tight')
 
     cols = [x for x in df_incremental.columns if (
@@ -248,7 +250,9 @@ def processBudget():
     df_incremental = df_incremental/86400
     df_incremental[cols].plot()
     plt.ylabel('Balance ($m^3/s$)', fontsize=14)
-    plt.savefig(os.path.join('.', 'out', 'balanceCopiapo.svg'),
+    plt.grid()
+    plt.tick_params(axis='both', which='major', labelsize=12)
+    plt.savefig(os.path.join('..','modflow','out', 'balanceCopiapo.svg'),
                 bbox_inches='tight')
     df_incremental.to_excel(os.path.join('.', 'out', 'balanceCopiapo.xlsx'))
     # incremental, cumulative = mf_list.get_budget()
@@ -259,10 +263,11 @@ def processBudget():
     plt.bar(data['index'], data['value'])
     plt.xticks(data['index'], data['name'], rotation=45, size=6)
     plt.show()
-    plt.ylabel('Balance volumétrico ($m^3$)')
+    plt.ylabel('Balance volumétrico ($m^3$)',fontsize=14)
     plt.tight_layout()
     plt.grid()
-    plt.savefig(os.path.join('.', 'out', 'balancePromedioCopiapo.svg'),
+    plt.tick_params(axis='both', which='major', labelsize=12)
+    plt.savefig(os.path.join('..','modflow','out', 'balancePromedioCopiapo.svg'),
                 bbox_inches='tight')
 
 
@@ -441,7 +446,8 @@ def makeRCH(model_, rchLautaro):
     return rch
 
 
-def plotQsim():
+def plotQsim(LaPuerta_GWSW_df_M,dfQ):
+    import matplotlib.pyplot as plt
     fig, ax = plt.subplots(1)
     LaPuerta_GWSW_df_M['Q_LaPuerta_sim'].plot(ax=ax)
     dfQ.resample('MS').mean().reset_index().plot.scatter(x='index',
